@@ -8,7 +8,8 @@
   --color-dark: #2D2D2D;
   --color-light-border: #E8E2D9;
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-lora);
 }
 
 :root {
@@ -23,33 +24,62 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-lora), Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   cursor: none;
 }
 
 @media (pointer: coarse) {
-  body {
-    cursor: auto;
-  }
+  body { cursor: auto; }
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
-a, button, [role="button"] {
-  cursor: none;
-}
+a, button, [role="button"] { cursor: none; }
 
 @media (pointer: coarse) {
-  a, button, [role="button"] {
-    cursor: auto;
-  }
+  a, button, [role="button"] { cursor: auto; }
 }
 
-h1, h2, h3, h4 {
+/* ── Type scale ─────────────────────────────── */
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-jakarta), system-ui, sans-serif;
   color: #1B3A5C;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: clamp(2.75rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.875rem, 3.5vw, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; }
+
+p {
+  font-family: var(--font-lora), Georgia, serif;
+  color: #4A4A4A;
+  line-height: 1.8;
+}
+
+/* Labels / eyebrows */
+.label {
+  font-family: var(--font-jakarta), sans-serif;
+  font-size: 0.6875rem;
   font-weight: 700;
-  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Nav links */
+nav a, nav button {
+  font-family: var(--font-jakarta), sans-serif;
+}
+
+/* Buttons */
+button, .btn {
+  font-family: var(--font-jakarta), sans-serif;
+  font-weight: 600;
 }
