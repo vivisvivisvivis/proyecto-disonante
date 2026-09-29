@@ -16,15 +16,36 @@
   --foreground: #2D2D2D;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  body {
+    cursor: auto;
+  }
 }
 
 * {
   box-sizing: border-box;
+}
+
+a, button, [role="button"] {
+  cursor: none;
+}
+
+@media (pointer: coarse) {
+  a, button, [role="button"] {
+    cursor: auto;
+  }
 }
 
 h1, h2, h3, h4 {
