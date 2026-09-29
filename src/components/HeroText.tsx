@@ -14,35 +14,52 @@ const item = {
 
 export default function HeroText() {
   return (
-    <motion.div
-      className="flex flex-col items-center gap-7 relative z-10"
-      variants={container}
-      initial="hidden"
-      animate="visible"
-    >
+    <div className="relative w-full flex flex-col items-center">
+      {/* Watermark background word */}
       <motion.span
-        variants={item}
-        className="label text-[#C0442C]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.2 }}
+        aria-hidden
+        className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center select-none pointer-events-none font-extrabold text-[#1B3A5C] leading-none"
+        style={{
+          fontSize: "clamp(5rem, 20vw, 16rem)",
+          opacity: 0.035,
+          letterSpacing: "-0.05em",
+          fontFamily: "var(--font-jakarta)",
+          zIndex: 0,
+        }}
       >
-        Deliberación · Evidencia · Pluralismo
+        ESCUCHAR
       </motion.span>
 
-      <motion.h1
-        variants={item}
-        className="text-center max-w-3xl"
-        style={{ fontFamily: "var(--font-jakarta)" }}
+      <motion.div
+        className="flex flex-col items-center gap-7 relative z-10"
+        variants={container}
+        initial="hidden"
+        animate="visible"
       >
-        Escuchar lo que<br />nos cuesta oír
-      </motion.h1>
+        <motion.span variants={item} className="label text-[#C0442C]">
+          Deliberación · Evidencia · Pluralismo
+        </motion.span>
 
-      <motion.p
-        variants={item}
-        className="text-lg md:text-xl max-w-2xl text-center"
-        style={{ fontFamily: "var(--font-lora)", color: "#5A6A7A", lineHeight: 1.75 }}
-      >
-        Una contribución para fortalecer el espacio cívico a través de la deliberación
-        pública, el uso de evidencia y el pluralismo.
-      </motion.p>
-    </motion.div>
+        <motion.h1
+          variants={item}
+          className="text-center max-w-3xl"
+          style={{ fontFamily: "var(--font-jakarta)" }}
+        >
+          Escuchar lo que<br />nos cuesta oír
+        </motion.h1>
+
+        <motion.p
+          variants={item}
+          className="text-lg md:text-xl max-w-2xl text-center"
+          style={{ fontFamily: "var(--font-lora)", color: "#5A6A7A", lineHeight: 1.75 }}
+        >
+          Una contribución para fortalecer el espacio cívico a través de la deliberación
+          pública, el uso de evidencia y el pluralismo.
+        </motion.p>
+      </motion.div>
+    </div>
   );
 }
