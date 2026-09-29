@@ -1,69 +1,187 @@
-import Image from "next/image";
+import Link from "next/link";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
-export default function Home() {
+const clients = [
+  "National Democratic Institute",
+  "Minerva University",
+  "Rios NGO",
+  "CEPAL / Uruguay",
+];
+
+const services = [
+  {
+    icon: "🔍",
+    title: "Diagnóstico y soluciones",
+    desc: "Evaluamos situaciones de diálogo bloqueado y diseñamos procesos para destrabarlos.",
+  },
+  {
+    icon: "🎓",
+    title: "Formación",
+    desc: "Capacitamos equipos en prácticas deliberativas, uso de evidencia y diálogo racional.",
+  },
+  {
+    icon: "🤝",
+    title: "Acompañamiento",
+    desc: "Implementamos decisiones difíciles junto a gobiernos, empresas y organizaciones.",
+  },
+];
+
+const recentActivities = [
+  { title: "Taller: Conversaciones difíciles", client: "Minerva University", date: "Nov 2025", cat: "Taller" },
+  { title: "Libertad de expresión en redes sociales", client: "Rios NGO", date: "Dic 2024", cat: "Charla" },
+  { title: "Legislación y Diálogo", client: "NDI", date: "Jul 2024", cat: "Formación" },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Navbar lang="es" />
+      <main>
+        {/* Hero */}
+        <section className="bg-[#FAF7F2] pt-20 pb-24 px-6">
+          <div className="max-w-4xl mx-auto text-center flex flex-col items-center gap-6">
+            <span className="text-[#C0442C] text-sm font-semibold uppercase tracking-widest">
+              Deliberación · Evidencia · Pluralismo
+            </span>
+            <h1 className="text-4xl md:text-6xl font-bold text-[#1B3A5C] leading-tight">
+              Escuchar lo que<br />nos cuesta oír
+            </h1>
+            <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed">
+              Fortalecemos el espacio público a través de procesos de deliberación
+              racional, el uso de evidencia y el pluralismo. Combatimos la polarización
+              desde adentro de las instituciones.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-2">
+              <Link
+                href="/que-ofrecemos"
+                className="bg-[#C0442C] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#a03824] transition-colors"
+              >
+                ¿Qué ofrecemos?
+              </Link>
+              <Link
+                href="/actividades"
+                className="border border-[#1B3A5C] text-[#1B3A5C] px-8 py-3 rounded-full font-semibold hover:bg-[#1B3A5C] hover:text-white transition-colors"
+              >
+                Ver actividades
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Clients bar */}
+        <section className="bg-white border-y border-[#E8E2D9] py-8 px-6">
+          <div className="max-w-5xl mx-auto flex flex-col items-center gap-4">
+            <p className="text-xs uppercase tracking-widest text-[#6B7280] font-semibold">
+              Trabajamos con
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-3">
+              {clients.map((c) => (
+                <span key={c} className="text-[#1B3A5C] font-semibold text-sm md:text-base">
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section className="py-24 px-6 bg-[#FAF7F2]">
+          <div className="max-w-5xl mx-auto">
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1B3A5C]">¿Qué ofrecemos?</h2>
+              <p className="mt-4 text-[#6B7280] max-w-xl mx-auto">
+                Servicios para instituciones, organizaciones y empresas que necesitan mejorar sus procesos de decisión colectiva.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {services.map((s) => (
+                <div
+                  key={s.title}
+                  className="bg-white border border-[#E8E2D9] rounded-2xl p-8 flex flex-col gap-4 hover:shadow-md transition-shadow"
+                >
+                  <span className="text-4xl">{s.icon}</span>
+                  <h3 className="text-xl font-bold text-[#1B3A5C]">{s.title}</h3>
+                  <p className="text-[#6B7280] text-sm leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <Link href="/que-ofrecemos" className="text-[#C0442C] font-semibold hover:underline">
+                Ver todos los servicios →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Mission callout */}
+        <section className="bg-[#1B3A5C] py-20 px-6">
+          <div className="max-w-3xl mx-auto text-center flex flex-col gap-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              La polarización no es inevitable
+            </h2>
+            <p className="text-blue-200 text-lg leading-relaxed">
+              Cualquier iniciativa puede ser etiquetada desde su origen. Proyecto Disonante
+              trabaja para crear dispositivos que mejoren la conversación pública —
+              en legislaturas, aulas, organizaciones y medios.
+            </p>
+            <Link
+              href="/que-ofrecemos"
+              className="self-center bg-white text-[#1B3A5C] px-8 py-3 rounded-full font-semibold hover:bg-[#FAF7F2] transition-colors"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Conocer el proyecto
+            </Link>
+          </div>
+        </section>
+
+        {/* Recent activities */}
+        <section className="py-24 px-6 bg-[#FAF7F2]">
+          <div className="max-w-5xl mx-auto">
+            <div className="flex items-end justify-between mb-10">
+              <h2 className="text-3xl font-bold text-[#1B3A5C]">Actividades recientes</h2>
+              <Link href="/actividades" className="text-[#C0442C] text-sm font-semibold hover:underline">
+                Ver todas →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {recentActivities.map((a) => (
+                <div
+                  key={a.title}
+                  className="bg-white border border-[#E8E2D9] rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
+                >
+                  <div className="bg-[#E8E2D9] h-40" />
+                  <div className="p-6 flex flex-col gap-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-semibold text-[#C0442C] uppercase tracking-wide">{a.cat}</span>
+                      <span className="text-xs text-[#6B7280]">· {a.date}</span>
+                    </div>
+                    <h3 className="font-bold text-[#1B3A5C]">{a.title}</h3>
+                    <p className="text-xs text-[#6B7280]">{a.client}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Contact CTA */}
+        <section className="py-20 px-6 bg-white border-t border-[#E8E2D9]">
+          <div className="max-w-2xl mx-auto text-center flex flex-col gap-6">
+            <h2 className="text-3xl font-bold text-[#1B3A5C]">¿Hablamos?</h2>
+            <p className="text-[#6B7280]">
+              Si tu organización enfrenta decisiones difíciles o diálogos bloqueados,
+              escribinos. Evaluamos cada caso sin costo.
+            </p>
+            <Link
+              href="/contacto"
+              className="self-center bg-[#C0442C] text-white px-8 py-3 rounded-full font-semibold hover:bg-[#a03824] transition-colors"
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              Contactar
+            </Link>
+          </div>
+        </section>
       </main>
-    </div>
+      <Footer lang="es" />
+    </>
   );
 }
