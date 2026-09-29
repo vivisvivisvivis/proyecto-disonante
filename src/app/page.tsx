@@ -126,16 +126,16 @@ export default function HomePage() {
                   Este fenómeno es un desafío para la gobernanza democrática. Los gobiernos de todos los niveles, los legisladores y hasta los jueces enfrentan el desafío de que sus propuestas y decisiones se procesen en clave de batalla cultural, política o moral. El periodismo y las Organizaciones de la Sociedad Civil atraviesan el mismo problema con sus agendas de intervención en la escena pública. De este modo, cualquier iniciativa está o bien etiquetada desde su origen, o bien asimilada con posterioridad a un bando u otro de los antagonismos que atraviesan las distintas sociedades. Esto, a su vez, genera un espiral de intolerancia que dificulta el debate, la convivencia, y en algunos casos, fomenta el autoritarismo.
                 </p>
 
-                {/* Pull quote with large decorative mark */}
-                <div className="relative pl-6 border-l-4 border-[#C0442C] mt-2">
+                {/* Pull quote */}
+                <div className="pl-6 border-l-4 border-[#C0442C] mt-6 flex flex-col gap-1">
                   <span
-                    className="absolute -top-6 -left-2 text-8xl leading-none text-[#C0442C] select-none pointer-events-none"
-                    style={{ fontFamily: "var(--font-jakarta)", opacity: 0.18 }}
                     aria-hidden
+                    className="text-5xl leading-none text-[#C0442C] select-none pointer-events-none"
+                    style={{ fontFamily: "Georgia, serif", opacity: 0.45 }}
                   >
                     "
                   </span>
-                  <p className="italic text-lg" style={{ color: "#4A5568", fontFamily: "var(--font-lora)" }}>
+                  <p className="italic text-lg -mt-1" style={{ color: "#4A5568", fontFamily: "var(--font-lora)" }}>
                     Esta polarización es, en algún sentido tentadora, toca alguna fibra íntima de nuestras convicciones pero vuelve estéril cualquier debate.
                   </p>
                 </div>
@@ -166,7 +166,7 @@ export default function HomePage() {
                 </div>
 
                 <div className="flex flex-col gap-4 px-2">
-                  <span className="label text-[#9CA3AF]">¿A quiénes se dirige nuestro trabajo?</span>
+                  <span className="label text-[#6B7280]">¿A quiénes se dirige nuestro trabajo?</span>
                   <ul className="flex flex-col gap-2.5">
                     {audiences.map((a) => (
                       <li key={a} className="flex items-center gap-3 group">
@@ -261,7 +261,7 @@ export default function HomePage() {
             <GeometricAccent size={280} color="white" />
           </div>
           <Reveal className="max-w-3xl mx-auto text-center flex flex-col gap-7 relative z-10">
-            <span className="label text-blue-400">Nuestra convicción</span>
+            <span className="label text-blue-300">Nuestra convicción</span>
             <h2 className="text-white">
               Tanto la legitimidad como la eficacia de las propuestas se fortalecerán si se las discute con dispositivos adecuados
             </h2>
@@ -385,7 +385,7 @@ export default function HomePage() {
                 <div className="absolute -bottom-8 -right-8 pointer-events-none opacity-[0.06]">
                   <GeometricAccent size={160} color="#1B3A5C" />
                 </div>
-                <span className="label text-[#9CA3AF]">Nosotros</span>
+                <span className="label text-[#6B7280]">Nosotros</span>
                 <h3>Quiénes somos</h3>
                 <p style={{ color: "#5A6A7A" }}>
                   Proyecto Disonante está liderado por Carolina Fernández Blanco y Hernán Charosky.
@@ -405,7 +405,7 @@ export default function HomePage() {
                 <div className="absolute -bottom-8 -right-8 pointer-events-none opacity-[0.08]">
                   <GeometricAccent size={160} color="white" />
                 </div>
-                <span className="label text-blue-400">Diálogo</span>
+                <span className="label text-blue-300">Diálogo</span>
                 <h3 className="text-white">Contactanos</h3>
                 <p className="text-blue-200" style={{ fontFamily: "var(--font-lora)" }}>
                   Nos interesa conocer tus inquietudes y propuestas.

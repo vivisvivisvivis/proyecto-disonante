@@ -13,7 +13,7 @@ export default function ClientMarquee() {
   return (
     <section className="bg-white border-y border-[#E8E2D9] py-8 overflow-hidden">
       <div className="mb-5 text-center">
-        <p className="label text-[#9CA3AF]">Trabajamos con</p>
+        <p className="label text-[#6B7280]">Trabajamos con</p>
       </div>
       <div className="flex overflow-hidden">
         <div className="marquee-track flex items-center gap-16 whitespace-nowrap">

@@ -41,13 +41,14 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-widest text-blue-300 mb-4">
-            {lang === "en" ? "Follow us" : "Síguenos"}
+            {lang === "en" ? "Contact" : "Contacto"}
           </p>
-          <div className="flex gap-4">
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-blue-100 hover:text-white text-sm transition-colors">LinkedIn</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-blue-100 hover:text-white text-sm transition-colors">Twitter</a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-100 hover:text-white text-sm transition-colors">Facebook</a>
-          </div>
+          <Link
+            href={lang === "en" ? "/en/contacto" : "/contacto"}
+            className="text-sm text-blue-100 hover:text-white transition-colors"
+          >
+            {lang === "en" ? "Get in touch →" : "Escribinos →"}
+          </Link>
         </div>
       </div>
 
