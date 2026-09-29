@@ -3,7 +3,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import HeroText from "@/components/HeroText";
-import ImpactNumbers from "@/components/ImpactNumbers";
 import GeometricAccent from "@/components/GeometricAccent";
 
 const clients = [
@@ -41,7 +40,7 @@ const recentActivities = [
   },
   {
     title: "Libertad de expresión en redes sociales",
-    client: "Rios NGO",
+    client: "",
     date: "Diciembre 2024",
     cat: "Charla",
     featured: false,
@@ -162,9 +161,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* ── Impact Numbers ─────────────────────────────── */}
-        <ImpactNumbers />
-
         {/* ── Services ───────────────────────────────────── */}
         <section className="py-28 px-6 bg-white relative overflow-hidden">
           <div className="max-w-5xl mx-auto">
@@ -275,9 +271,11 @@ export default function HomePage() {
                       <h3 className="text-2xl group-hover:text-[#C0442C] transition-colors duration-200">
                         {a.title}
                       </h3>
-                      <p className="text-sm" style={{ color: "#7A8A9A", fontFamily: "var(--font-jakarta)" }}>
-                        Con {a.client}
-                      </p>
+                      {a.client && (
+                        <p className="text-sm" style={{ color: "#7A8A9A", fontFamily: "var(--font-jakarta)" }}>
+                          Con {a.client}
+                        </p>
+                      )}
                     </div>
                   </div>
                 </Reveal>
