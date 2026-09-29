@@ -11,19 +11,16 @@ const clients = [
 
 const services = [
   {
-    icon: "🔍",
     title: "Diagnóstico y soluciones",
-    desc: "Evaluamos situaciones de diálogo bloqueado y diseñamos procesos para destrabarlos.",
+    desc: "Evaluación y propuestas de solución de situaciones en donde el diálogo y la toma de decisiones colectivas se encuentra bloqueada.",
   },
   {
-    icon: "🎓",
     title: "Formación",
-    desc: "Capacitamos equipos en prácticas deliberativas, uso de evidencia y diálogo racional.",
+    desc: "Formación en distintos niveles relativas a prácticas deliberativas y diálogo racional.",
   },
   {
-    icon: "🤝",
     title: "Acompañamiento",
-    desc: "Implementamos decisiones difíciles junto a gobiernos, empresas y organizaciones.",
+    desc: "Las propuestas de política pública, los proyectos legislativos y las agendas de reformas pueden incrementar su legitimidad y eficacia incorporando pluralidad, deliberación y evidencia.",
   },
 ];
 
@@ -48,9 +45,7 @@ export default function HomePage() {
               Escuchar lo que<br />nos cuesta oír
             </h1>
             <p className="text-lg md:text-xl text-[#6B7280] max-w-2xl leading-relaxed">
-              Fortalecemos el espacio público a través de procesos de deliberación
-              racional, el uso de evidencia y el pluralismo. Combatimos la polarización
-              desde adentro de las instituciones.
+              Una contribución para fortalecer el espacio cívico a través de la deliberación pública, el uso de evidencia y el pluralismo.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-2">
               <Link
@@ -85,22 +80,51 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Services */}
+        {/* Problem + Solution */}
         <section className="py-24 px-6 bg-[#FAF7F2]">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div className="flex flex-col gap-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1B3A5C]">
+                La polarización es un desafío para la gobernanza democrática
+              </h2>
+              <p className="text-[#6B7280] leading-relaxed">
+                La polarización es una tendencia que impacta globalmente en la conversación pública. Cada vez es más difícil la discusión de asuntos públicos —desde una película o una canción hasta el contenido de un proyecto de ley o de una política pública.
+              </p>
+              <p className="text-[#6B7280] leading-relaxed">
+                Esta polarización es, en algún sentido tentadora, toca alguna fibra íntima de nuestras convicciones pero vuelve estéril cualquier debate.
+              </p>
+            </div>
+            <div className="bg-white border border-[#E8E2D9] rounded-2xl p-8 flex flex-col gap-4">
+              <span className="text-[#C0442C] text-xs font-semibold uppercase tracking-widest">Nuestra propuesta</span>
+              <h3 className="text-xl font-bold text-[#1B3A5C]">
+                Dispositivos que mejoran la conversación pública
+              </h3>
+              <p className="text-[#6B7280] leading-relaxed text-sm">
+                Proyecto Disonante es una propuesta para poner en práctica dispositivos que mejoren la conversación pública a través del respeto, la lógica argumentativa, la incorporación de evidencia, la diversidad y el pluralismo.
+              </p>
+              <Link href="/que-ofrecemos" className="text-[#C0442C] text-sm font-semibold hover:underline mt-2">
+                Conocer el proyecto →
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Services */}
+        <section className="py-24 px-6 bg-white border-t border-[#E8E2D9]">
           <div className="max-w-5xl mx-auto">
             <div className="mb-12 text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1B3A5C]">¿Qué ofrecemos?</h2>
               <p className="mt-4 text-[#6B7280] max-w-xl mx-auto">
-                Servicios para instituciones, organizaciones y empresas que necesitan mejorar sus procesos de decisión colectiva.
+                Para gobiernos, legislaturas, educadores, ONGs, empresas y asociaciones profesionales.
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {services.map((s) => (
                 <div
                   key={s.title}
-                  className="bg-white border border-[#E8E2D9] rounded-2xl p-8 flex flex-col gap-4 hover:shadow-md transition-shadow"
+                  className="border border-[#E8E2D9] rounded-2xl p-8 flex flex-col gap-4 hover:shadow-md transition-shadow bg-[#FAF7F2]"
                 >
-                  <span className="text-4xl">{s.icon}</span>
+                  <div className="w-8 h-1 bg-[#C0442C] rounded-full" />
                   <h3 className="text-xl font-bold text-[#1B3A5C]">{s.title}</h3>
                   <p className="text-[#6B7280] text-sm leading-relaxed">{s.desc}</p>
                 </div>
@@ -118,18 +142,16 @@ export default function HomePage() {
         <section className="bg-[#1B3A5C] py-20 px-6">
           <div className="max-w-3xl mx-auto text-center flex flex-col gap-6">
             <h2 className="text-3xl md:text-4xl font-bold text-white">
-              La polarización no es inevitable
+              Las propuestas ganan legitimidad cuando incorporan pluralidad, deliberación y evidencia
             </h2>
             <p className="text-blue-200 text-lg leading-relaxed">
-              Cualquier iniciativa puede ser etiquetada desde su origen. Proyecto Disonante
-              trabaja para crear dispositivos que mejoren la conversación pública —
-              en legislaturas, aulas, organizaciones y medios.
+              Los proyectos legislativos, las agendas de reformas y las políticas públicas pueden incrementar su eficacia en la medida que incorporen estos procesos de discusión.
             </p>
             <Link
-              href="/que-ofrecemos"
+              href="/contacto"
               className="self-center bg-white text-[#1B3A5C] px-8 py-3 rounded-full font-semibold hover:bg-[#FAF7F2] transition-colors"
             >
-              Conocer el proyecto
+              Hablar con el equipo
             </Link>
           </div>
         </section>
@@ -169,8 +191,7 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto text-center flex flex-col gap-6">
             <h2 className="text-3xl font-bold text-[#1B3A5C]">¿Hablamos?</h2>
             <p className="text-[#6B7280]">
-              Si tu organización enfrenta decisiones difíciles o diálogos bloqueados,
-              escribinos. Evaluamos cada caso sin costo.
+              Si tu organización enfrenta decisiones difíciles o diálogos bloqueados, escribinos. Evaluamos cada caso sin costo.
             </p>
             <Link
               href="/contacto"
