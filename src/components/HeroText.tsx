@@ -18,13 +18,12 @@ export default function HeroText() {
       {/* Watermark background word */}
       <motion.span
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: 0.04 }}
         transition={{ duration: 1.5, delay: 0.2 }}
         aria-hidden
         className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center select-none pointer-events-none font-extrabold text-[#1B3A5C] leading-none"
         style={{
-          fontSize: "clamp(5rem, 20vw, 16rem)",
-          opacity: 0.035,
+          fontSize: "clamp(4rem, 14vw, 11rem)",
           letterSpacing: "-0.05em",
           fontFamily: "var(--font-jakarta)",
           zIndex: 0,

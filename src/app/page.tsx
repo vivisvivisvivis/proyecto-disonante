@@ -78,7 +78,7 @@ export default function HomePage() {
         {/* ── Hero ───────────────────────────────────────── */}
         <section className="relative bg-[#FAF7F2] pt-24 pb-28 px-6 overflow-hidden">
           <div className="absolute -top-10 -right-16 pointer-events-none">
-            <GeometricAccent size={560} opacity={0.08} color="#1B3A5C" />
+            <GeometricAccent size={480} opacity={0.05} color="#1B3A5C" />
           </div>
           <div className="absolute -bottom-20 -left-20 pointer-events-none rotate-180">
             <GeometricAccent size={320} opacity={0.06} color="#C0442C" />
