@@ -1,23 +1,43 @@
 @import "tailwindcss";
 
+/* Palette. Text tokens (ink/body/muted/rust) all pass WCAG AA (4.5:1) on cream and sand. */
+:root {
+  --pd-navy: #1B3A5C;
+  --pd-navy-dark: #152D47;
+  --pd-navy-deep: #0F2238;
+  --pd-terracotta: #C0442C;      /* fills: buttons, strips, dots */
+  --pd-terracotta-dark: #A03824;
+  --pd-rust: #96301B;            /* terracotta for small text on light backgrounds */
+  --pd-cream: #EBD7BE;
+  --pd-sand: #E2CDB4;
+  --pd-line: #D8C9B3;
+  --pd-ink: #2D2D2D;
+  --pd-body: #3E362F;
+  --pd-muted: #5F5142;
+
+  --background: var(--pd-cream);
+  --foreground: var(--pd-ink);
+}
+
 @theme inline {
-  --color-navy: #1B3A5C;
-  --color-terracotta: #C0442C;
-  --color-cream: #EBD7BE;
-  --color-warm-gray: #6B7280;
-  --color-dark: #2D2D2D;
-  --color-light-border: #D8C9B3;
+  --color-navy: var(--pd-navy);
+  --color-navy-dark: var(--pd-navy-dark);
+  --color-navy-deep: var(--pd-navy-deep);
+  --color-terracotta: var(--pd-terracotta);
+  --color-terracotta-dark: var(--pd-terracotta-dark);
+  --color-rust: var(--pd-rust);
+  --color-cream: var(--pd-cream);
+  --color-sand: var(--pd-sand);
+  --color-line: var(--pd-line);
+  --color-ink: var(--pd-ink);
+  --color-body: var(--pd-body);
+  --color-muted: var(--pd-muted);
 
   --font-sans: var(--font-source);
   --font-display: var(--font-bebas);
+  --font-ui: var(--font-jakarta);
 }
 
-:root {
-  --background: #EBD7BE;
-  --foreground: #2D2D2D;
-}
-
-html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
@@ -51,7 +71,8 @@ body::after {
 @layer base {
   h1 {
     font-family: var(--font-bebas), system-ui, sans-serif;
-    color: #1B3A5C;
+    color: var(--pd-navy);
+    text-wrap: balance;
     font-weight: 400;
     line-height: 1.0;
     letter-spacing: 0;
@@ -61,7 +82,8 @@ body::after {
 
   h2 {
     font-family: var(--font-bebas), system-ui, sans-serif;
-    color: #1B3A5C;
+    color: var(--pd-navy);
+    text-wrap: balance;
     font-weight: 400;
     line-height: 1.1;
     letter-spacing: 0;
@@ -71,7 +93,8 @@ body::after {
 
   h3 {
     font-family: var(--font-jakarta), system-ui, sans-serif;
-    color: #1B3A5C;
+    color: var(--pd-navy);
+    text-wrap: balance;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -80,7 +103,7 @@ body::after {
 
   h4, h5 {
     font-family: var(--font-jakarta), system-ui, sans-serif;
-    color: #1B3A5C;
+    color: var(--pd-navy);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.01em;
@@ -88,7 +111,7 @@ body::after {
 
   p {
     font-family: var(--font-source), system-ui, sans-serif;
-    color: #4A4A4A;
+    color: var(--pd-body);
     line-height: 1.8;
     font-size: 1.0625rem;
   }
@@ -102,20 +125,58 @@ body::after {
   text-transform: uppercase;
 }
 
+/* Long headings: Bebas Neue is for short titles (about 6 words or fewer).
+   Sentences and article titles use Jakarta in sentence case so they stay readable. */
+h1.heading-sentence,
+h2.heading-sentence {
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+h1.heading-sentence { font-size: clamp(2rem, 4vw, 3rem); }
+h2.heading-sentence { font-size: clamp(1.5rem, 2.6vw, 2.125rem); }
+
+/* ── Accessibility ───────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--pd-navy);
+  outline-offset: 3px;
+}
+.bg-navy :focus-visible,
+.bg-terracotta :focus-visible,
+footer :focus-visible {
+  outline-color: #FFFFFF;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 10000;
+  background: var(--pd-navy);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-family: var(--font-jakarta), sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+.skip-link:focus { top: 1rem; }
+
+#main { scroll-margin-top: 80px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 nav a, nav button { font-family: var(--font-jakarta), sans-serif; }
 button, .btn { font-family: var(--font-jakarta), sans-serif; font-weight: 600; }
-
-/* ── Marquee ─────────────────────────────────────── */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-.marquee-track {
-  animation: marquee 28s linear infinite;
-}
-.marquee-track:hover {
-  animation-play-state: paused;
-}
 
 /* ── Article body ────────────────────────────────── */
 .article-body {
@@ -127,11 +188,11 @@ button, .btn { font-family: var(--font-jakarta), sans-serif; font-weight: 600; }
   font-family: var(--font-source), system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.85;
-  color: #4A4A4A;
+  color: var(--pd-body);
 }
 .article-body strong {
-  font-weight: 700;
-  color: #2D2D2D;
+  font-weight: 600;
+  color: var(--pd-ink);
 }
 .article-body em { font-style: italic; }
 .article-body ul {
@@ -145,13 +206,12 @@ button, .btn { font-family: var(--font-jakarta), sans-serif; font-weight: 600; }
   font-family: var(--font-source), system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: #4A4A4A;
+  color: var(--pd-body);
 }
 
 /* ── Print ───────────────────────────────────────── */
 @media print {
   /* Hide interactive/decorative elements */
-  .marquee-track,
   nav,
   footer,
   [data-lenis],

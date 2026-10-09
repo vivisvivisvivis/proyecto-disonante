@@ -1,37 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState } from "react";
+import { subscribeNewsletter, type FormState } from "@/app/actions";
 
-export default function NewsletterForm() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+const copy = {
+  es: {
+    label: "Correo electrónico", placeholder: "tu@correo.com", submit: "Suscribirme", sending: "Enviando…",
+    success: "Listo. Te escribiremos cuando publiquemos novedades.",
+    invalid: "Escribe un correo electrónico válido.",
+    failed: "No pudimos registrar tu correo. Inténtalo de nuevo en unos minutos.",
+  },
+  en: {
+    label: "Email", placeholder: "you@email.com", submit: "Subscribe", sending: "Sending…",
+    success: "Done. We'll write when we publish news.",
+    invalid: "Enter a valid email address.",
+    failed: "We couldn't save your email. Please try again in a few minutes.",
+  },
+};
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    // Placeholder — wire to Mailchimp/Resend when ready
-    setStatus("success");
-    setEmail("");
-  };
+export default function NewsletterForm({ lang = "es", source = "web" }: { lang?: "es" | "en"; source?: string }) {
+  const t = copy[lang];
+  const [state, action, pending] = useActionState<FormState, FormData>(subscribeNewsletter, { status: "idle" });
+  const id = `nl-email-${source}`;
+
+  if (state.status === "success") {
+    return (
+      <p role="status" className="text-navy font-semibold" style={{ fontFamily: "var(--font-jakarta)" }}>
+        {t.success}
+      </p>
+    );
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 w-full">
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="tu@correo.com"
-        required
-        className="flex-1 px-5 py-3 rounded border-2 border-[#D8C9B3] bg-[#EBD7BE] text-[#2D2D2D] placeholder-[#9CA3AF] focus:outline-none focus:border-[#1B3A5C] transition-colors text-sm"
-        style={{ fontFamily: "var(--font-jakarta)" }}
-      />
-      <button
-        type="submit"
-        className="bg-[#1B3A5C] text-white px-7 py-3 rounded font-semibold text-sm hover:bg-[#152d47] transition-colors flex-shrink-0"
-        style={{ fontFamily: "var(--font-jakarta)" }}
-      >
-        {status === "success" ? "¡Listo!" : "Suscribirme"}
-      </button>
+    <form action={action} className="flex flex-col gap-2 w-full">
+      <input type="hidden" name="source" value={source} />
+      <div aria-hidden className="absolute -left-[9999px] w-px h-px overflow-hidden">
+        <input name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+      <label htmlFor={id} className="sr-only">{t.label}</label>
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          id={id} name="email" type="email" required autoComplete="email" spellCheck={false}
+          placeholder={t.placeholder}
+          aria-describedby={`${id}-msg`}
+          className="flex-1 min-w-0 px-5 py-3 rounded border-2 border-line bg-cream text-ink placeholder-muted focus:border-navy transition-colors text-base"
+        />
+        <button
+          type="submit"
+          disabled={pending}
+          className="bg-navy text-white px-7 py-3 rounded font-semibold text-sm hover:bg-navy-dark transition-colors flex-shrink-0 disabled:opacity-60"
+        >
+          {pending ? t.sending : t.submit}
+        </button>
+      </div>
+      <p id={`${id}-msg`} aria-live="polite" className="text-sm text-rust font-semibold min-h-[1.25rem]">
+        {state.status === "error" && (state.error === "invalid" ? t.invalid : t.failed)}
+      </p>
     </form>
   );
 }

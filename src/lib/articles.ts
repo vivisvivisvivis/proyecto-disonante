@@ -1,5 +1,14 @@
+export type Category = "actividades" | "analisis" | "newsletter";
+
+export const categoryLabels: Record<Category, { es: string; en: string }> = {
+  actividades: { es: "Actividades", en: "Activities" },
+  analisis: { es: "Análisis", en: "Analysis" },
+  newsletter: { es: "Newsletter", en: "Newsletter" },
+};
+
 export interface Article {
   slug: string;
+  category: Category;
   isoDate: string; // ISO 8601, empty string if unknown
   es: {
     title: string;
@@ -17,9 +26,10 @@ export interface Article {
   };
 }
 
-export const articles: Article[] = [
+const allArticles: Article[] = [
   {
     slug: "cepal-derechos-sexuales-reproductivos",
+    category: "actividades",
     isoDate: "2026-09-29",
     es: {
       title:
@@ -42,10 +52,11 @@ export const articles: Article[] = [
   },
   {
     slug: "taller-minerva-university",
+    category: "actividades",
     isoDate: "2025-11-12",
     es: {
       title:
-        "Proyecto Disonante realizó un taller sobre 'conversaciones difíciles' con Minerva University",
+        "Proyecto Disonante realizó un taller sobre “conversaciones difíciles” con Minerva University",
       author: "Carolina Fernández Blanco",
       date: "12 de noviembre de 2025",
       excerpt:
@@ -54,7 +65,7 @@ export const articles: Article[] = [
     },
     en: {
       title:
-        "Proyecto Disonante held a workshop on 'difficult conversations' with Minerva University",
+        "Proyecto Disonante held a workshop on “difficult conversations” with Minerva University",
       author: "Carolina Fernández Blanco",
       date: "November 12, 2025",
       excerpt:
@@ -64,6 +75,7 @@ export const articles: Article[] = [
   },
   {
     slug: "newsletter-actividades-2024",
+    category: "newsletter",
     isoDate: "2025-02-27",
     es: {
       title: "Newsletter con las actividades de 2024",
@@ -84,6 +96,7 @@ export const articles: Article[] = [
   },
   {
     slug: "encrucijadas-libertad-expresion",
+    category: "actividades",
     isoDate: "2024-12-15",
     es: {
       title: "Encrucijadas de la Libertad de Expresión en redes sociales",
@@ -104,6 +117,7 @@ export const articles: Article[] = [
   },
   {
     slug: "financiamiento-politica",
+    category: "actividades",
     isoDate: "2024-12-15",
     es: {
       title: "Financiamiento de la política",
@@ -124,28 +138,30 @@ export const articles: Article[] = [
   },
   {
     slug: "capacitacion-ndi",
+    category: "actividades",
     isoDate: "2024-07-29",
     es: {
       title:
-        "Capacitación 'Legislación y Diálogo' para el National Democratic Institute",
+        "Capacitación “Legislación y Diálogo” para el National Democratic Institute",
       author: "Carolina Fernández Blanco",
       date: "29 de julio de 2024",
       excerpt:
-        "Durante junio, Proyecto Disonante realizó una capacitación sobre 'Legislación y diálogo' para la Red de Innovación del National Democratic Institute.",
+        "Durante junio, Proyecto Disonante realizó una capacitación sobre “Legislación y diálogo” para la Red de Innovación del National Democratic Institute.",
       tag: "Formación",
     },
     en: {
       title:
-        "Training on 'Legislation and Dialogue' for the National Democratic Institute",
+        "Training on “Legislation and Dialogue” for the National Democratic Institute",
       author: "Carolina Fernández Blanco",
       date: "July 29, 2024",
       excerpt:
-        "During June, Proyecto Disonante conducted a training course on 'Legislation and Dialogue' for the National Democratic Institute's Innovation Network.",
+        "During June, Proyecto Disonante conducted a training course on “Legislation and Dialogue” for the National Democratic Institute's Innovation Network.",
       tag: "Training",
     },
   },
   {
     slug: "apertura-polarizacion",
+    category: "analisis",
     isoDate: "2024-07-09",
     es: {
       title: "Apertura en tiempos de polarización",
@@ -166,6 +182,7 @@ export const articles: Article[] = [
   },
   {
     slug: "polarizacion-toma-decisiones",
+    category: "analisis",
     isoDate: "2024-10-10",
     es: {
       title: "Polarización y toma de decisiones racionales",
@@ -186,6 +203,7 @@ export const articles: Article[] = [
   },
   {
     slug: "dialogo-politico-mejores-politicas",
+    category: "analisis",
     isoDate: "2024-03-01",
     es: {
       title: "Diálogo político y mejores políticas: algunos hitos biográficos",
@@ -207,6 +225,7 @@ export const articles: Article[] = [
   },
   {
     slug: "antagonismo-desacuerdo-conflicto",
+    category: "analisis",
     isoDate: "2023-03-19",
     es: {
       title: "Antagonismo, desacuerdo y conflicto institucionalizado",
@@ -227,6 +246,7 @@ export const articles: Article[] = [
   },
   {
     slug: "legislacion-simbolica",
+    category: "analisis",
     isoDate: "2023-03-09",
     es: {
       title:
@@ -247,3 +267,6 @@ export const articles: Article[] = [
     },
   },
 ];
+
+// Newest first.
+export const articles: Article[] = [...allArticles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));

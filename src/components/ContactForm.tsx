@@ -1,122 +1,115 @@
 "use client";
 
-import { useState } from "react";
-
-// TODO: replace with the real Formspree form ID once Carolina confirms the destination email
-const FORMSPREE_ID = "TODO_REPLACE_WITH_FORM_ID";
+import { useActionState } from "react";
+import { submitContact, type FormState } from "@/app/actions";
+import { site } from "@/lib/site";
 
 const copy = {
   es: {
-    name: "Nombre", namePlaceholder: "Tu nombre",
-    email: "Correo electrónico *", emailPlaceholder: "tu@correo.com",
-    message: "Mensaje *", messagePlaceholder: "¿En qué podemos ayudarte?",
-    submit: "Enviar mensaje", sending: "Enviando...",
-    successTitle: "¡Gracias por escribirnos!",
-    successBody: "Te responderemos a la brevedad.",
-    error: "Hubo un error al enviar. Por favor, inténtalo de nuevo.",
+    name: "Nombre", namePlaceholder: "Ana Pérez",
+    email: "Correo electrónico", emailPlaceholder: "ana@organizacion.org",
+    organization: "Organización", organizationPlaceholder: "Institución, ONG, universidad…",
+    message: "Mensaje", messagePlaceholder: "Cuéntanos qué situación quieres abordar…",
+    required: "obligatorio",
+    submit: "Enviar mensaje", sending: "Enviando…",
+    successTitle: "Mensaje enviado",
+    successBody: "Gracias por escribirnos. Te responderemos por correo.",
+    invalid: "Revisa tu correo electrónico y escribe un mensaje antes de enviar.",
+    failed: "No pudimos enviar el mensaje. Inténtalo de nuevo en unos minutos",
+    failedEmail: " o escríbenos a",
   },
   en: {
-    name: "Name", namePlaceholder: "Your name",
-    email: "Email *", emailPlaceholder: "you@email.com",
-    message: "Message *", messagePlaceholder: "How can we help you?",
-    submit: "Send message", sending: "Sending...",
-    successTitle: "Thanks for reaching out!",
-    successBody: "We'll get back to you shortly.",
-    error: "Something went wrong. Please try again.",
+    name: "Name", namePlaceholder: "Jane Smith",
+    email: "Email", emailPlaceholder: "jane@organization.org",
+    organization: "Organization", organizationPlaceholder: "Institution, NGO, university…",
+    message: "Message", messagePlaceholder: "Tell us what situation you want to address…",
+    required: "required",
+    submit: "Send message", sending: "Sending…",
+    successTitle: "Message sent",
+    successBody: "Thanks for reaching out. We'll reply by email.",
+    invalid: "Check your email address and write a message before sending.",
+    failed: "We couldn't send your message. Please try again in a few minutes",
+    failedEmail: " or write to us at",
   },
 };
 
+const inputClass =
+  "w-full px-5 py-3 rounded border-2 border-line bg-cream text-ink placeholder-muted focus:border-navy transition-colors text-base";
+
 export default function ContactForm({ lang = "es" }: { lang?: "es" | "en" }) {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const t = copy[lang];
+  const [state, action, pending] = useActionState<FormState, FormData>(submitContact, { status: "idle" });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.email || !form.message) return;
-    setStatus("sending");
-    try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
-      });
-      if (res.ok) {
-        setStatus("success");
-        setForm({ name: "", email: "", message: "" });
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
-
-  if (status === "success") {
+  if (state.status === "success") {
     return (
-      <div className="bg-[#EBD7BE] border border-[#D8C9B3] rounded-lg p-10 text-center">
-        <p className="text-[#1B3A5C] font-semibold text-lg" style={{ fontFamily: "var(--font-jakarta)" }}>
+      <div role="status" className="bg-cream border border-line rounded-lg p-10 text-center">
+        <p className="text-navy font-semibold text-lg" style={{ fontFamily: "var(--font-jakarta)" }}>
           {t.successTitle}
         </p>
-        <p className="mt-2 text-sm" style={{ color: "#6B7280", fontFamily: "var(--font-jakarta)" }}>
-          {t.successBody}
-        </p>
+        <p className="mt-2">{t.successBody}</p>
       </div>
     );
   }
 
-  const inputClass =
-    "w-full px-5 py-3 rounded border-2 border-[#D8C9B3] bg-[#EBD7BE] text-[#2D2D2D] placeholder-[#9CA3AF] focus:outline-none focus:border-[#1B3A5C] transition-colors text-sm";
-
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+    <form action={action} className="flex flex-col gap-5" noValidate={false}>
+      <input type="hidden" name="lang" value={lang} />
+      {/* Honeypot for bots: hidden from people and assistive tech */}
+      <div aria-hidden className="absolute -left-[9999px] w-px h-px overflow-hidden">
+        <label htmlFor="cf-website">Website</label>
+        <input id="cf-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="cf-name" className="label text-muted block mb-2">{t.name}</label>
+          <input id="cf-name" name="name" type="text" autoComplete="name" placeholder={t.namePlaceholder} className={inputClass} />
+        </div>
+        <div>
+          <label htmlFor="cf-org" className="label text-muted block mb-2">{t.organization}</label>
+          <input id="cf-org" name="organization" type="text" autoComplete="organization" placeholder={t.organizationPlaceholder} className={inputClass} />
+        </div>
+      </div>
       <div>
-        <label className="label text-[#6B7280] block mb-2">{t.name}</label>
+        <label htmlFor="cf-email" className="label text-muted block mb-2">
+          {t.email} <span className="normal-case tracking-normal font-normal">({t.required})</span>
+        </label>
         <input
-          type="text"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          placeholder={t.namePlaceholder}
-          className={inputClass}
-          style={{ fontFamily: "var(--font-jakarta)" }}
+          id="cf-email" name="email" type="email" required autoComplete="email" spellCheck={false}
+          placeholder={t.emailPlaceholder} className={inputClass}
+          aria-describedby={state.status === "error" ? "cf-error" : undefined}
         />
       </div>
       <div>
-        <label className="label text-[#6B7280] block mb-2">{t.email}</label>
-        <input
-          type="email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          placeholder={t.emailPlaceholder}
-          required
-          className={inputClass}
-          style={{ fontFamily: "var(--font-jakarta)" }}
-        />
+        <label htmlFor="cf-message" className="label text-muted block mb-2">
+          {t.message} <span className="normal-case tracking-normal font-normal">({t.required})</span>
+        </label>
+        <textarea id="cf-message" name="message" required rows={6} placeholder={t.messagePlaceholder} className={`${inputClass} resize-y`} />
       </div>
-      <div>
-        <label className="label text-[#6B7280] block mb-2">{t.message}</label>
-        <textarea
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          placeholder={t.messagePlaceholder}
-          required
-          rows={6}
-          className={`${inputClass} resize-none`}
-          style={{ fontFamily: "var(--font-jakarta)" }}
-        />
-      </div>
-      {status === "error" && (
-        <p className="text-sm text-red-600" style={{ fontFamily: "var(--font-jakarta)" }}>
-          {t.error}
-        </p>
-      )}
+
+      <p id="cf-error" aria-live="polite" className="text-sm text-rust font-semibold min-h-[1.25rem]" style={{ fontFamily: "var(--font-jakarta)" }}>
+        {state.status === "error" &&
+          (state.error === "invalid" ? (
+            t.invalid
+          ) : (
+            <>
+              {t.failed}
+              {site.email ? (
+                <>
+                  {t.failedEmail} <a href={`mailto:${site.email}`} className="underline">{site.email}</a>
+                </>
+              ) : null}
+              .
+            </>
+          ))}
+      </p>
+
       <button
         type="submit"
-        disabled={status === "sending"}
-        className="self-start bg-[#1B3A5C] text-white px-9 py-3.5 rounded font-semibold text-sm hover:bg-[#152d47] transition-colors disabled:opacity-60"
-        style={{ fontFamily: "var(--font-jakarta)" }}
+        disabled={pending}
+        className="self-start bg-navy text-white px-9 py-3.5 rounded font-semibold text-sm hover:bg-navy-dark transition-colors disabled:opacity-60"
       >
-        {status === "sending" ? t.sending : t.submit}
+        {pending ? t.sending : t.submit}
       </button>
     </form>
   );

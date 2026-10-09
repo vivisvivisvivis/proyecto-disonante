@@ -1,145 +1,131 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import Reveal from "@/components/Reveal";
-import type { Article } from "@/lib/articles";
+import { Suspense } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { categoryLabels, type Article, type Category } from "@/lib/articles";
 
 interface Props {
   articles: Article[];
   lang: "es" | "en";
+  /** Slugs whose full text exists only in Spanish (EN list only). */
+  spanishOnly?: string[];
 }
 
-export default function BlogList({ articles, lang }: Props) {
-  const [activeTag, setActiveTag] = useState<string | null>(null);
+const ui = { fontFamily: "var(--font-jakarta)" };
+const categories = Object.keys(categoryLabels) as Category[];
 
-  const t = (a: Article) => a[lang];
+// The category filter lives in the URL (?cat=analisis) so it can be shared and survives reloads.
+// The static HTML renders the unfiltered list; the filter applies once the page hydrates.
+export default function BlogList(props: Props) {
+  return (
+    <Suspense fallback={<BlogListView {...props} active={null} />}>
+      <BlogListWithParams {...props} />
+    </Suspense>
+  );
+}
 
-  const allTags = Array.from(new Set(articles.map((a) => t(a).tag)));
+function BlogListWithParams(props: Props) {
+  const params = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const cat = params.get("cat");
+  const active = cat && categories.includes(cat as Category) ? (cat as Category) : null;
 
-  const filtered = activeTag
-    ? articles.filter((a) => t(a).tag === activeTag)
-    : articles;
+  const onSelect = (next: Category | null) => {
+    router.replace(next ? `${pathname}?cat=${next}` : pathname, { scroll: false });
+  };
 
+  return <BlogListView {...props} active={active} onSelect={onSelect} />;
+}
+
+function BlogListView({
+  articles,
+  lang,
+  spanishOnly = [],
+  active,
+  onSelect,
+}: Props & { active: Category | null; onSelect?: (cat: Category | null) => void }) {
+  const en = lang === "en";
+  const select = (cat: Category | null) => onSelect?.(cat);
+
+  const filtered = active ? articles.filter((a) => a.category === active) : articles;
   const [featured, ...rest] = filtered;
-  const basePath = lang === "en" ? "/en/blog" : "/blog";
+  const basePath = en ? "/en/blog" : "/blog";
+  const spanishBadge = (slug: string) =>
+    spanishOnly.includes(slug) ? (
+      <span className="text-[0.6875rem] font-semibold uppercase tracking-wider border border-current rounded px-1.5 py-0.5" style={ui}>
+        Spanish only
+      </span>
+    ) : null;
+
+  const pill = (selected: boolean) =>
+    `px-4 py-2 rounded text-sm font-semibold transition-colors duration-150 ${
+      selected ? "bg-navy text-white" : "bg-cream border border-line text-ink hover:border-navy hover:text-navy"
+    }`;
 
   return (
     <div className="max-w-5xl mx-auto">
-      {/* Tag filter */}
-      <Reveal className="mb-10 flex flex-wrap gap-2">
-        <button
-          onClick={() => setActiveTag(null)}
-          className={`px-4 py-1.5 rounded text-xs font-semibold transition-all duration-150 ${
-            activeTag === null
-              ? "bg-[#1B3A5C] text-white"
-              : "bg-[#EBD7BE] border border-[#D8C9B3] text-[#6B7280] hover:border-[#1B3A5C] hover:text-[#1B3A5C]"
-          }`}
-          style={{ fontFamily: "var(--font-jakarta)" }}
-        >
-          {lang === "en" ? "All" : "Todo"}
+      <div role="group" aria-label={en ? "Filter by category" : "Filtrar por categoría"} className="mb-10 flex flex-wrap gap-2">
+        <button onClick={() => select(null)} aria-pressed={active === null} className={pill(active === null)} style={ui}>
+          {en ? "All" : "Todo"} <span className="font-normal">({articles.length})</span>
         </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-            className={`px-4 py-1.5 rounded text-xs font-semibold transition-all duration-150 ${
-              activeTag === tag
-                ? "bg-[#C0442C] text-white"
-                : "bg-[#EBD7BE] border border-[#D8C9B3] text-[#6B7280] hover:border-[#C0442C] hover:text-[#C0442C]"
-            }`}
-            style={{ fontFamily: "var(--font-jakarta)" }}
-          >
-            {tag}
+        {categories.map((cat) => (
+          <button key={cat} onClick={() => select(cat)} aria-pressed={active === cat} className={pill(active === cat)} style={ui}>
+            {categoryLabels[cat][lang]}{" "}
+            <span className="font-normal">({articles.filter((a) => a.category === cat).length})</span>
           </button>
         ))}
-      </Reveal>
-
-      {filtered.length === 0 && (
-        <p className="text-center py-16" style={{ color: "#9CA3AF", fontFamily: "var(--font-jakarta)" }}>
-          {lang === "en" ? "No articles for this tag." : "No hay artículos para esta etiqueta."}
-        </p>
-      )}
+      </div>
 
       {featured && (
-        <Reveal className="mb-10">
-          <Link href={`${basePath}/${featured.slug}`} className="block group">
-            <div className="rounded-lg overflow-hidden bg-[#1B3A5C] transition-all duration-300 flex flex-col md:flex-row">
-              <div className="flex-1 p-10 md:p-14 flex flex-col gap-4">
-                <div className="flex items-center gap-3 flex-wrap">
-                  <span className="label text-blue-300">{t(featured).tag}</span>
-                  {t(featured).date && (
-                    <>
-                      <span className="w-1 h-1 rounded bg-[#C0442C]" />
-                      <span className="text-xs text-blue-400" style={{ fontFamily: "var(--font-jakarta)" }}>
-                        {t(featured).date}
-                      </span>
-                    </>
-                  )}
-                </div>
-                <h2 className="text-white text-2xl md:text-3xl leading-snug group-hover:text-blue-100 transition-colors duration-200">
-                  {t(featured).title}
-                </h2>
-                {t(featured).excerpt && (
-                  <p className="text-blue-200 text-base leading-relaxed" style={{ fontFamily: "var(--font-source)" }}>
-                    {t(featured).excerpt}
-                  </p>
-                )}
-                {t(featured).author && (
-                  <p className="text-sm font-semibold text-blue-300 mt-2" style={{ fontFamily: "var(--font-jakarta)" }}>
-                    {t(featured).author}
-                  </p>
-                )}
-              </div>
-              <div className="hidden md:flex w-64 flex-shrink-0 bg-[#0f2238] items-center justify-center p-10">
-                <span
-                  className="text-[8rem] font-extrabold text-white leading-none select-none"
-                  style={{ fontFamily: "var(--font-jakarta)", opacity: 0.06, letterSpacing: "-0.05em" }}
-                  aria-hidden
-                >
-                  PD
-                </span>
-              </div>
+        <Link href={`${basePath}/${featured.slug}`} className="block group mb-8">
+          <article className="rounded-lg bg-navy p-8 md:p-14 flex flex-col gap-4 group-hover:bg-navy-dark transition-colors duration-200">
+            <div className="flex items-center gap-3 flex-wrap text-blue-200">
+              <span className="label">{featured[lang].tag}</span>
+              {featured[lang].date && (
+                <>
+                  <span aria-hidden>·</span>
+                  <time dateTime={featured.isoDate} className="text-xs" style={ui}>{featured[lang].date}</time>
+                </>
+              )}
+              {spanishBadge(featured.slug)}
             </div>
-          </Link>
-        </Reveal>
+            <h2 className="heading-sentence text-white max-w-3xl">{featured[lang].title}</h2>
+            {featured[lang].excerpt && <p className="text-blue-100 text-lg leading-relaxed max-w-3xl">{featured[lang].excerpt}</p>}
+            {featured[lang].author && (
+              <p className="text-sm font-semibold text-blue-200 mt-2" style={ui}>{featured[lang].author}</p>
+            )}
+          </article>
+        </Link>
       )}
 
       {rest.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {rest.map((article, i) => (
-            <Reveal key={article.slug} delay={i * 0.06}>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {rest.map((article) => (
+            <li key={article.slug}>
               <Link href={`${basePath}/${article.slug}`} className="block group h-full">
-                <div className="bg-[#EBD7BE] border border-[#D8C9B3] rounded-lg p-7 flex flex-col gap-3 h-full hover:border-[#1B3A5C] transition-all duration-300">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="label text-[#C0442C]">{t(article).tag}</span>
-                    {t(article).date && (
+                <article className="bg-cream border border-line rounded-lg p-7 flex flex-col gap-3 h-full group-hover:border-navy transition-colors duration-200">
+                  <div className="flex items-center gap-2 flex-wrap text-muted">
+                    <span className="label text-rust">{article[lang].tag}</span>
+                    {article[lang].date && (
                       <>
-                        <span className="w-1 h-1 rounded bg-[#D8C9B3] flex-shrink-0" />
-                        <span className="text-xs text-[#9CA3AF]" style={{ fontFamily: "var(--font-jakarta)" }}>
-                          {t(article).date}
-                        </span>
+                        <span aria-hidden>·</span>
+                        <time dateTime={article.isoDate} className="text-xs" style={ui}>{article[lang].date}</time>
                       </>
                     )}
+                    {spanishBadge(article.slug)}
                   </div>
-                  <h3 className="text-base leading-snug group-hover:text-[#C0442C] transition-colors duration-200">
-                    {t(article).title}
-                  </h3>
-                  {t(article).excerpt && (
-                    <p className="text-xs leading-relaxed mt-auto" style={{ color: "#7A8A9A" }}>
-                      {t(article).excerpt}
-                    </p>
+                  <h3 className="text-lg leading-snug group-hover:text-rust transition-colors duration-200">{article[lang].title}</h3>
+                  {article[lang].excerpt && <p className="text-sm leading-relaxed">{article[lang].excerpt}</p>}
+                  {article[lang].author && (
+                    <p className="text-xs font-semibold text-navy mt-auto pt-2" style={ui}>{article[lang].author}</p>
                   )}
-                  {t(article).author && (
-                    <p className="text-xs font-semibold text-[#1B3A5C] mt-auto" style={{ fontFamily: "var(--font-jakarta)" }}>
-                      {t(article).author}
-                    </p>
-                  )}
-                </div>
+                </article>
               </Link>
-            </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );

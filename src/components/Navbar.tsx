@@ -4,26 +4,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { navLinks, localHref } from "@/lib/nav";
 
-const navLinks = [
-  { href: "/que-ofrecemos",  label: "¿Qué hacemos?",       labelEn: "What we offer" },
-  { href: "/quienes-somos",  label: "Quiénes somos",        labelEn: "About us" },
-  { href: "/actividades",    label: "Actividades realizadas", labelEn: "Activities" },
-  { href: "/blog",           label: "Blog",                  labelEn: "Blog" },
-  { href: "/contacto",       label: "Contáctanos",           labelEn: "Contact us" },
-];
-
-export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
+// `altHref` overrides the language-switch target for pages that exist in one language only.
+export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; altHref?: string }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
   const otherLangHref =
-    lang === "en"
+    altHref ??
+    (lang === "en"
       ? pathname.replace(/^\/en/, "") || "/"
       : pathname === "/"
       ? "/en"
-      : `/en${pathname}`;
+      : `/en${pathname}`);
+
+  const isCurrent = (href: string) => {
+    const full = localHref(lang, href);
+    return pathname === full || pathname.startsWith(`${full}/`);
+  };
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24);
@@ -31,42 +31,52 @@ export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
     <header
-      className={`w-full sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-[#EBD7BE]/95 border-b border-[#D8C9B3]"
-          : "bg-[#EBD7BE] border-b border-transparent"
+      className={`w-full sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "bg-cream/95 border-b border-line" : "bg-cream border-b border-transparent"
       }`}
     >
-      <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link href={lang === "en" ? "/en" : "/"} className="flex-shrink-0">
-          <Image
-            src="/logo.png"
-            alt="Proyecto Disonante"
-            width={160}
-            height={50}
-            priority
-          />
+      <nav
+        aria-label={lang === "en" ? "Main" : "Principal"}
+        className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
+      >
+        <Link href={localHref(lang, "/")} className="flex-shrink-0">
+          <Image src="/logo.png" alt="Proyecto Disonante" width={160} height={50} priority />
         </Link>
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-7">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={lang === "en" ? `/en${link.href}` : link.href}
-                className="text-[#2D2D2D] hover:text-[#C0442C] transition-colors duration-150"
-                style={{ fontFamily: "var(--font-jakarta)", fontSize: "0.8125rem", fontWeight: 500 }}
-              >
-                {lang === "en" ? link.labelEn : link.label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const current = isCurrent(link.href);
+            return (
+              <li key={link.href}>
+                <Link
+                  href={localHref(lang, link.href)}
+                  aria-current={current ? "page" : undefined}
+                  className={`py-1 border-b-2 transition-colors duration-150 hover:text-rust ${
+                    current ? "text-navy border-terracotta" : "text-ink border-transparent"
+                  }`}
+                  style={{ fontFamily: "var(--font-jakarta)", fontSize: "0.8125rem", fontWeight: current ? 600 : 500 }}
+                >
+                  {link[lang]}
+                </Link>
+              </li>
+            );
+          })}
           <li>
             <Link
               href={otherLangHref}
-              className="text-xs font-bold text-[#1B3A5C] border-2 border-[#1B3A5C] px-3.5 py-1 rounded hover:bg-[#1B3A5C] hover:text-white transition-all duration-200"
+              hrefLang={lang === "en" ? "es" : "en"}
+              aria-label={lang === "en" ? "Ver en español" : "View in English"}
+              className="text-xs font-bold text-navy border-2 border-navy px-3.5 py-1 rounded hover:bg-navy hover:text-white transition-colors duration-200"
               style={{ fontFamily: "var(--font-jakarta)", letterSpacing: "0.05em" }}
             >
               {lang === "en" ? "ES" : "EN"}
@@ -76,38 +86,49 @@ export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
 
         {/* Hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col gap-1.5 p-3 -mr-3"
           onClick={() => setOpen(!open)}
-          aria-label="Menú"
+          aria-label={open ? (lang === "en" ? "Close menu" : "Cerrar menú") : lang === "en" ? "Open menu" : "Abrir menú"}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
         >
-          <span className={`block w-5 h-0.5 bg-[#1B3A5C] transition-transform duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-[#1B3A5C] transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-[#1B3A5C] transition-transform duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span aria-hidden className={`block w-5 h-0.5 bg-navy transition-transform duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
+          <span aria-hidden className={`block w-5 h-0.5 bg-navy transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
+          <span aria-hidden className={`block w-5 h-0.5 bg-navy transition-transform duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </nav>
 
-      {/* Mobile menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
-        <div className="bg-[#EBD7BE] border-t border-[#D8C9B3] px-6 py-6 flex flex-col gap-5">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={lang === "en" ? `/en${link.href}` : link.href}
-              className="text-[#2D2D2D] hover:text-[#C0442C] font-medium transition-colors"
-              style={{ fontFamily: "var(--font-jakarta)", fontSize: "0.9375rem" }}
-              onClick={() => setOpen(false)}
-            >
-              {lang === "en" ? link.labelEn : link.label}
-            </Link>
-          ))}
-          <div className="h-px bg-[#D8C9B3]" />
+      {/* Mobile menu: `inert` keeps closed links out of the tab order */}
+      <div
+        id="mobile-menu"
+        inert={!open}
+        className={`md:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[28rem]" : "max-h-0"}`}
+      >
+        <div className="bg-cream border-t border-line px-6 py-6 flex flex-col gap-5">
+          {navLinks.map((link) => {
+            const current = isCurrent(link.href);
+            return (
+              <Link
+                key={link.href}
+                href={localHref(lang, link.href)}
+                aria-current={current ? "page" : undefined}
+                className={`hover:text-rust font-medium transition-colors ${current ? "text-rust" : "text-ink"}`}
+                style={{ fontFamily: "var(--font-jakarta)", fontSize: "1rem" }}
+                onClick={() => setOpen(false)}
+              >
+                {link[lang]}
+              </Link>
+            );
+          })}
+          <div className="h-px bg-line" />
           <Link
             href={otherLangHref}
-            className="text-sm font-bold text-[#1B3A5C]"
+            hrefLang={lang === "en" ? "es" : "en"}
+            className="text-sm font-bold text-navy"
             style={{ fontFamily: "var(--font-jakarta)" }}
             onClick={() => setOpen(false)}
           >
-            {lang === "en" ? "Ver en Español" : "View in English"}
+            {lang === "en" ? "Ver en español" : "View in English"}
           </Link>
         </div>
       </div>
