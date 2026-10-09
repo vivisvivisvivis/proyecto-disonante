@@ -3,18 +3,27 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
-  { href: "/actividades",   label: "Actividades",     labelEn: "Activities" },
-  { href: "/que-ofrecemos", label: "¿Qué ofrecemos?", labelEn: "What we offer" },
-  { href: "/blog",          label: "Blog",             labelEn: "Blog" },
-  { href: "/quienes-somos", label: "Quiénes somos",   labelEn: "About us" },
-  { href: "/contacto",      label: "Contacto",         labelEn: "Contact" },
+  { href: "/que-ofrecemos",  label: "¿Qué hacemos?",       labelEn: "What we offer" },
+  { href: "/quienes-somos",  label: "Quiénes somos",        labelEn: "About us" },
+  { href: "/actividades",    label: "Actividades realizadas", labelEn: "Activities" },
+  { href: "/blog",           label: "Blog",                  labelEn: "Blog" },
+  { href: "/contacto",       label: "Contáctanos",           labelEn: "Contact us" },
 ];
 
 export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const otherLangHref =
+    lang === "en"
+      ? pathname.replace(/^\/en/, "") || "/"
+      : pathname === "/"
+      ? "/en"
+      : `/en${pathname}`;
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 24);
@@ -26,8 +35,8 @@ export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
     <header
       className={`w-full sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm border-b border-[#E8E2D9]"
-          : "bg-[#FAF7F2] border-b border-transparent"
+          ? "bg-[#EBD7BE]/95 border-b border-[#D8C9B3]"
+          : "bg-[#EBD7BE] border-b border-transparent"
       }`}
     >
       <nav className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -56,8 +65,8 @@ export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
           ))}
           <li>
             <Link
-              href={lang === "en" ? "/" : "/en"}
-              className="text-xs font-bold text-[#1B3A5C] border-2 border-[#1B3A5C] px-3.5 py-1 rounded-full hover:bg-[#1B3A5C] hover:text-white transition-all duration-200"
+              href={otherLangHref}
+              className="text-xs font-bold text-[#1B3A5C] border-2 border-[#1B3A5C] px-3.5 py-1 rounded hover:bg-[#1B3A5C] hover:text-white transition-all duration-200"
               style={{ fontFamily: "var(--font-jakarta)", letterSpacing: "0.05em" }}
             >
               {lang === "en" ? "ES" : "EN"}
@@ -79,7 +88,7 @@ export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
 
       {/* Mobile menu */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ${open ? "max-h-96" : "max-h-0"}`}>
-        <div className="bg-white border-t border-[#E8E2D9] px-6 py-6 flex flex-col gap-5">
+        <div className="bg-[#EBD7BE] border-t border-[#D8C9B3] px-6 py-6 flex flex-col gap-5">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -91,9 +100,9 @@ export default function Navbar({ lang = "es" }: { lang?: "es" | "en" }) {
               {lang === "en" ? link.labelEn : link.label}
             </Link>
           ))}
-          <div className="h-px bg-[#E8E2D9]" />
+          <div className="h-px bg-[#D8C9B3]" />
           <Link
-            href={lang === "en" ? "/" : "/en"}
+            href={otherLangHref}
             className="text-sm font-bold text-[#1B3A5C]"
             style={{ fontFamily: "var(--font-jakarta)" }}
             onClick={() => setOpen(false)}

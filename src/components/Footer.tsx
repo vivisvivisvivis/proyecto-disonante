@@ -7,9 +7,9 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
       ? "Strengthening public space through rational deliberation, evidence, and pluralism."
       : "Fortalecemos el espacio público a través de la deliberación racional, el uso de evidencia y el pluralismo.",
     links: lang === "en"
-      ? ["Activities", "What we offer", "Blog", "About us", "Contact"]
-      : ["Actividades", "¿Qué ofrecemos?", "Blog", "Quiénes somos", "Contacto"],
-    hrefs: ["/actividades", "/que-ofrecemos", "/blog", "/quienes-somos", "/contacto"],
+      ? ["What we do", "About us", "Activities", "Blog", "Contact us"]
+      : ["¿Qué hacemos?", "Quiénes somos", "Actividades realizadas", "Blog", "Contáctanos"],
+    hrefs: ["/que-ofrecemos", "/quienes-somos", "/actividades", "/blog", "/contacto"],
     rights: lang === "en" ? "All rights reserved." : "Todos los derechos reservados.",
   };
 
@@ -47,15 +47,31 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
             href={lang === "en" ? "/en/contacto" : "/contacto"}
             className="text-sm text-blue-100 hover:text-white transition-colors"
           >
-            {lang === "en" ? "Get in touch →" : "Escribinos →"}
+            {lang === "en" ? "Get in touch →" : "Escríbenos →"}
           </Link>
         </div>
       </div>
 
       <div className="border-t border-blue-800">
-        <p className="max-w-6xl mx-auto px-6 py-4 text-xs text-blue-300">
-          © {new Date().getFullYear()} Proyecto Disonante. {t.rights}
-        </p>
+        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
+          <p className="text-xs text-blue-300">
+            © {new Date().getFullYear()} Proyecto Disonante. {t.rights}
+          </p>
+          <div className="flex gap-4">
+            <Link
+              href={lang === "en" ? "/en/privacy" : "/privacy"}
+              className="text-xs text-blue-400 hover:text-blue-200 transition-colors"
+            >
+              {lang === "en" ? "Privacy Policy" : "Política de privacidad"}
+            </Link>
+            <Link
+              href={lang === "en" ? "/en/terms" : "/terms"}
+              className="text-xs text-blue-400 hover:text-blue-200 transition-colors"
+            >
+              {lang === "en" ? "Terms of Use" : "Términos de uso"}
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -3,17 +3,17 @@
 @theme inline {
   --color-navy: #1B3A5C;
   --color-terracotta: #C0442C;
-  --color-cream: #FAF7F2;
+  --color-cream: #EBD7BE;
   --color-warm-gray: #6B7280;
   --color-dark: #2D2D2D;
-  --color-light-border: #E8E2D9;
+  --color-light-border: #D8C9B3;
 
-  --font-sans: var(--font-jakarta);
-  --font-serif: var(--font-lora);
+  --font-sans: var(--font-source);
+  --font-display: var(--font-bebas);
 }
 
 :root {
-  --background: #FAF7F2;
+  --background: #EBD7BE;
   --foreground: #2D2D2D;
 }
 
@@ -22,12 +22,11 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-lora), Georgia, serif;
+  font-family: var(--font-source), system-ui, sans-serif;
   font-size: 1.0625rem;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  cursor: none;
 }
 
 /* ── Grain texture overlay ─────────────────────── */
@@ -44,35 +43,54 @@ body::after {
   mix-blend-mode: multiply;
 }
 
-@media (pointer: coarse) { body { cursor: auto; } }
-
 * { box-sizing: border-box; }
-
-a, button, [role="button"] { cursor: none; }
-@media (pointer: coarse) {
-  a, button, [role="button"] { cursor: auto; }
-}
 
 /* ── Type scale ─────────────────────────────────── */
 /* Inside @layer base so Tailwind utility classes (text-white, text-blue-200, etc.)
    can override these defaults — without this, unlayered CSS beats @layer utilities */
 @layer base {
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-jakarta), system-ui, sans-serif;
+  h1 {
+    font-family: var(--font-bebas), system-ui, sans-serif;
     color: #1B3A5C;
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: 0;
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    text-transform: uppercase;
   }
 
-  h1 { font-size: clamp(2.75rem, 6vw, 5rem); }
-  h2 { font-size: clamp(1.875rem, 3.5vw, 2.75rem); }
-  h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; }
+  h2 {
+    font-family: var(--font-bebas), system-ui, sans-serif;
+    color: #1B3A5C;
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    color: #1B3A5C;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.125rem, 1.75vw, 1.375rem);
+  }
+
+  h4, h5 {
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+    color: #1B3A5C;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
 
   p {
-    font-family: var(--font-lora), Georgia, serif;
+    font-family: var(--font-source), system-ui, sans-serif;
     color: #4A4A4A;
     line-height: 1.8;
+    font-size: 1.0625rem;
   }
 }
 
@@ -97,4 +115,78 @@ button, .btn { font-family: var(--font-jakarta), sans-serif; font-weight: 600; }
 }
 .marquee-track:hover {
   animation-play-state: paused;
+}
+
+/* ── Article body ────────────────────────────────── */
+.article-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;
+}
+.article-body p {
+  font-family: var(--font-source), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+  color: #4A4A4A;
+}
+.article-body strong {
+  font-weight: 700;
+  color: #2D2D2D;
+}
+.article-body em { font-style: italic; }
+.article-body ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.article-body li {
+  font-family: var(--font-source), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #4A4A4A;
+}
+
+/* ── Print ───────────────────────────────────────── */
+@media print {
+  /* Hide interactive/decorative elements */
+  .marquee-track,
+  nav,
+  footer,
+  [data-lenis],
+  [aria-hidden="true"] {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: #000;
+    font-size: 11pt;
+    line-height: 1.5;
+    cursor: auto;
+  }
+
+  body::after { display: none; }
+
+  @layer base {
+    h1, h2, h3, h4, h5 { color: #000; page-break-after: avoid; }
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after {
+    content: "";
+  }
+
+  img { max-width: 100% !important; }
+
+  p, blockquote, li { orphans: 3; widows: 3; }
+
+  section { page-break-inside: avoid; }
 }

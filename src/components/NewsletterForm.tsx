@@ -22,12 +22,12 @@ export default function NewsletterForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="tu@correo.com"
         required
-        className="flex-1 px-5 py-3 rounded-full border-2 border-[#E8E2D9] bg-white text-[#2D2D2D] placeholder-[#9CA3AF] focus:outline-none focus:border-[#1B3A5C] transition-colors text-sm"
+        className="flex-1 px-5 py-3 rounded border-2 border-[#D8C9B3] bg-[#EBD7BE] text-[#2D2D2D] placeholder-[#9CA3AF] focus:outline-none focus:border-[#1B3A5C] transition-colors text-sm"
         style={{ fontFamily: "var(--font-jakarta)" }}
       />
       <button
         type="submit"
-        className="bg-[#1B3A5C] text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-[#152d47] transition-colors flex-shrink-0"
+        className="bg-[#1B3A5C] text-white px-7 py-3 rounded font-semibold text-sm hover:bg-[#152d47] transition-colors flex-shrink-0"
         style={{ fontFamily: "var(--font-jakarta)" }}
       >
         {status === "success" ? "¡Listo!" : "Suscribirme"}

@@ -12,7 +12,25 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: "easeOut" as const } },
 };
 
-export default function HeroText() {
+const copy = {
+  es: {
+    watermark: "DISONANTE",
+    label: "Deliberación · Evidencia · Pluralismo",
+    h1: "Proyecto Disonante",
+    subtitle: "Escuchar lo que nos cuesta oír",
+    p: "Una contribución para fortalecer el espacio cívico a través de la deliberación pública, el uso de evidencia y el pluralismo.",
+  },
+  en: {
+    watermark: "DISONANTE",
+    label: "Deliberation · Evidence · Pluralism",
+    h1: "Proyecto Disonante",
+    subtitle: "Listen to what is hard for us to hear",
+    p: "A contribution to strengthen civic space through public deliberation, the use of evidence and pluralism.",
+  },
+};
+
+export default function HeroText({ lang = "es" }: { lang?: "es" | "en" }) {
+  const t = copy[lang];
   return (
     <div className="relative w-full flex flex-col items-center">
       {/* Watermark background word */}
@@ -29,7 +47,7 @@ export default function HeroText() {
           zIndex: 0,
         }}
       >
-        ESCUCHAR
+        {t.watermark}
       </motion.span>
 
       <motion.div
@@ -39,24 +57,30 @@ export default function HeroText() {
         animate="visible"
       >
         <motion.span variants={item} className="label text-[#C0442C]">
-          Deliberación · Evidencia · Pluralismo
+          {t.label}
         </motion.span>
 
         <motion.h1
           variants={item}
           className="text-center max-w-3xl"
-          style={{ fontFamily: "var(--font-jakarta)" }}
         >
-          Escuchar lo que<br />nos cuesta oír
+          {t.h1}
         </motion.h1>
 
         <motion.p
           variants={item}
-          className="text-lg md:text-xl max-w-2xl text-center"
-          style={{ fontFamily: "var(--font-lora)", color: "#5A6A7A", lineHeight: 1.75 }}
+          className="text-2xl md:text-3xl font-light text-center max-w-2xl"
+          style={{ fontFamily: "var(--font-source)", color: "#2D2D2D", letterSpacing: "-0.01em" }}
         >
-          Una contribución para fortalecer el espacio cívico a través de la deliberación
-          pública, el uso de evidencia y el pluralismo.
+          {t.subtitle}
+        </motion.p>
+
+        <motion.p
+          variants={item}
+          className="text-lg md:text-xl max-w-2xl text-center"
+          style={{ fontFamily: "var(--font-source)", color: "#5A6A7A", lineHeight: 1.75 }}
+        >
+          {t.p}
         </motion.p>
       </motion.div>
     </div>

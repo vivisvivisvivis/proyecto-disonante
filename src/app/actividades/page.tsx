@@ -3,12 +3,14 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import GeometricAccent from "@/components/GeometricAccent";
 import PageHero from "@/components/PageHero";
 
+import { esAlternates } from "@/lib/seo";
+
 export const metadata: Metadata = {
-  title: "Actividades — Proyecto Disonante",
-  description: "Nuestros proyectos actuales tienen como objetivo conocer y potenciar experiencias exitosas de fortalecimiento del espacio cívico.",
+  title: "Actividades realizadas",
+  description: "Las actividades realizadas por Proyecto Disonante: talleres, formaciones, charlas y participaciones en espacios públicos.",
+  alternates: esAlternates("/actividades"),
 };
 
 export default function ActividadesPage() {
@@ -18,30 +20,30 @@ export default function ActividadesPage() {
       <main>
         <PageHero
           label="Proyectos"
-          title="Actividades"
-          description="Nuestros proyectos actuales tienen como objetivo conocer y potenciar experiencias exitosas de fortalecimiento del espacio cívico y capacitar en buenas prácticas de deliberación pública."
+          title="Actividades realizadas"
+          description="Nuestros proyectos buscan identificar y fortalecer experiencias exitosas de construcción de espacio cívico y la formación en buenas prácticas de deliberación pública."
         />
 
         {/* Proyecto 01 — Redes Plurales */}
-        <section className="py-24 px-6 bg-white">
+        <section className="py-24 px-6 bg-[#E2CDB4]">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <Reveal direction="left">
               <span className="label text-[#C0442C]">Proyecto 01</span>
               <h2 className="mt-4">Redes Plurales</h2>
               <p className="mt-6" style={{ color: "#5A6A7A" }}>
-                Conocer buenas prácticas, desarrollar herramientas de diálogo y generar capacidades son las tres principales actividades que proponemos desarrollar durante el primer año de trabajo. Sabemos que en diversos lugares del mundo existen organizaciones de la sociedad civil, instituciones académicas y programas de gobierno orientados a promover el diálogo, la construcción de consensos, la convivencia, el debate de ideas y otras actividades que fomentan el pluralismo en la esfera pública.
+                Identificar buenas prácticas, desarrollar herramientas de diálogo y construir capacidades son las tres principales actividades que proponemos para el primer año de trabajo. Sabemos que en diversas partes del mundo existen organizaciones de la sociedad civil, instituciones académicas y programas gubernamentales orientados a promover el diálogo, la búsqueda de consensos, la convivencia, el debate de ideas y otras actividades que fomentan el pluralismo en el espacio público.
               </p>
               <p className="mt-4" style={{ color: "#5A6A7A" }}>
-                Si queremos multiplicar estas capacidades, es necesario poner en marcha un programa que recopile estas experiencias y herramientas, las sistematice conceptualmente, y cree redes para potenciar su potencial e impacto. Esas herramientas, ahora potenciadas, pueden llevarse a nuevas áreas y situaciones.
+                Si queremos multiplicar estas capacidades, es necesario lanzar un programa que recoja estas experiencias y herramientas, las sistematice conceptualmente y cree redes para potenciar su impacto y llevarlas a nuevas áreas y situaciones.
               </p>
             </Reveal>
 
             <Reveal direction="right">
-              <div className="bg-[#FAF7F2] rounded-3xl p-10 border border-[#E8E2D9] flex flex-col gap-5">
-                <span className="label text-[#6B7280]">Tres ejes de trabajo</span>
+              <div className="bg-[#EBD7BE] rounded-lg p-10 border border-[#D8C9B3] flex flex-col gap-5">
+                <span className="label text-[#6B7280]">Tres líneas de trabajo</span>
                 <ul className="flex flex-col gap-4">
                   {[
-                    "Conocer buenas prácticas de diálogo y deliberación en el mundo",
+                    "Identificar buenas prácticas de diálogo y deliberación a nivel mundial",
                     "Desarrollar herramientas de diálogo adaptables a distintos contextos",
                     "Crear redes para potenciar su impacto y llevarlas a nuevas áreas",
                   ].map((item) => (
@@ -59,10 +61,7 @@ export default function ActividadesPage() {
         </section>
 
         {/* Proyecto 02 — Deliberar para entendernos */}
-        <section className="py-24 px-6 bg-[#FAF7F2] relative overflow-hidden">
-          <div className="absolute -right-20 -bottom-20 pointer-events-none">
-            <GeometricAccent size={420} opacity={0.05} color="#C0442C" />
-          </div>
+        <section className="py-24 px-6 bg-[#EBD7BE] relative overflow-hidden">
           <div className="max-w-5xl mx-auto">
             <Reveal>
               <span className="label text-[#C0442C]">Proyecto 02</span>
@@ -72,26 +71,26 @@ export default function ActividadesPage() {
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
               <Reveal className="md:col-span-2 flex flex-col gap-5" delay={0.1}>
                 <p style={{ color: "#5A6A7A" }}>
-                  Programa Deliberar para entendernos se nutre y multiplica los hallazgos de Redes Plurales. Es necesario entrenar la capacidad de deliberar para que la deliberación se vuelva una práctica habitual, constructiva y superadora de la confrontación. Diversos actores pueden ser promotores. Los gobiernos son líderes naturales para estas transformaciones: instituciones legislativas (concejos locales, legislaturas subnacionales, congresos nacionales), poderes ejecutivos de distintos niveles de gobierno que formulan proyectos normativos, autoridades judiciales y órganos de control superior.
+                  El programa Deliberar para Entendernos construye sobre y multiplica los hallazgos de Redes Plurales. Es necesario entrenar la capacidad de deliberar para que la deliberación se convierta en una práctica habitual, constructiva y que trascienda la confrontación. Distintos actores pueden ser promotores. Los gobiernos son líderes naturales de estas transformaciones: las instituciones legislativas (concejos municipales, legislaturas subnacionales, congresos nacionales), los poderes ejecutivos en sus distintos niveles que formulan proyectos normativos, las autoridades judiciales y los órganos supremos de control.
                 </p>
                 <p style={{ color: "#5A6A7A" }}>
-                  También los actores no gubernamentales —OSCs, empresas, instituciones académicas, y hasta escuelas secundarias— han demostrado creciente capacidad de generar instancias de debate público. Existen en todas estas instituciones prácticas usuales de debate pero no aún de deliberación. El debate político en las instituciones legislativas es competitivo y no necesariamente constructivo; la polarización reinante socava la posibilidad de comprensión mutua y de construcción colectiva.
+                  Los actores no gubernamentales —OSC, empresas, instituciones académicas e incluso escuelas secundarias— también han demostrado una capacidad creciente para generar instancias de debate público. En todas estas instituciones existen prácticas comunes de debate, pero aún no de deliberación. El debate político en las instituciones legislativas es competitivo y no necesariamente constructivo; la polarización imperante socava la posibilidad de entendimiento mutuo y construcción colectiva.
                 </p>
                 <p style={{ color: "#5A6A7A" }}>
-                  Deliberar para entendernos es un programa orientado a crear materiales pedagógicos y a capacitar a funcionarios, legisladores, asesores, activistas de sociedad civil, profesores y estudiantes en recursos útiles para potenciar las capacidades de diálogo en un contexto en el que predomina el conflicto y la competencia.
+                  Deliberar para Entendernos es un programa orientado a crear materiales pedagógicos y a capacitar funcionarios, legisladores, asesores, activistas de la sociedad civil, docentes y estudiantes en recursos útiles para fortalecer las capacidades de diálogo en un contexto dominado por el conflicto y la competencia.
                 </p>
               </Reveal>
 
               <Reveal delay={0.2}>
-                <div className="bg-[#1B3A5C] rounded-3xl p-8 flex flex-col gap-5 h-full">
+                <div className="bg-[#1B3A5C] rounded-lg p-8 flex flex-col gap-5 h-full">
                   <span className="label text-blue-300">Actores destinatarios</span>
                   <ul className="flex flex-col gap-3">
                     {[
                       "Funcionarios y legisladores",
                       "Asesores y activistas",
-                      "OSCs y empresas",
+                      "OSC y empresas",
                       "Instituciones académicas",
-                      "Profesores y estudiantes",
+                      "Docentes y estudiantes",
                       "Escuelas secundarias",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2.5">
@@ -110,27 +109,22 @@ export default function ActividadesPage() {
 
         {/* Impact strip */}
         <section className="bg-[#C0442C] py-16 px-6 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none opacity-[0.07]">
-            <div className="absolute -right-20 -top-20">
-              <GeometricAccent size={480} color="white" />
-            </div>
-          </div>
-          <Reveal className="max-w-4xl mx-auto text-center relative z-10">
+          <Reveal className="max-w-4xl mx-auto text-center">
             <p
               className="text-2xl md:text-3xl font-bold text-white leading-snug"
               style={{ fontFamily: "var(--font-jakarta)", letterSpacing: "-0.02em" }}
             >
-              Proyecto Disonante se propone trabajar simultáneamente en los dos programas: detectar capacidades de diálogo y ponerlas en red, por un lado, y potenciar la deliberación como práctica en las instituciones, por otro.
+              Proyecto Disonante aspira a trabajar simultáneamente en ambos programas: detectar capacidades de diálogo y ponerlas en red, por un lado, y fortalecer la deliberación como práctica en las instituciones, por el otro.
             </p>
           </Reveal>
         </section>
 
         {/* CTA */}
-        <section className="py-20 px-6 bg-white border-t border-[#E8E2D9]">
+        <section className="py-20 px-6 bg-[#E2CDB4] border-t border-[#D8C9B3]">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 items-center justify-between">
             <Reveal direction="left">
-              <span className="label text-[#6B7280]">Sumate</span>
-              <h2 className="mt-3 max-w-md">¿Querés ser parte?</h2>
+              <span className="label text-[#6B7280]">Colabora</span>
+              <h2 className="mt-3 max-w-md">¿Quieres ser parte?</h2>
               <p className="mt-3 max-w-md" style={{ color: "#5A6A7A" }}>
                 Nos interesa conocer tus inquietudes y propuestas.
               </p>
@@ -138,10 +132,10 @@ export default function ActividadesPage() {
             <Reveal direction="right">
               <Link
                 href="/contacto"
-                className="bg-[#C0442C] text-white px-9 py-3.5 rounded-full font-semibold hover:bg-[#a03824] transition-colors text-sm tracking-wide"
+                className="bg-[#C0442C] text-white px-9 py-3.5 rounded font-semibold hover:bg-[#a03824] transition-colors text-sm tracking-wide"
                 style={{ fontFamily: "var(--font-jakarta)" }}
               >
-                Contactanos
+                Contáctanos
               </Link>
             </Reveal>
           </div>

@@ -2,18 +2,18 @@ const clients = [
   "National Democratic Institute",
   "Minerva University",
   "Alianza Regional por la Libre Expresión e Información",
-  "CEPAL / Uruguay",
+  "Ríos Strategic Lawyering for Social Justice",
   "National Democratic Institute",
   "Minerva University",
   "Alianza Regional por la Libre Expresión e Información",
-  "CEPAL / Uruguay",
+  "Ríos Strategic Lawyering for Social Justice",
 ];
 
-export default function ClientMarquee() {
+export default function ClientMarquee({ lang = "es" }: { lang?: "es" | "en" }) {
   return (
-    <section className="bg-white border-y border-[#E8E2D9] py-8 overflow-hidden">
+    <section className="bg-[#E2CDB4] border-y border-[#D8C9B3] py-8 overflow-hidden">
       <div className="mb-5 text-center">
-        <p className="label text-[#6B7280]">Trabajamos con</p>
+        <p className="label text-[#6B7280]">{lang === "en" ? "We work with" : "Trabajamos con"}</p>
       </div>
       <div className="flex overflow-hidden">
         <div className="marquee-track flex items-center gap-16 whitespace-nowrap">
