@@ -54,7 +54,7 @@ function BlogListView({
   const basePath = en ? "/en/blog" : "/blog";
   const spanishBadge = (slug: string) =>
     spanishOnly.includes(slug) ? (
-      <span className="text-[0.6875rem] font-semibold uppercase tracking-wider border border-current rounded px-1.5 py-0.5" style={ui}>
+      <span className="text-xs font-semibold border border-current rounded px-1.5 py-0.5" style={ui}>
         Spanish only
       </span>
     ) : null;
@@ -65,7 +65,7 @@ function BlogListView({
     }`;
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-[72rem] mx-auto">
       <div role="group" aria-label={en ? "Filter by category" : "Filtrar por categoría"} className="mb-10 flex flex-wrap gap-2">
         <button onClick={() => select(null)} aria-pressed={active === null} className={pill(active === null)} style={ui}>
           {en ? "All" : "Todo"} <span className="font-normal">({articles.length})</span>
@@ -80,7 +80,7 @@ function BlogListView({
 
       {featured && (
         <Link href={`${basePath}/${featured.slug}`} className="block group mb-8">
-          <article className="rounded-lg bg-navy p-8 md:p-14 flex flex-col gap-4 group-hover:bg-navy-dark transition-colors duration-200">
+          <article className="rounded bg-navy p-8 md:p-16 flex flex-col gap-5 group-hover:bg-navy-dark transition-colors duration-300">
             <div className="flex items-center gap-3 flex-wrap text-blue-200">
               <span className="label">{featured[lang].tag}</span>
               {featured[lang].date && (
@@ -91,7 +91,7 @@ function BlogListView({
               )}
               {spanishBadge(featured.slug)}
             </div>
-            <h2 className="heading-sentence text-white max-w-3xl">{featured[lang].title}</h2>
+            <h2 className="heading-sentence featured-title text-white max-w-4xl">{featured[lang].title}</h2>
             {featured[lang].excerpt && <p className="text-blue-100 text-lg leading-relaxed max-w-3xl">{featured[lang].excerpt}</p>}
             {featured[lang].author && (
               <p className="text-sm font-semibold text-blue-200 mt-2" style={ui}>{featured[lang].author}</p>
@@ -101,27 +101,24 @@ function BlogListView({
       )}
 
       {rest.length > 0 && (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <ul className="border-t border-navy/20">
           {rest.map((article) => (
-            <li key={article.slug}>
-              <Link href={`${basePath}/${article.slug}`} className="block group h-full">
-                <article className="bg-cream border border-line rounded-lg p-7 flex flex-col gap-3 h-full group-hover:border-navy transition-colors duration-200">
-                  <div className="flex items-center gap-2 flex-wrap text-muted">
-                    <span className="label text-rust">{article[lang].tag}</span>
-                    {article[lang].date && (
-                      <>
-                        <span aria-hidden>·</span>
-                        <time dateTime={article.isoDate} className="text-xs" style={ui}>{article[lang].date}</time>
-                      </>
-                    )}
-                    {spanishBadge(article.slug)}
-                  </div>
-                  <h3 className="text-lg leading-snug group-hover:text-rust transition-colors duration-200">{article[lang].title}</h3>
-                  {article[lang].excerpt && <p className="text-sm leading-relaxed">{article[lang].excerpt}</p>}
-                  {article[lang].author && (
-                    <p className="text-xs font-semibold text-navy mt-auto pt-2" style={ui}>{article[lang].author}</p>
+            <li key={article.slug} className="border-b border-navy/20">
+              <Link href={`${basePath}/${article.slug}`} className="index-row group">
+                <div className="flex md:flex-col gap-2 md:w-40 shrink-0 flex-wrap items-center md:items-start font-ui text-sm">
+                  <span className="font-semibold text-rust">{article[lang].tag}</span>
+                  {article[lang].date && (
+                    <time dateTime={article.isoDate} className="text-muted">{article[lang].date}</time>
                   )}
-                </article>
+                  {spanishBadge(article.slug)}
+                </div>
+                <div className="flex flex-col gap-2 flex-1">
+                  <h3 className="index-row-title">{article[lang].title}</h3>
+                  {article[lang].excerpt && <p className="text-[0.9375rem] leading-relaxed max-w-2xl">{article[lang].excerpt}</p>}
+                </div>
+                {article[lang].author && (
+                  <span className="font-ui text-sm font-semibold text-navy md:w-48 md:text-right shrink-0">{article[lang].author}</span>
+                )}
               </Link>
             </li>
           ))}

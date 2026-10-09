@@ -66,8 +66,8 @@ export default async function ArticlePage({
       <main id="main" className="bg-cream min-h-screen">
 
         {/* Article header */}
-        <section className="pt-20 pb-16 px-6 bg-sand border-b border-line">
-          <div className="max-w-3xl mx-auto flex flex-col gap-6">
+        <section className="pt-16 pb-14 md:pt-24 md:pb-20 px-6 bg-sand border-b border-line">
+          <div className="max-w-3xl mx-auto flex flex-col gap-7">
             <Link
               href="/blog"
               className="text-sm text-muted hover:text-rust transition-colors self-start"
@@ -100,7 +100,7 @@ export default async function ArticlePage({
               )}
             </div>
 
-            <h1 className="heading-sentence">
+            <h1 className="heading-sentence article-title">
               {title}
             </h1>
 
@@ -129,7 +129,7 @@ export default async function ArticlePage({
 
             {/* Share */}
             <div className="flex items-center gap-4 pt-4 border-t border-line">
-              <span className="text-xs font-semibold text-muted uppercase tracking-widest" style={{ fontFamily: "var(--font-jakarta)" }}>
+              <span className="font-ui text-sm font-semibold text-muted" style={{ fontFamily: "var(--font-jakarta)" }}>
                 Compartir
               </span>
               <a
@@ -156,7 +156,7 @@ export default async function ArticlePage({
             <div className="pt-4">
               <Link
                 href="/blog"
-                className="text-sm font-semibold text-rust hover:underline"
+                className="text-sm font-semibold text-rust link-underline"
                 style={{ fontFamily: "var(--font-jakarta)" }}
               >
                 ← Ver todas las publicaciones
@@ -168,11 +168,8 @@ export default async function ArticlePage({
         {/* Related articles */}
         {related.length > 0 && (
           <section className="py-16 px-6 bg-sand border-t border-line">
-            <div className="max-w-5xl mx-auto">
-              <p
-                className="label text-muted mb-8"
-                style={{ fontFamily: "var(--font-jakarta)" }}
-              >
+            <div className="max-w-[72rem] mx-auto">
+              <p className="section-title mb-10">
                 También te puede interesar
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">

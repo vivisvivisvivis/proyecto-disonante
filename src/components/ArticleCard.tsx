@@ -12,9 +12,9 @@ export default function ArticleCard({ article, lang }: Props) {
 
   return (
     <Link href={`${basePath}/${article.slug}`} className="block group h-full">
-      <div className="bg-cream border border-line rounded-lg p-7 flex flex-col gap-3 h-full hover:border-navy transition-all duration-300">
+      <div className="bg-cream border border-line rounded p-8 flex flex-col gap-3 h-full group-hover:border-navy transition-colors duration-300">
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="label text-rust">{t.tag}</span>
+          <span className="font-ui text-sm font-semibold text-rust">{t.tag}</span>
           {t.date && (
             <>
               <span className="w-1 h-1 rounded-full bg-line flex-shrink-0" />
@@ -24,11 +24,11 @@ export default function ArticleCard({ article, lang }: Props) {
             </>
           )}
         </div>
-        <h3 className="text-base leading-snug group-hover:text-rust transition-colors duration-200">
+        <h3 className="index-row-title">
           {t.title}
         </h3>
         {t.excerpt && (
-          <p className="text-xs leading-relaxed mt-auto" style={{ color: "var(--pd-muted)" }}>
+          <p className="text-sm leading-relaxed" style={{ color: "var(--pd-muted)" }}>
             {t.excerpt}
           </p>
         )}

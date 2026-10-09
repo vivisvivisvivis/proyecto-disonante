@@ -27,7 +27,7 @@ export default function ContactoEnPage() {
         />
 
         <section className="py-24 px-6 bg-sand relative overflow-hidden">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div className="max-w-[72rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             {/* Left: context */}
             <Reveal direction="left">
               <div className="flex flex-col gap-8">
@@ -38,18 +38,17 @@ export default function ContactoEnPage() {
                   </p>
                 </div>
 
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col border-t border-navy/20">
                   {[
                     { title: "Diagnosis and solutions", desc: "Situations of blocked dialogue" },
                     { title: "Training", desc: "Deliberative practices and rational dialogue" },
                     { title: "Implementation", desc: "Decisions that generate conflict" },
                     { title: "Evidence-based argumentation", desc: "Development of rational arguments" },
                   ].map((item) => (
-                    <div key={item.title} className="flex items-start gap-3 p-4 rounded border border-line">
-                      <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0 mt-2" />
+                    <div key={item.title} className="border-b border-navy/20 py-4">
                       <div>
-                        <p className="text-sm font-semibold text-navy" style={{ fontFamily: "var(--font-jakarta)" }}>{item.title}</p>
-                        <p className="text-xs mt-0.5" style={{ color: "var(--pd-muted)", fontFamily: "var(--font-jakarta)" }}>{item.desc}</p>
+                        <p className="font-ui text-lg font-semibold text-navy">{item.title}</p>
+                        <p className="font-ui text-sm mt-0.5 text-muted">{item.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -75,8 +74,7 @@ export default function ContactoEnPage() {
         {/* Newsletter */}
         <section className="py-20 px-6 bg-cream border-t border-line relative overflow-hidden">
           <Reveal className="max-w-xl mx-auto text-center flex flex-col gap-6">
-            <span className="label text-rust">Newsletter</span>
-            <h2>Subscribe</h2>
+            <h2 className="section-title">Subscribe</h2>
             <p style={{ color: "var(--pd-body)" }}>Enter your email to receive updates.</p>
             <NewsletterForm lang="en" source="contact-en" />
           </Reveal>

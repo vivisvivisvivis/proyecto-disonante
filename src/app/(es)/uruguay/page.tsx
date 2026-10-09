@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CaseCards from "@/components/CaseCards";
+import CaseRail from "@/components/CaseRail";
+import ButtonLink from "@/components/ButtonLink";
+import KineticText from "@/components/motion/KineticText";
 import NewsletterForm from "@/components/NewsletterForm";
 import { event, site } from "@/lib/site";
 
@@ -23,52 +25,47 @@ export default function UruguayPage() {
       <Navbar lang="es" altHref="/en" />
       <main id="main">
         <section className="bg-cream pt-12 pb-14 md:pt-20 md:pb-16 px-6 border-b border-line">
-          <div className="max-w-3xl mx-auto flex flex-col gap-5">
-            <span className="label text-rust">{eventLine || "Proyecto Disonante en Uruguay"}</span>
-            <h1>Gracias por acompañarnos</h1>
-            <p className="text-lg">
+          <div className="max-w-[72rem] mx-auto flex flex-col gap-6">
+            <p className="font-ui text-sm font-semibold text-rust">{eventLine || "Proyecto Disonante en Uruguay"}</p>
+            <KineticText text="Gracias por acompañarnos" as="h1" spread={40} className="page-title" />
+            <p className="text-lg md:text-xl max-w-2xl" style={{ lineHeight: 1.6 }}>
               Proyecto Disonante trabaja para que los desacuerdos públicos, incluidos los más difíciles, se discutan con
               método, evidencia y respeto. Aquí encontrarás lo que hacemos y cómo seguir en contacto.
             </p>
             {event.slidesUrl && (
-              <a href={event.slidesUrl} target="_blank" rel="noopener noreferrer" className="text-rust font-semibold hover:underline self-start" style={ui}>
-                Ver la presentación <span aria-hidden>→</span>
+              <a href={event.slidesUrl} target="_blank" rel="noopener noreferrer" className="text-rust font-semibold link-underline self-start" style={ui}>
+                Ver la presentación
               </a>
             )}
           </div>
         </section>
 
         <section className="py-14 px-6 bg-sand border-b border-line">
-          <div className="max-w-3xl mx-auto flex flex-col gap-5">
-            <span className="label text-muted">Newsletter</span>
-            <h2>Recibe nuestras novedades</h2>
-            <p>Te escribiremos cuando publiquemos análisis, materiales y nuevas actividades.</p>
+          <div className="max-w-[72rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 items-center">
+            <div className="flex flex-col gap-3">
+              <h2 className="section-title">Recibe nuestras novedades</h2>
+              <p>Te escribiremos cuando publiquemos análisis, materiales y nuevas actividades.</p>
+            </div>
             <NewsletterForm lang="es" source="uruguay" />
           </div>
         </section>
 
         <section className="py-16 md:py-20 px-6 bg-cream">
-          <div className="max-w-5xl mx-auto flex flex-col gap-8">
-            <div>
-              <span className="label text-rust">Trabajo reciente</span>
-              <h2 className="mt-3">Lo que hemos hecho</h2>
-            </div>
-            <CaseCards lang="es" />
+          <div className="max-w-[72rem] mx-auto flex flex-col gap-10">
+            <h2 className="section-title">Lo que hemos hecho</h2>
+            <CaseRail lang="es" />
           </div>
         </section>
 
-        <section className="py-16 px-6 bg-navy">
-          <div className="max-w-3xl mx-auto flex flex-col gap-5 items-start">
-            <span className="label text-blue-200">Diálogo</span>
-            <h2 className="heading-sentence text-white">¿Tu organización enfrenta una discusión bloqueada o polarizada?</h2>
-            <p className="text-blue-100">
+        <section className="py-24 md:py-32 px-6 bg-navy-deep">
+          <div className="max-w-[72rem] mx-auto flex flex-col gap-6 items-start">
+            <h2 className="section-title text-cream max-w-4xl">¿Tu organización enfrenta una discusión bloqueada o polarizada?</h2>
+            <p className="text-blue-100 text-lg max-w-xl">
               Diseñamos talleres, formaciones y espacios de diálogo a la medida de cada institución.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
-              <Link href="/contacto" className="bg-cream text-navy px-8 py-3.5 rounded font-ui font-semibold hover:bg-sand transition-colors text-sm">
-                Escribir al equipo
-              </Link>
-              <Link href="/que-ofrecemos" className="text-white font-semibold underline underline-offset-4 hover:no-underline text-sm" style={ui}>
+              <ButtonLink href="/contacto">Escribir al equipo</ButtonLink>
+              <Link href="/que-ofrecemos" className="text-white font-semibold link-underline text-sm" style={ui}>
                 Qué hacemos
               </Link>
             </div>

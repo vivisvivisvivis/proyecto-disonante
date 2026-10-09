@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import ScrollWords from "@/components/motion/ScrollWords";
+import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 
 import { esAlternates } from "@/lib/seo";
@@ -57,43 +58,38 @@ export default function QueOfrecemosPage() {
 
         {/* Services */}
         <section className="py-24 px-6 bg-cream relative overflow-hidden">
-          <div className="max-w-5xl mx-auto">
-            <Reveal className="mb-14">
-              <span className="label text-rust">Servicios</span>
-              <h2 className="mt-4 max-w-xl">¿Qué podemos ofrecer?</h2>
-            </Reveal>
-
-            <div className="flex flex-col gap-px bg-line">
-              {services.map((s, i) => (
-                <Reveal key={s.title} delay={i * 0.07}>
-                  <div id={s.id} className="bg-cream scroll-mt-24 flex flex-col gap-2 p-8 md:p-10">
-                    <h3>{s.title}</h3>
-                      <p className="text-sm leading-relaxed" style={{ color: "var(--pd-body)" }}>{s.desc}</p>
-                    </div>
-                </Reveal>
-              ))}
+          <div className="max-w-[72rem] mx-auto">
+            <div className="mb-12 flex flex-col gap-4">
+              <p className="font-ui text-sm font-semibold text-rust">Servicios</p>
+              <h2 className="section-title">¿Qué podemos ofrecer?</h2>
             </div>
+
+            <ul className="border-t border-navy/20">
+              {services.map((s) => (
+                <li key={s.id} id={s.id} className="scroll-mt-28 border-b border-navy/20 py-10 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-baseline">
+                  <h3 className="service-title md:col-span-7">{s.title}</h3>
+                  <p className="md:col-span-5 text-lg" style={{ lineHeight: 1.7 }}>{s.desc}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
         {/* Audiences */}
         <section className="py-24 px-6 bg-sand">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="max-w-[72rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <Reveal direction="left">
-              <span className="label text-rust">Destinatarios</span>
-              <h2 className="mt-4">¿A quiénes se dirige nuestro trabajo?</h2>
+              <p className="font-ui text-sm font-semibold text-rust">Destinatarios</p>
+              <h2 className="section-title mt-4">¿A quiénes se dirige nuestro trabajo?</h2>
               <p className="mt-5" style={{ color: "var(--pd-body)" }}>
                 Las propuestas de política pública, los proyectos legislativos, las agendas de reformas, pueden incrementar su legitimidad y su eficacia en la medida en que incorporen la pluralidad, la deliberación y la evidencia en los procesos de discusión.
               </p>
             </Reveal>
             <Reveal direction="right">
-              <ul className="flex flex-col gap-4">
+              <ul className="border-t border-navy/20">
                 {audiences.map((a) => (
-                  <li key={a} className="flex items-center gap-4 p-5 rounded border border-line bg-cream">
-                    <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" />
-                    <span className="text-[0.9375rem] font-medium" style={{ color: "var(--pd-ink)", fontFamily: "var(--font-jakarta)" }}>
-                      {a}
-                    </span>
+                  <li key={a} className="border-b border-navy/20 py-4 font-ui text-lg md:text-xl font-semibold text-navy">
+                    {a}
                   </li>
                 ))}
               </ul>
@@ -101,25 +97,15 @@ export default function QueOfrecemosPage() {
           </div>
         </section>
 
-        {/* Navy conviction */}
-        <section className="bg-navy py-24 px-6 relative overflow-hidden">
-          <Reveal className="max-w-3xl mx-auto text-center flex flex-col gap-7">
-            <span className="label text-blue-300">Nuestra convicción</span>
-            <h2 className="heading-sentence text-white">
-              Tanto la legitimidad como la eficacia de las propuestas se fortalecerán si se las discute con dispositivos adecuados
-            </h2>
-            <p className="text-blue-200 text-lg leading-relaxed" style={{ fontFamily: "var(--font-source)" }}>
-              Dispositivos que las preserven del secuestro por identidades que las exceden.
-            </p>
-            <Link
-              href="/contacto"
-              className="self-center bg-cream text-navy px-9 py-3.5 rounded font-semibold hover:bg-sand transition-colors text-sm tracking-wide"
-              style={{ fontFamily: "var(--font-jakarta)" }}
-            >
-              Hablar con el equipo
-            </Link>
-          </Reveal>
+        {/* Conviction: fills in word by word */}
+        <section className="bg-navy px-6 py-28 md:py-40">
+          <div className="max-w-[72rem] mx-auto flex flex-col gap-10">
+            <ScrollWords text="Tanto la legitimidad como la eficacia de las propuestas se fortalecerán si se las discute con dispositivos adecuados" className="manifesto max-w-5xl" />
+            <p className="text-xl text-blue-100 max-w-xl" style={{ lineHeight: 1.6 }}>Dispositivos que las preserven del secuestro por identidades que las exceden.</p>
+          </div>
         </section>
+
+        <CtaBand lang="es" />
       </main>
       <Footer lang="es" />
     </>

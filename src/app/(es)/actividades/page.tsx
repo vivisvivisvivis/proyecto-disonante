@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import ScrollWords from "@/components/motion/ScrollWords";
+import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 import CaseCards from "@/components/CaseCards";
 
@@ -27,10 +28,10 @@ export default function ActividadesPage() {
 
         {/* Cases */}
         <section className="py-20 md:py-24 px-6 bg-cream">
-          <div className="max-w-5xl mx-auto flex flex-col gap-10">
+          <div className="max-w-[72rem] mx-auto flex flex-col gap-10">
             <Reveal>
               <span className="label text-rust">Trabajo reciente</span>
-              <h2 className="mt-3">Casos</h2>
+              <h2 className="section-title mt-3">Casos</h2>
               <p className="mt-4 max-w-2xl">Talleres, formaciones y encuentros que diseñamos y coordinamos con instituciones y organizaciones de la sociedad civil.</p>
             </Reveal>
             <CaseCards lang="es" />
@@ -38,19 +39,19 @@ export default function ActividadesPage() {
         </section>
 
         <section className="pt-20 px-6 bg-sand border-t border-line">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-[72rem] mx-auto">
             <span className="label text-rust">Programas</span>
-            <h2 className="mt-3">Nuestros programas</h2>
+            <h2 className="section-title mt-3">Nuestros programas</h2>
           </div>
         </section>
 
 
         {/* Proyecto 01 — Redes Plurales */}
         <section className="pt-12 pb-24 px-6 bg-sand">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+          <div className="max-w-[72rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             <Reveal direction="left">
               <span className="label text-rust">Proyecto 01</span>
-              <h2 className="mt-4">Redes Plurales</h2>
+              <h2 className="section-title mt-4">Redes Plurales</h2>
               <p className="mt-6" style={{ color: "var(--pd-body)" }}>
                 Identificar buenas prácticas, desarrollar herramientas de diálogo y construir capacidades son las tres principales actividades que proponemos para el primer año de trabajo. Sabemos que en diversas partes del mundo existen organizaciones de la sociedad civil, instituciones académicas y programas gubernamentales orientados a promover el diálogo, la búsqueda de consensos, la convivencia, el debate de ideas y otras actividades que fomentan el pluralismo en el espacio público.
               </p>
@@ -83,10 +84,10 @@ export default function ActividadesPage() {
 
         {/* Proyecto 02 — Deliberar para entendernos */}
         <section className="py-24 px-6 bg-cream relative overflow-hidden">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-[72rem] mx-auto">
             <Reveal>
               <span className="label text-rust">Proyecto 02</span>
-              <h2 className="mt-4 max-w-xl">Deliberar para entendernos</h2>
+              <h2 className="section-title mt-4 max-w-xl">Deliberar para entendernos</h2>
             </Reveal>
 
             <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -128,39 +129,12 @@ export default function ActividadesPage() {
           </div>
         </section>
 
-        {/* Impact strip */}
-        <section className="bg-terracotta py-16 px-6 relative overflow-hidden">
-          <Reveal className="max-w-4xl mx-auto text-center">
-            <p
-              className="text-2xl md:text-3xl font-bold text-white leading-snug"
-              style={{ fontFamily: "var(--font-jakarta)", letterSpacing: "-0.02em" }}
-            >
-              Proyecto Disonante aspira a trabajar simultáneamente en ambos programas: detectar capacidades de diálogo y ponerlas en red, por un lado, y fortalecer la deliberación como práctica en las instituciones, por el otro.
-            </p>
-          </Reveal>
+        {/* Both programs, in one sentence */}
+        <section className="bg-terracotta px-6 py-28 md:py-40">
+          <ScrollWords text="Proyecto Disonante aspira a trabajar simultáneamente en ambos programas: detectar capacidades de diálogo y ponerlas en red, por un lado, y fortalecer la deliberación como práctica en las instituciones, por el otro." className="manifesto max-w-5xl mx-auto" />
         </section>
 
-        {/* CTA */}
-        <section className="py-20 px-6 bg-sand border-t border-line">
-          <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-10 items-center justify-between">
-            <Reveal direction="left">
-              <span className="label text-muted">Colabora</span>
-              <h2 className="mt-3 max-w-md">¿Quieres ser parte?</h2>
-              <p className="mt-3 max-w-md" style={{ color: "var(--pd-body)" }}>
-                Nos interesa conocer tus inquietudes y propuestas.
-              </p>
-            </Reveal>
-            <Reveal direction="right">
-              <Link
-                href="/contacto"
-                className="bg-terracotta text-white px-9 py-3.5 rounded font-semibold hover:bg-terracotta-dark transition-colors text-sm tracking-wide"
-                style={{ fontFamily: "var(--font-jakarta)" }}
-              >
-                Contáctanos
-              </Link>
-            </Reveal>
-          </div>
-        </section>
+        <CtaBand lang="es" />
       </main>
       <Footer lang="es" />
     </>

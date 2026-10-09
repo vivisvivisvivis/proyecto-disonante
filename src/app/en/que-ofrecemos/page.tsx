@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import ScrollWords from "@/components/motion/ScrollWords";
+import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
 
 import { enAlternates } from "@/lib/seo";
@@ -57,7 +58,7 @@ export default function QueOfrecemosEnPage() {
 
         {/* The problem */}
         <section className="py-24 px-6 bg-sand relative overflow-hidden">
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-[72rem] mx-auto">
             <Reveal>
               <span className="label text-rust">The problem</span>
               <h2 className="mt-4 max-w-2xl">Polarization as a democratic challenge</h2>
@@ -82,43 +83,38 @@ export default function QueOfrecemosEnPage() {
 
         {/* Services */}
         <section className="py-24 px-6 bg-cream relative overflow-hidden">
-          <div className="max-w-5xl mx-auto">
-            <Reveal className="mb-14">
-              <span className="label text-rust">Services</span>
-              <h2 className="mt-4 max-w-xl">What can we offer?</h2>
-            </Reveal>
-
-            <div className="flex flex-col gap-px bg-line">
-              {services.map((s, i) => (
-                <Reveal key={s.title} delay={i * 0.07}>
-                  <div id={s.id} className="bg-cream scroll-mt-24 flex flex-col gap-2 p-8 md:p-10">
-                    <h3>{s.title}</h3>
-                      <p className="text-sm leading-relaxed" style={{ color: "var(--pd-body)" }}>{s.desc}</p>
-                    </div>
-                </Reveal>
-              ))}
+          <div className="max-w-[72rem] mx-auto">
+            <div className="mb-12 flex flex-col gap-4">
+              <p className="font-ui text-sm font-semibold text-rust">Services</p>
+              <h2 className="section-title">What can we offer?</h2>
             </div>
+
+            <ul className="border-t border-navy/20">
+              {services.map((s) => (
+                <li key={s.id} id={s.id} className="scroll-mt-28 border-b border-navy/20 py-10 md:py-14 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-12 items-baseline">
+                  <h3 className="service-title md:col-span-7">{s.title}</h3>
+                  <p className="md:col-span-5 text-lg" style={{ lineHeight: 1.7 }}>{s.desc}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
         {/* Audiences */}
         <section className="py-24 px-6 bg-sand">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="max-w-[72rem] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
             <Reveal direction="left">
-              <span className="label text-rust">Audiences</span>
-              <h2 className="mt-4">Who is our work aimed at?</h2>
+              <p className="font-ui text-sm font-semibold text-rust">Audiences</p>
+              <h2 className="section-title mt-4">Who is our work aimed at?</h2>
               <p className="mt-5" style={{ color: "var(--pd-body)" }}>
                 Public policy proposals, legislative projects, and reform agendas can increase their legitimacy and effectiveness to the extent that they incorporate plurality, deliberation and evidence in the discussion process.
               </p>
             </Reveal>
             <Reveal direction="right">
-              <ul className="flex flex-col gap-4">
+              <ul className="border-t border-navy/20">
                 {audiences.map((a) => (
-                  <li key={a} className="flex items-center gap-4 p-5 rounded border border-line bg-cream">
-                    <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" />
-                    <span className="text-[0.9375rem] font-medium" style={{ color: "var(--pd-ink)", fontFamily: "var(--font-jakarta)" }}>
-                      {a}
-                    </span>
+                  <li key={a} className="border-b border-navy/20 py-4 font-ui text-lg md:text-xl font-semibold text-navy">
+                    {a}
                   </li>
                 ))}
               </ul>
@@ -126,25 +122,15 @@ export default function QueOfrecemosEnPage() {
           </div>
         </section>
 
-        {/* Navy conviction */}
-        <section className="bg-navy py-24 px-6 relative overflow-hidden">
-          <Reveal className="max-w-3xl mx-auto text-center flex flex-col gap-7">
-            <span className="label text-blue-300">Our conviction</span>
-            <h2 className="heading-sentence text-white">
-              Both the legitimacy and effectiveness of proposals will be strengthened if they are discussed with adequate mechanisms
-            </h2>
-            <p className="text-blue-200 text-lg leading-relaxed" style={{ fontFamily: "var(--font-source)" }}>
-              Mechanisms that preserve them from being hijacked by identities that exceed them.
-            </p>
-            <Link
-              href="/en/contacto"
-              className="self-center bg-cream text-navy px-9 py-3.5 rounded font-semibold hover:bg-sand transition-colors text-sm tracking-wide"
-              style={{ fontFamily: "var(--font-jakarta)" }}
-            >
-              Talk to the team
-            </Link>
-          </Reveal>
+        {/* Conviction: fills in word by word */}
+        <section className="bg-navy px-6 py-28 md:py-40">
+          <div className="max-w-[72rem] mx-auto flex flex-col gap-10">
+            <ScrollWords text="Both the legitimacy and effectiveness of proposals will be strengthened if they are discussed with adequate mechanisms" className="manifesto max-w-5xl" />
+            <p className="text-xl text-blue-100 max-w-xl" style={{ lineHeight: 1.6 }}>Mechanisms that preserve them from being hijacked by identities that exceed them.</p>
+          </div>
         </section>
+
+        <CtaBand lang="en" />
       </main>
       <Footer lang="en" />
     </>
