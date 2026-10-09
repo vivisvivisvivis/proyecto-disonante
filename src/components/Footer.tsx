@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { navLinks, localHref } from "@/lib/nav";
 import { site } from "@/lib/site";
+import KineticText from "@/components/motion/KineticText";
 
 const socialLabels = { linkedin: "LinkedIn", instagram: "Instagram", youtube: "YouTube" } as const;
 
@@ -10,8 +11,8 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
   const socials = (Object.keys(socialLabels) as (keyof typeof socialLabels)[]).filter((k) => site.social[k]);
 
   return (
-    <footer className="bg-navy text-white mt-auto">
-      <div className="max-w-6xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+    <footer className="bg-navy text-white mt-auto overflow-hidden">
+      <div className="max-w-[75rem] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div className="flex flex-col gap-4">
           <Image src="/logo.png" alt="Proyecto Disonante" width={150} height={46} className="brightness-0 invert" />
           <p className="text-sm text-blue-100 leading-relaxed">
@@ -22,13 +23,13 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-200 mb-4">
+          <p className="font-ui text-sm font-semibold text-blue-200 mb-4">
             {en ? "Navigation" : "Navegación"}
           </p>
           <ul className="flex flex-col gap-2">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <Link href={localHref(lang, link.href)} className="text-sm text-blue-100 hover:text-white hover:underline">
+                <Link href={localHref(lang, link.href)} className="text-sm text-blue-100 hover:text-white link-underline">
                   {link[lang]}
                 </Link>
               </li>
@@ -37,7 +38,7 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
         </div>
 
         <div className="flex flex-col gap-3">
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-200 mb-1">
+          <p className="font-ui text-sm font-semibold text-blue-200 mb-1">
             {en ? "Contact" : "Contacto"}
           </p>
           {site.email && (
@@ -45,8 +46,8 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
               {site.email}
             </a>
           )}
-          <Link href={localHref(lang, "/contacto")} className="text-sm text-blue-100 hover:text-white hover:underline">
-            {en ? "Contact form →" : "Formulario de contacto →"}
+          <Link href={localHref(lang, "/contacto")} className="text-sm text-blue-100 hover:text-white link-underline">
+            {en ? "Contact form" : "Formulario de contacto"}
           </Link>
           {socials.length > 0 && (
             <ul className="flex flex-wrap gap-x-5 gap-y-2 mt-2">
@@ -56,7 +57,7 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
                     href={site.social[k]}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-blue-100 hover:text-white hover:underline"
+                    className="text-sm text-blue-100 hover:text-white link-underline"
                   >
                     {socialLabels[k]}
                   </a>
@@ -67,8 +68,13 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
         </div>
       </div>
 
+      {/* The name, set as large as the page allows. Decorative: the logo above already names the site. */}
+      <div aria-hidden className="max-w-[75rem] mx-auto px-6">
+        <KineticText text="Disonante" as="p" play="view" seed={9} spread={40} className="footer-word" />
+      </div>
+
       <div className="border-t border-white/15">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
+        <div className="max-w-[75rem] mx-auto px-6 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6">
           <p className="text-xs text-blue-200">
             © {new Date().getFullYear()} Proyecto Disonante. {en ? "All rights reserved." : "Todos los derechos reservados."}
           </p>

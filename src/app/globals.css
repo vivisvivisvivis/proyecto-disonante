@@ -138,6 +138,194 @@ h2.heading-sentence {
 h1.heading-sentence { font-size: clamp(2rem, 4vw, 3rem); }
 h2.heading-sentence { font-size: clamp(1.5rem, 2.6vw, 2.125rem); }
 
+
+/* ── Display type ─────────────────────────────────── */
+/* Bebas is the logo's voice: used big, tight and uppercase for short statements. */
+.hero-title,
+.stage-title,
+.section-title,
+.service-title,
+.cta-word,
+.case-rail-title {
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  color: var(--pd-navy);
+}
+.hero-title { font-size: clamp(4rem, 15vw, 13rem); line-height: 0.86; }
+.stage-title { font-size: clamp(3.5rem, 8.5vw, 8rem); line-height: 0.92; text-wrap: balance; }
+.section-title { font-size: clamp(2.75rem, 6vw, 5.25rem); line-height: 0.92; text-wrap: balance; }
+.service-title { font-size: clamp(2.5rem, 5.5vw, 4.75rem); line-height: 0.92; color: inherit; }
+.case-rail-title { font-size: clamp(2rem, 3.2vw, 2.75rem); line-height: 0.95; transition: color 0.3s; }
+.group:hover .case-rail-title { color: var(--pd-rust); }
+.cta-word { font-size: clamp(4.5rem, 19vw, 18rem); line-height: 0.82; color: var(--pd-cream); }
+
+.kinetic-char { will-change: transform; }
+
+.manifesto {
+  font-family: var(--font-source), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: clamp(1.875rem, 4.6vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  text-wrap: balance;
+}
+.scroll-word { opacity: 0.16; }
+
+.pull-quote {
+  font-family: var(--font-source), system-ui, sans-serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.5rem, 2.6vw, 2.125rem);
+  line-height: 1.3;
+  color: var(--pd-navy);
+  padding-left: 1.5rem;
+  border-left: 3px solid var(--pd-terracotta);
+}
+
+/* Publications index: one row per article. */
+.index-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.75rem 0;
+  transition: padding 0.4s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.4s;
+}
+@media (min-width: 768px) {
+  .index-row { flex-direction: row; align-items: baseline; gap: 2.5rem; padding: 2.25rem 0; }
+  .index-row:hover { padding-left: 1.25rem; padding-right: 1.25rem; background: var(--pd-cream); }
+}
+.index-row-title {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  line-height: 1.2;
+  transition: color 0.3s;
+}
+.index-row:hover .index-row-title { color: var(--pd-rust); }
+
+/* Text link whose underline draws in from the left. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover,
+.group:hover .link-underline,
+.link-underline:focus-visible { background-size: 100% 1.5px; }
+
+/* Button label that rolls up on hover. */
+.btn-roll-clip {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.4;
+}
+.btn-roll-label { display: inline-block; transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+.btn-roll-clip::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.btn-roll:hover .btn-roll-label,
+.btn-roll:hover .btn-roll-clip::after { transform: translateY(-100%); }
+
+/* ── Partners marquee ─────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.marquee-track { display: flex; width: max-content; animation: marquee 40s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-row { display: flex; flex-shrink: 0; }
+.marquee-item {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  line-height: 1;
+  color: var(--pd-navy);
+  white-space: nowrap;
+}
+.marquee-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: var(--pd-terracotta); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* ── Case rail ────────────────────────────────────── */
+.case-rail {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+  margin: 0 -1.5rem;
+  padding: 0 1.5rem;
+}
+.case-rail::-webkit-scrollbar { display: none; }
+.case-rail[data-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.case-rail-item {
+  flex: 0 0 min(86vw, 28rem);
+  scroll-snap-align: start;
+}
+
+/* ── Page transitions (React <ViewTransition>, see the template.tsx files) ── */
+::view-transition-old(.page) { animation: 220ms cubic-bezier(0.4, 0, 1, 1) both page-out; }
+::view-transition-new(.page) { animation: 420ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both page-in; }
+@keyframes page-out { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(18px); } }
+
+
+/* ── Mobile menu (full screen) ────────────────────── */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 7rem 1.5rem 2.5rem;
+  background: var(--pd-navy-deep);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.mobile-menu[data-open] { clip-path: inset(0 0 0 0); }
+.mobile-menu-item {
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.4s, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.mobile-menu[data-open] .mobile-menu-item { opacity: 1; transform: none; }
+.mobile-menu-link {
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  font-size: clamp(2.75rem, 13vw, 4.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ── Reduced motion: everything sits in its final state ── */
+@media (prefers-reduced-motion: reduce) {
+  .kinetic-char { transform: none !important; }
+  .scroll-word { opacity: 1; }
+  .mobile-menu-item { opacity: 1; transform: none; }
+  .marquee { mask-image: none; }
+  .marquee-track { animation: none; width: auto; }
+  .marquee-row { flex-wrap: wrap; justify-content: center; row-gap: 0.75rem; padding: 0 1.5rem; }
+  .marquee-row[aria-hidden] { display: none; }
+  ::view-transition-old(.page), ::view-transition-new(.page) { animation: none; }
+}
+
 /* ── Accessibility ───────────────────────────────── */
 :focus-visible {
   outline: 2px solid var(--pd-navy);
@@ -249,4 +437,24 @@ button, .btn { font-family: var(--font-jakarta), sans-serif; font-weight: 600; }
   p, blockquote, li { orphans: 3; widows: 3; }
 
   section { page-break-inside: avoid; }
+}
+
+.footer-word {
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  font-size: clamp(5rem, 24.5vw, 23rem);
+  line-height: 0.78;
+  text-transform: uppercase;
+  color: var(--pd-navy-dark);
+  margin-bottom: -0.04em;
+  user-select: none;
+}
+
+.page-title {
+  font-family: var(--font-bebas), system-ui, sans-serif;
+  font-weight: 400;
+  font-size: clamp(3.5rem, 10vw, 9.5rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+  color: var(--pd-navy);
+  max-width: 14ch;
 }

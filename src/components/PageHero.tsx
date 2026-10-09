@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Reveal from "@/components/Reveal";
+import KineticText from "@/components/motion/KineticText";
 
 interface Crumb {
   label: string;
@@ -15,8 +15,8 @@ interface PageHeroProps {
 
 export default function PageHero({ label, title, description, breadcrumbs }: PageHeroProps) {
   return (
-    <section className="relative bg-cream pt-14 pb-14 md:pt-24 md:pb-20 px-6 overflow-hidden border-b border-line">
-      <div className="max-w-5xl mx-auto">
+    <section className="relative bg-cream pt-12 pb-14 md:pt-20 md:pb-20 px-6 overflow-hidden border-b border-line">
+      <div className="max-w-[72rem] mx-auto">
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav aria-label="Breadcrumb" className="mb-5 flex items-center gap-1.5 flex-wrap">
             {breadcrumbs.map((crumb, i) => (
@@ -33,15 +33,13 @@ export default function PageHero({ label, title, description, breadcrumbs }: Pag
             ))}
           </nav>
         )}
-        <Reveal>
-          <span className="label text-rust">{label}</span>
-          <h1 className="mt-4 max-w-3xl">{title}</h1>
-          {description && (
-            <p className="mt-5 max-w-2xl text-lg leading-relaxed" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
-              {description}
-            </p>
-          )}
-        </Reveal>
+        <p className="font-ui text-sm font-semibold text-rust">{label}</p>
+        <KineticText text={title} as="h1" spread={40} className="page-title mt-5" />
+        {description && (
+          <p className="mt-8 max-w-2xl text-lg md:text-xl text-pretty" style={{ lineHeight: 1.6 }}>
+            {description}
+          </p>
+        )}
       </div>
     </section>
   );

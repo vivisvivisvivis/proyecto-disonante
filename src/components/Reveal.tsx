@@ -1,8 +1,6 @@
-"use client";
-
-import { motion, useInView, type Variants } from "framer-motion";
-import { useRef } from "react";
-
+// Kept as a plain wrapper so existing pages keep their markup. Entrance motion is now
+// reserved for a few deliberate moments (kinetic headings, the pinned stage, the manifesto)
+// instead of fading in every section.
 interface RevealProps {
   children: React.ReactNode;
   className?: string;
@@ -10,37 +8,6 @@ interface RevealProps {
   direction?: "up" | "left" | "right" | "none";
 }
 
-export default function Reveal({ children, className, delay = 0, direction = "up" }: RevealProps) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-
-  const variants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: direction === "up" ? 24 : 0,
-      x: direction === "left" ? -24 : direction === "right" ? 24 : 0,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      transition: {
-        duration: 0.6,
-        delay,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      variants={variants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-    >
-      {children}
-    </motion.div>
-  );
+export default function Reveal({ children, className }: RevealProps) {
+  return <div className={className}>{children}</div>;
 }

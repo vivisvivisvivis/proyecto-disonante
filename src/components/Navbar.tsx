@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { navLinks, localHref } from "@/lib/nav";
+import { useLenis } from "@/components/SmoothScrollProvider";
 
 // `altHref` overrides the language-switch target for pages that exist in one language only.
 export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; altHref?: string }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const lenis = useLenis();
 
   const otherLangHref =
     altHref ??
@@ -31,6 +33,13 @@ export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; a
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  // The full-screen menu freezes the page behind it.
+  useEffect(() => {
+    if (open) lenis?.current?.stop();
+    else lenis?.current?.start();
+    document.documentElement.style.overflow = open ? "hidden" : "";
+  }, [open, lenis]);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
@@ -41,15 +50,15 @@ export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; a
   return (
     <header
       className={`w-full sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-cream/95 border-b border-line" : "bg-cream border-b border-transparent"
+        open ? "bg-navy-deep border-b border-transparent" : scrolled ? "bg-cream/95 border-b border-line" : "bg-cream border-b border-transparent"
       }`}
     >
       <nav
         aria-label={lang === "en" ? "Main" : "Principal"}
-        className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between"
+        className="relative z-10 max-w-[75rem] mx-auto px-6 py-4 flex items-center justify-between"
       >
         <Link href={localHref(lang, "/")} className="flex-shrink-0">
-          <Image src="/logo.png" alt="Proyecto Disonante" width={160} height={50} priority />
+          <Image src="/logo.png" alt="Proyecto Disonante" width={160} height={50} priority className={open ? "brightness-0 invert" : ""} />
         </Link>
 
         {/* Desktop */}
@@ -61,8 +70,8 @@ export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; a
                 <Link
                   href={localHref(lang, link.href)}
                   aria-current={current ? "page" : undefined}
-                  className={`py-1 border-b-2 transition-colors duration-150 hover:text-rust ${
-                    current ? "text-navy border-terracotta" : "text-ink border-transparent"
+                  className={`link-underline transition-colors duration-150 hover:text-rust ${
+                    current ? "text-rust [background-size:100%_1.5px]" : "text-ink"
                   }`}
                   style={{ fontFamily: "var(--font-jakarta)", fontSize: "0.8125rem", fontWeight: current ? 600 : 500 }}
                 >
@@ -92,45 +101,44 @@ export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; a
           aria-expanded={open}
           aria-controls="mobile-menu"
         >
-          <span aria-hidden className={`block w-5 h-0.5 bg-navy transition-transform duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
+          <span aria-hidden className={`block w-5 h-0.5 ${open ? "bg-cream" : "bg-navy"} transition-transform duration-200 ${open ? "rotate-45 translate-y-2" : ""}`} />
           <span aria-hidden className={`block w-5 h-0.5 bg-navy transition-opacity duration-200 ${open ? "opacity-0" : ""}`} />
-          <span aria-hidden className={`block w-5 h-0.5 bg-navy transition-transform duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
+          <span aria-hidden className={`block w-5 h-0.5 ${open ? "bg-cream" : "bg-navy"} transition-transform duration-200 ${open ? "-rotate-45 -translate-y-2" : ""}`} />
         </button>
       </nav>
 
-      {/* Mobile menu: `inert` keeps closed links out of the tab order */}
+      {/* Mobile menu: full screen. `inert` keeps closed links out of the tab order. */}
       <div
         id="mobile-menu"
         inert={!open}
-        className={`md:hidden overflow-hidden transition-[max-height] duration-300 ${open ? "max-h-[28rem]" : "max-h-0"}`}
+        data-open={open || undefined}
+        className="mobile-menu md:hidden"
       >
-        <div className="bg-cream border-t border-line px-6 py-6 flex flex-col gap-5">
-          {navLinks.map((link) => {
+        <ul className="flex flex-col gap-1">
+          {navLinks.map((link, i) => {
             const current = isCurrent(link.href);
             return (
-              <Link
-                key={link.href}
-                href={localHref(lang, link.href)}
-                aria-current={current ? "page" : undefined}
-                className={`hover:text-rust font-medium transition-colors ${current ? "text-rust" : "text-ink"}`}
-                style={{ fontFamily: "var(--font-jakarta)", fontSize: "1rem" }}
-                onClick={() => setOpen(false)}
-              >
-                {link[lang]}
-              </Link>
+              <li key={link.href} style={{ transitionDelay: open ? `${80 + i * 55}ms` : "0ms" }} className="mobile-menu-item">
+                <Link
+                  href={localHref(lang, link.href)}
+                  aria-current={current ? "page" : undefined}
+                  className={`mobile-menu-link ${current ? "text-terracotta" : "text-cream"}`}
+                  onClick={() => setOpen(false)}
+                >
+                  {link[lang]}
+                </Link>
+              </li>
             );
           })}
-          <div className="h-px bg-line" />
-          <Link
-            href={otherLangHref}
-            hrefLang={lang === "en" ? "es" : "en"}
-            className="text-sm font-bold text-navy"
-            style={{ fontFamily: "var(--font-jakarta)" }}
-            onClick={() => setOpen(false)}
-          >
-            {lang === "en" ? "Ver en español" : "View in English"}
-          </Link>
-        </div>
+        </ul>
+        <Link
+          href={otherLangHref}
+          hrefLang={lang === "en" ? "es" : "en"}
+          className="font-ui text-sm font-bold text-cream link-underline self-start"
+          onClick={() => setOpen(false)}
+        >
+          {lang === "en" ? "Ver en español" : "View in English"}
+        </Link>
       </div>
     </header>
   );
