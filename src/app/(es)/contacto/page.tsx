@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 import { esAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contacto",
+  title: "Contáctanos",
   description: "Nos interesa intercambiar ideas contigo. Contáctanos completando el formulario.",
   alternates: esAlternates("/contacto"),
 };
@@ -22,7 +22,7 @@ export default function ContactoPage() {
       <main id="main">
         <PageHero
           label="Diálogo"
-          title="Contacto"
+          title="Contáctanos"
           description="Nos interesa intercambiar ideas contigo. Contáctanos completando el formulario."
         />
 

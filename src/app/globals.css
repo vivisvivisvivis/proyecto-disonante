@@ -5,8 +5,8 @@
   --pd-navy: #1B3A5C;
   --pd-navy-dark: #152D47;
   --pd-navy-deep: #0F2238;
-  --pd-terracotta: #C0442C;      /* fills: buttons, strips, dots */
-  --pd-terracotta-dark: #A03824;
+  --pd-terracotta: #C54130;      /* the logo's red: the one accent. Buttons, links, the proposal block */
+  --pd-terracotta-dark: #A8372A;
   --pd-rust: #96301B;            /* terracotta for small text on light backgrounds */
   --pd-cream: #EBD7BE;
   --pd-sand: #E2CDB4;

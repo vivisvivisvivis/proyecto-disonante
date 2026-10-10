@@ -73,7 +73,7 @@ export default async function ArticleEnPage({
               className="text-sm text-muted hover:text-rust transition-colors self-start"
               style={{ fontFamily: "var(--font-jakarta)" }}
             >
-              ← Publications
+              ← Blog
             </Link>
 
             <div className="flex items-center gap-3 flex-wrap">

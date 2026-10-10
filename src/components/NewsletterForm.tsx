@@ -48,7 +48,7 @@ export default function NewsletterForm({ lang = "es", source = "web" }: { lang?:
         <button
           type="submit"
           disabled={pending}
-          className="bg-navy text-white px-7 py-3 rounded font-semibold text-sm hover:bg-navy-dark transition-colors flex-shrink-0 disabled:opacity-60"
+          className="bg-terracotta text-white px-7 py-3 rounded font-semibold text-sm hover:bg-terracotta-dark transition-colors flex-shrink-0 disabled:opacity-60"
         >
           {pending ? t.sending : t.submit}
         </button>

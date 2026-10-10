@@ -32,7 +32,7 @@ export default function NotFoundEn() {
           <div className="flex gap-4 mt-2 flex-wrap justify-center">
             <Link
               href="/en"
-              className="bg-navy text-white px-9 py-3.5 rounded font-semibold hover:bg-navy-dark transition-colors text-sm tracking-wide"
+              className="bg-terracotta text-white px-9 py-3.5 rounded font-semibold hover:bg-terracotta-dark transition-colors text-sm tracking-wide"
               style={{ fontFamily: "var(--font-jakarta)" }}
             >
               Back to home

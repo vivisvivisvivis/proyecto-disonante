@@ -11,7 +11,7 @@ export interface Case {
 export const cases: Case[] = [
   {
     slug: "cepal-derechos-sexuales-reproductivos",
-    client: "CEPAL · Mysu · Salud sin miedo",
+    client: "Mysu · Salud sin miedo",
     es: {
       when: "Montevideo, agosto de 2026",
       format: "Taller y panel",
@@ -43,6 +43,24 @@ export const cases: Case[] = [
       summary:
         "Workshop on difficult conversations with the M27 cohort, based on the Disonante Model for polarized environments.",
       highlight: "More than 150 students",
+    },
+  },
+  {
+    slug: "financiamiento-politica",
+    client: "Inter-American Dialogue · IDEA Internacional",
+    es: {
+      when: "Último trimestre de 2024",
+      format: "Documento y taller de diálogo",
+      summary:
+        "Documento sobre dinero y política para el Programa sobre Estado de derecho del Inter-American Dialogue, discutido en un taller de diálogo con el sector privado, la sociedad civil y funcionarios electorales de la región.",
+      highlight: "Polarización y financiamiento de la política",
+    },
+    en: {
+      when: "Last quarter of 2024",
+      format: "Paper and dialogue workshop",
+      summary:
+        "A paper on money and politics for the Inter-American Dialogue's Rule of Law Program, discussed in a dialogue workshop with the private sector, civil society and electoral officials from across the region.",
+      highlight: "Polarization and political finance",
     },
   },
   {
@@ -83,9 +101,8 @@ export const cases: Case[] = [
   },
 ];
 
-// Organizations shown in the "we have worked with" row.
+// Organizations shown in "Con quién trabajamos" on /actividades.
 export const partners = [
-  "CEPAL",
   "National Democratic Institute",
   "Minerva University",
   "Alianza Regional por la Libre Expresión e Información",

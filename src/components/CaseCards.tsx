@@ -10,7 +10,7 @@ export default function CaseCards({ lang = "es", limit }: { lang?: "es" | "en"; 
       {list.map((c) => {
         const t = c[lang];
         return (
-          <li key={c.slug} className="bg-cream">
+          <li key={c.slug} className="bg-cream md:[&:last-child:nth-child(odd)]:col-span-2">
             <Link
               href={`${base}/${c.slug}`}
               className="group h-full flex flex-col gap-3 p-7 md:p-8 hover:bg-sand transition-colors duration-200"

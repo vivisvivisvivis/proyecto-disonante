@@ -208,7 +208,7 @@ export default function QuienesSomosEnPage() {
             <Reveal direction="right">
               <Link
                 href="/en/contacto"
-                className="bg-navy text-white px-9 py-3.5 rounded font-semibold hover:bg-navy-dark transition-colors text-sm tracking-wide"
+                className="bg-terracotta text-white px-9 py-3.5 rounded font-semibold hover:bg-terracotta-dark transition-colors text-sm tracking-wide"
                 style={{ fontFamily: "var(--font-jakarta)" }}
               >
                 Contact us

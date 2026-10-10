@@ -7,7 +7,7 @@ import { articles } from "@/lib/articles";
 import { esAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Publicaciones",
+  title: "Blog",
   description: "Análisis, actividades y novedades de Proyecto Disonante.",
   alternates: esAlternates("/blog"),
 };
@@ -19,7 +19,7 @@ export default function BlogPage() {
       <main id="main">
         <PageHero
           label="Análisis y novedades"
-          title="Publicaciones"
+          title="Blog"
           description="Análisis, actividades y novedades de Proyecto Disonante."
         />
         <section className="py-24 px-6 bg-cream">

@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 import { enAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact us",
   description: "We are interested in exchanging ideas with you. Contact us by filling out the form.",
   alternates: enAlternates("/contacto"),
 };
@@ -22,7 +22,7 @@ export default function ContactoEnPage() {
       <main id="main">
         <PageHero
           label="Dialogue"
-          title="Contact"
+          title="Contact us"
           description="We are interested in exchanging ideas with you. Contact us by filling out the form."
         />
 
