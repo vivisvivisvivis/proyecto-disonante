@@ -3,7 +3,6 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CaseCards from "@/components/CaseCards";
-import NewsletterForm from "@/components/NewsletterForm";
 import { event, site } from "@/lib/site";
 
 // Landing page for the QR code shown at the Oct 15 talk in Uruguay.
@@ -35,15 +34,6 @@ export default function UruguayPage() {
                 Ver la presentación <span aria-hidden>→</span>
               </a>
             )}
-          </div>
-        </section>
-
-        <section className="py-14 px-6 bg-sand border-b border-line">
-          <div className="max-w-3xl mx-auto flex flex-col gap-5">
-            <span className="label text-muted">Newsletter</span>
-            <h2>Recibe nuestras novedades</h2>
-            <p>Te escribiremos cuando publiquemos análisis, materiales y nuevas actividades.</p>
-            <NewsletterForm lang="es" source="uruguay" />
           </div>
         </section>
 

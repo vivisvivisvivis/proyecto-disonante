@@ -75,7 +75,7 @@ export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; a
             <Link
               href={otherLangHref}
               hrefLang={lang === "en" ? "es" : "en"}
-              aria-label={lang === "en" ? "Ver en español" : "View in English"}
+              aria-label={lang === "en" ? "View in Spanish" : "View in English"}
               className="text-xs font-bold text-navy border-2 border-navy px-3.5 py-1 rounded hover:bg-navy hover:text-white transition-colors duration-200"
               style={{ fontFamily: "var(--font-jakarta)", letterSpacing: "0.05em" }}
             >
@@ -128,7 +128,7 @@ export default function Navbar({ lang = "es", altHref }: { lang?: "es" | "en"; a
             style={{ fontFamily: "var(--font-jakarta)" }}
             onClick={() => setOpen(false)}
           >
-            {lang === "en" ? "Ver en español" : "View in English"}
+            {lang === "en" ? "View in Spanish" : "View in English"}
           </Link>
         </div>
       </div>

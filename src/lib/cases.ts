@@ -1,5 +1,5 @@
 // Recent work, written only from facts stated in the published articles.
-// Each case links to its full article in /blog.
+// Each case links to its full article (Actividades realizadas or Blog). Used on /uruguay.
 
 export interface Case {
   slug: string; // article slug
@@ -101,7 +101,7 @@ export const cases: Case[] = [
   },
 ];
 
-// Organizations shown in "Con quién trabajamos" on /actividades.
+// Organizations shown in "Con quién trabajamos" (home and /actividades).
 export const partners = [
   "National Democratic Institute",
   "Minerva University",

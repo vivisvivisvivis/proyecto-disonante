@@ -2,9 +2,9 @@
 // Leave a value empty to hide it; nothing renders until it is filled in.
 export const site = {
   url: "https://proyectodisonante.org",
-  email: "",
+  email: "", // PENDING: Carolina to confirm the public address (point 3 of her Oct 23 list)
   social: {
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/proyecto-disonante-375607341/",
     instagram: "",
     youtube: "",
   },

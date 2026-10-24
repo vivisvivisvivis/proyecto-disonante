@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Article } from "@/lib/articles";
+import { articlePath, type Article } from "@/lib/articles";
 
 interface Props {
   article: Article;
@@ -8,10 +8,10 @@ interface Props {
 
 export default function ArticleCard({ article, lang }: Props) {
   const t = article[lang];
-  const basePath = lang === "en" ? "/en/blog" : "/blog";
+  const href = articlePath(article, lang);
 
   return (
-    <Link href={`${basePath}/${article.slug}`} className="block group h-full">
+    <Link href={href} className="block group h-full">
       <div className="bg-cream border border-line rounded-lg p-7 flex flex-col gap-3 h-full hover:border-navy transition-all duration-300">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="label text-rust">{t.tag}</span>

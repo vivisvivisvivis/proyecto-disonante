@@ -1,6 +1,6 @@
 // One name per section, used by the navbar, the footer and page titles.
 export const navLinks = [
-  { href: "/que-ofrecemos", es: "Nuestro trabajo", en: "Our work" },
+  { href: "/que-ofrecemos", es: "¿Qué hacemos?", en: "What we do" },
   { href: "/quienes-somos", es: "Quiénes somos", en: "About us" },
   { href: "/actividades", es: "Actividades realizadas", en: "Past activities" },
   { href: "/blog", es: "Blog", en: "Blog" },

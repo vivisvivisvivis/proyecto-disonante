@@ -11,11 +11,13 @@ import PolarizacionEs from "@/content/es/polarizacion-toma-decisiones";
 import DialogoEs from "@/content/es/dialogo-politico-mejores-politicas";
 import AntagonismoEs from "@/content/es/antagonismo-desacuerdo-conflicto";
 import LegislacionEs from "@/content/es/legislacion-simbolica";
+import GironaEs from "@/content/es/evidencia-creacion-derecho-girona";
 
 import AntagonismoEn from "@/content/en/antagonismo-desacuerdo-conflicto";
 import LegislacionEn from "@/content/en/legislacion-simbolica";
 import DialogoEn from "@/content/en/dialogo-politico-mejores-politicas";
 import CapacitacionEn from "@/content/en/capacitacion-ndi";
+import GironaEn from "@/content/en/evidencia-creacion-derecho-girona";
 
 export const esBodies: Record<string, ComponentType> = {
   "cepal-derechos-sexuales-reproductivos": CepalEs,
@@ -29,6 +31,7 @@ export const esBodies: Record<string, ComponentType> = {
   "dialogo-politico-mejores-politicas": DialogoEs,
   "antagonismo-desacuerdo-conflicto": AntagonismoEs,
   "legislacion-simbolica": LegislacionEs,
+  "evidencia-creacion-derecho-girona": GironaEs,
 };
 
 export const enBodies: Record<string, ComponentType> = {
@@ -36,4 +39,5 @@ export const enBodies: Record<string, ComponentType> = {
   "legislacion-simbolica": LegislacionEn,
   "dialogo-politico-mejores-politicas": DialogoEn,
   "capacitacion-ndi": CapacitacionEn,
+  "evidencia-creacion-derecho-girona": GironaEn,
 };

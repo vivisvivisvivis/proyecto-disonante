@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,10 +7,11 @@ import Reveal from "@/components/Reveal";
 import PageHero from "@/components/PageHero";
 
 import { esAlternates } from "@/lib/seo";
+import { journals } from "@/lib/publications";
 
 export const metadata: Metadata = {
   title: "Quiénes somos",
-  description: "Proyecto Disonante está liderado por Carolina Fernández Blanco y Hernán Charosky.",
+  description: "Proyecto Disonante está liderado por Hernán Charosky y Carolina Fernández Blanco.",
   alternates: esAlternates("/quienes-somos"),
 };
 
@@ -21,109 +23,21 @@ export default function QuienesSomosPage() {
         <PageHero
           label="Nosotros"
           title="Quiénes somos"
-          description="Proyecto Disonante está liderado por Carolina Fernández Blanco y Hernán Charosky."
+          description="Partimos de una convicción: el desacuerdo es una condición de la vida democrática, y lo decisivo es cómo lo transitamos. Cuando las diferencias dejan de discutirse como posiciones y se viven como enfrentamientos entre identidades, se debilita la capacidad de aprender de quien piensa distinto y de lograr leyes y políticas públicas de calidad y estables. Desde Buenos Aires y Barcelona, Proyecto Disonante trabaja sobre esa fragilidad para mejorar la calidad del disenso y, en la medida de lo posible, alcanzar soluciones más racionales."
         />
 
-        {/* Carolina */}
+        {/* Hernán */}
         <section className="py-24 px-6 bg-sand relative overflow-hidden">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
             <Reveal direction="left">
               <div className="flex flex-col gap-4">
-                <div className="w-24 h-24 rounded-full bg-line flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl font-extrabold text-navy" style={{ fontFamily: "var(--font-jakarta)" }}>CF</span>
-                </div>
-                <div>
-                  <h3 className="text-xl">Carolina Fernández Blanco</h3>
-                  <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Doctora en Derecho · Abogada</p>
-                  <p className="text-sm text-muted mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>España</p>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal direction="right" className="md:col-span-2 flex flex-col gap-4">
-              <p style={{ color: "var(--pd-body)" }}>
-                Carolina es Doctora en Derecho por la Universitat de Girona, abogada por la Universidad de Buenos Aires y magíster en Derecho (LL. M.) por Columbia University (Nueva York). Su trabajo se centra en la calidad legislativa, la deliberación y el Estado de derecho. Ha dictado cursos y formaciones sobre legislación racional, deliberación parlamentaria y políticas públicas basadas en evidencia para legisladores y funcionarios de distintos países de América Latina. Actualmente integra los proyectos de investigación <em>Sesgos en la producción y aplicación del derecho</em> y <em>Epistemología social y Derecho</em>.
-              </p>
-              <details className="group">
-                <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden text-sm font-semibold text-rust hover:underline font-ui w-fit">
-                  <span className="group-open:hidden">Leer biografía completa ↓</span>
-                  <span className="hidden group-open:inline">Ocultar ↑</span>
-                </summary>
-                <div className="mt-4 flex flex-col gap-4">
-              <p style={{ color: "var(--pd-body)" }}>
-                Es investigadora de la Cátedra de Cultura Jurídica de la Universitat de Girona, donde fue investigadora postdoctoral y coordinó el Máster oficial en Derecho de Daños entre 2021 y 2026. Tiene una amplia experiencia docente en la Universidad de Buenos Aires y en la Universitat de Girona, y actualmente enseña en el Máster en Derecho de Daños, en el Máster en Fundamentos de la Responsabilidad Civil y en el Master in Global Rule of Law & Constitutional Democracy (Génova y Girona).
-              </p>
-              <p style={{ color: "var(--pd-body)" }}>
-                Ejerció la abogacía en Buenos Aires y trabajó en organizaciones de derechos humanos. Actúa también como consultora jurídica y litigante ante el Sistema Interamericano y el Tribunal Europeo de Derechos Humanos.
-              </p>
-                </div>
-              </details>
-
-              {/* Publications */}
-              <div className="pt-2">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
-                  Libros
-                </p>
-                <ul className="flex flex-col gap-2">
-                  {[
-                    { text: "Eficacia, efectividad y entramado normativo", detail: "Marcial Pons, 2026" },
-                    { text: "Derecho y Desarrollo. Una visión desde América Latina y el Caribe", detail: "" },
-                    { text: "La Seguridad Jurídica para el Desarrollo Humano: desafíos en Iberoamérica", detail: "coautora · Marcial Pons, 2025" },
-                    { text: "Errores en la creación y aplicación del derecho", detail: "coeditora con F. Carbonell · Marcial Pons, 2026" },
-                    { text: "Derecho y Pobreza", detail: "coeditora con E. Pereira Fredes · 2021" },
-                    { text: "Seguridad jurídica, pobreza y corrupción", detail: "coeditora con J. Ferrer · 2018" },
-                    { text: "Seguridad jurídica y democracia en Iberoamérica", detail: "coeditora con J. Ferrer y C. Cruz · 2015" },
-                  ].map((pub) => (
-                    <li key={pub.text} className="flex items-start gap-2">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" aria-hidden />
-                      <span className="text-sm" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
-                        <em>{pub.text}</em>
-                        {pub.detail && <span className="not-italic text-xs text-muted"> · {pub.detail}</span>}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Journal badges */}
-              <div className="pt-1">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
-                  Revistas
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "European Law Journal",
-                    "International Journal for the Semiotics of Law",
-                    "Doxa",
-                    "Isonomía",
-                    "Analisi e Diritto",
-                    "Diritto & Questioni Pubbliche",
-                    "Revista Catalana de Derecho Público",
-                  ].map((journal) => (
-                    <span
-                      key={journal}
-                      className="px-3 py-1 rounded border border-line text-xs text-muted"
-                      style={{ fontFamily: "var(--font-jakarta)" }}
-                    >
-                      {journal}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        <div className="h-px bg-line" />
-
-        {/* Hernán */}
-        <section className="py-24 px-6 bg-cream relative overflow-hidden">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-            <Reveal direction="left">
-              <div className="flex flex-col gap-4">
-                <div className="w-24 h-24 rounded-full bg-navy flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl font-extrabold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>HC</span>
-                </div>
+                <Image
+                  src="/team/hernan-charosky.jpg"
+                  alt="Hernán Charosky"
+                  width={160}
+                  height={160}
+                  className="w-32 h-32 rounded-full object-cover flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-xl">Hernán Charosky</h3>
                   <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Abogado y sociólogo</p>
@@ -181,6 +95,98 @@ export default function QuienesSomosPage() {
           </div>
         </section>
 
+        <div className="h-px bg-line" />
+
+        {/* Carolina */}
+        <section className="py-24 px-6 bg-cream relative overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+            <Reveal direction="left">
+              <div className="flex flex-col gap-4">
+                <Image
+                  src="/team/carolina-fernandez-blanco.jpg"
+                  alt="Carolina Fernández Blanco"
+                  width={160}
+                  height={160}
+                  className="w-32 h-32 rounded-full object-cover flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-xl">Carolina Fernández Blanco</h3>
+                  <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Doctora en Derecho · Abogada</p>
+                  <p className="text-sm text-muted mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>España</p>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal direction="right" className="md:col-span-2 flex flex-col gap-4">
+              <p style={{ color: "var(--pd-body)" }}>
+                Carolina es Doctora en Derecho por la Universitat de Girona, abogada por la Universidad de Buenos Aires y magíster en Derecho (LL. M.) por Columbia University (Nueva York). Su trabajo se centra en la calidad legislativa, la deliberación y el Estado de derecho. Ha dictado cursos y formaciones sobre legislación racional, deliberación parlamentaria y políticas públicas basadas en evidencia para legisladores y funcionarios de distintos países de América Latina. Actualmente integra los proyectos de investigación <em>Sesgos en la producción y aplicación del derecho</em> y <em>Epistemología social y Derecho</em>.
+              </p>
+              <details className="group">
+                <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden text-sm font-semibold text-rust hover:underline font-ui w-fit">
+                  <span className="group-open:hidden">Leer biografía completa ↓</span>
+                  <span className="hidden group-open:inline">Ocultar ↑</span>
+                </summary>
+                <div className="mt-4 flex flex-col gap-4">
+              <p style={{ color: "var(--pd-body)" }}>
+                Es investigadora de la Cátedra de Cultura Jurídica de la Universitat de Girona, donde fue investigadora postdoctoral y coordinó el Máster oficial en Derecho de Daños entre 2021 y 2026. Tiene una amplia experiencia docente en la Universidad de Buenos Aires y en la Universitat de Girona, y actualmente enseña en el Máster en Derecho de Daños, en el Máster en Fundamentos de la Responsabilidad Civil y en el Master in Global Rule of Law & Constitutional Democracy (Génova y Girona).
+              </p>
+              <p style={{ color: "var(--pd-body)" }}>
+                Ejerció la abogacía en Buenos Aires y trabajó en organizaciones de derechos humanos. Actúa también como consultora jurídica y litigante ante el Sistema Interamericano y el Tribunal Europeo de Derechos Humanos.
+              </p>
+                </div>
+              </details>
+
+              {/* Publications */}
+              <div className="pt-2">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  Libros
+                </p>
+                <ul className="flex flex-col gap-2">
+                  {[
+                    { text: "Eficacia, efectividad y entramado normativo", detail: "Marcial Pons, 2026" },
+                    { text: "Derecho y Desarrollo. Una visión desde América Latina y el Caribe", detail: "Editores del Puerto, 2013" },
+                    { text: "La Seguridad Jurídica para el Desarrollo Humano: desafíos en Iberoamérica", detail: "coautora · Marcial Pons, 2025" },
+                    { text: "Errores en la creación y aplicación del derecho", detail: "coeditora con F. Carbonell · Marcial Pons, 2026" },
+                    { text: "Derecho y Pobreza", detail: "coeditora con E. Pereira Fredes · 2021" },
+                    { text: "Seguridad jurídica, pobreza y corrupción", detail: "coeditora con J. Ferrer · 2018" },
+                    { text: "Seguridad jurídica y democracia en Iberoamérica", detail: "coeditora con J. Ferrer y C. Cruz · 2015" },
+                  ].map((pub) => (
+                    <li key={pub.text} className="flex items-start gap-2">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" aria-hidden />
+                      <span className="text-sm" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
+                        <em>{pub.text}</em>
+                        {pub.detail && <span className="not-italic text-xs text-muted"> · {pub.detail}</span>}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Journals: each one links to the article */}
+              <div className="pt-1">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  Revistas (trabajos seleccionados)
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {journals.map((j) => (
+                    <li key={j.url}>
+                      <a
+                        href={j.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-3 py-1 rounded border border-line text-xs text-navy hover:border-terracotta hover:text-rust transition-colors"
+                        style={{ fontFamily: "var(--font-jakarta)" }}
+                      >
+                        {j.es} <span aria-hidden>↗</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         {/* Network */}
         <section className="bg-navy py-20 px-6 relative overflow-hidden">
           <Reveal className="max-w-4xl mx-auto flex flex-col gap-6">
@@ -195,12 +201,25 @@ export default function QuienesSomosPage() {
           </Reveal>
         </section>
 
+        {/* Redes plurales */}
+        <section className="py-20 px-6 bg-cream">
+          <Reveal className="max-w-4xl mx-auto flex flex-col gap-6">
+            <h2 className="heading-sentence max-w-2xl">Redes plurales</h2>
+            <p className="text-lg leading-relaxed max-w-2xl" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
+              Las experiencias que logran mejorar una conversación difícil suelen quedar encerradas en el lugar donde ocurrieron. Queremos formar una red que las ponga en circulación: identificar buenas prácticas de diálogo y deliberación en distintos contextos, convertirlas en herramientas que puedan adaptarse a otros y ampliar su alcance a través de quienes las usan y de quienes las estudian.
+            </p>
+            <p className="text-lg leading-relaxed max-w-2xl" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
+              Por eso la red reúne a quienes trabajan en el terreno, como facilitadores, funcionarios, legisladores y organizaciones de la sociedad civil, con universidades y think tanks que investigan la polarización, la deliberación y la calidad de las decisiones públicas.
+            </p>
+          </Reveal>
+        </section>
+
         {/* CTA */}
         <section className="py-20 px-6 bg-sand border-t border-line">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 items-center justify-between">
             <Reveal direction="left">
               <span className="label text-muted">Diálogo</span>
-              <h2 className="mt-3 max-w-sm">¿Quieres trabajar con nosotros?</h2>
+              <h2 className="mt-3 max-w-sm">¿Quieres integrar la red?</h2>
               <p className="mt-3 max-w-sm" style={{ color: "var(--pd-body)" }}>
                 Nos interesa conocer tus inquietudes y propuestas.
               </p>

@@ -2,16 +2,14 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import ContactForm from "@/components/ContactForm";
-import NewsletterForm from "@/components/NewsletterForm";
+import ContactDetails from "@/components/ContactDetails";
 import PageHero from "@/components/PageHero";
-import { site } from "@/lib/site";
 
 import { esAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contáctanos",
-  description: "Nos interesa intercambiar ideas contigo. Contáctanos completando el formulario.",
+  description: "Nos interesa intercambiar ideas contigo.",
   alternates: esAlternates("/contacto"),
 };
 
@@ -23,7 +21,7 @@ export default function ContactoPage() {
         <PageHero
           label="Diálogo"
           title="Contáctanos"
-          description="Nos interesa intercambiar ideas contigo. Contáctanos completando el formulario."
+          description="Nos interesa intercambiar ideas contigo."
         />
 
         <section className="py-24 px-6 bg-sand relative overflow-hidden">
@@ -54,32 +52,14 @@ export default function ContactoPage() {
                     </div>
                   ))}
                 </div>
-                {site.email && (
-                  <p className="text-sm">
-                    También puedes escribirnos a{" "}
-                    <a href={`mailto:${site.email}`} className="font-semibold text-navy underline underline-offset-2 break-all">
-                      {site.email}
-                    </a>
-                  </p>
-                )}
               </div>
             </Reveal>
 
-            {/* Right: form */}
+            {/* Right: how to reach us */}
             <Reveal direction="right">
-              <ContactForm lang="es" />
+              <ContactDetails lang="es" />
             </Reveal>
           </div>
-        </section>
-
-        {/* Newsletter */}
-        <section className="py-20 px-6 bg-cream border-t border-line relative overflow-hidden">
-          <Reveal className="max-w-xl mx-auto text-center flex flex-col gap-6">
-            <span className="label text-rust">Newsletter</span>
-            <h2>Suscríbete</h2>
-            <p style={{ color: "var(--pd-body)" }}>Ingresa tu correo para recibir novedades.</p>
-            <NewsletterForm lang="es" source="contact-es" />
-          </Reveal>
         </section>
       </main>
       <Footer lang="es" />

@@ -1,4 +1,4 @@
-import { articles } from "@/lib/articles";
+import { articles, articlePath } from "@/lib/articles";
 
 const SITE = "https://proyectodisonante.org";
 
@@ -11,8 +11,8 @@ export async function GET() {
       return `
     <item>
       <title><![CDATA[${a.en.title}]]></title>
-      <link>${SITE}/en/blog/${a.slug}</link>
-      <guid isPermaLink="true">${SITE}/en/blog/${a.slug}</guid>
+      <link>${SITE}${articlePath(a, "en")}</link>
+      <guid isPermaLink="true">${SITE}${articlePath(a, "en")}</guid>
       <pubDate>${pubDate}</pubDate>
       ${a.en.author ? `<author>${a.en.author}</author>` : ""}
       ${a.en.excerpt ? `<description><![CDATA[${a.en.excerpt}]]></description>` : ""}

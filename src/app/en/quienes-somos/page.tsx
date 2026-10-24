@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,10 +7,11 @@ import Reveal from "@/components/Reveal";
 import PageHero from "@/components/PageHero";
 
 import { enAlternates } from "@/lib/seo";
+import { journals } from "@/lib/publications";
 
 export const metadata: Metadata = {
   title: "About us",
-  description: "Proyecto Disonante is led by Carolina Fernández Blanco and Hernán Charosky.",
+  description: "Proyecto Disonante is led by Hernán Charosky and Carolina Fernández Blanco.",
   alternates: enAlternates("/quienes-somos"),
 };
 
@@ -21,109 +23,21 @@ export default function QuienesSomosEnPage() {
         <PageHero
           label="About us"
           title="Who we are"
-          description="Proyecto Disonante is led by Carolina Fernández Blanco and Hernán Charosky."
+          description="We start from a conviction: disagreement is a condition of democratic life, and what matters is how we go through it. When differences stop being discussed as positions and are lived as clashes between identities, our ability to learn from those who think differently, and to achieve high-quality, stable laws and public policies, is weakened. From Buenos Aires and Barcelona, Proyecto Disonante works on that fragility to improve the quality of dissent and, as far as possible, reach more rational solutions."
         />
 
-        {/* Carolina */}
+        {/* Hernán */}
         <section className="py-24 px-6 bg-sand relative overflow-hidden">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
             <Reveal direction="left">
               <div className="flex flex-col gap-4">
-                <div className="w-24 h-24 rounded-full bg-line flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl font-extrabold text-navy" style={{ fontFamily: "var(--font-jakarta)" }}>CF</span>
-                </div>
-                <div>
-                  <h3 className="text-xl">Carolina Fernández Blanco</h3>
-                  <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Doctor in Law · Lawyer</p>
-                  <p className="text-sm text-muted mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>Spain</p>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal direction="right" className="md:col-span-2 flex flex-col gap-4">
-              <p style={{ color: "var(--pd-body)" }}>
-                Carolina holds a PhD from the Universitat de Girona, a law degree from the University of Buenos Aires, and an LL.M. from Columbia University (New York). Her work focuses on legislative quality, deliberation and the rule of law. She has taught courses and conducted training on rational legislation, parliamentary deliberation and evidence-based public policy for legislators and officials from various Latin American countries. She is currently a researcher at the Chair of Legal Culture at the Universitat de Girona and a member of the research projects <em>Biases in the production and application of law</em> and <em>Social Epistemology and Law</em>.
-              </p>
-              <details className="group">
-                <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden text-sm font-semibold text-rust hover:underline font-ui w-fit">
-                  <span className="group-open:hidden">Read full biography ↓</span>
-                  <span className="hidden group-open:inline">Hide ↑</span>
-                </summary>
-                <div className="mt-4 flex flex-col gap-4">
-              <p style={{ color: "var(--pd-body)" }}>
-                She was a postdoctoral researcher at the same institution and coordinated the official Master’s program in Tort Law between 2021 and 2026. She has extensive teaching experience at the University of Buenos Aires and the Universitat de Girona, and currently teaches in the Master’s in Tort Law, the Master’s in Foundations of Civil Liability, and the Master in Global Rule of Law &amp; Constitutional Democracy (Genova and Girona).
-              </p>
-              <p style={{ color: "var(--pd-body)" }}>
-                She practiced law in Buenos Aires and worked at human rights organizations. She also acts as a legal consultant and litigator before the Inter-American System and the European Court of Human Rights.
-              </p>
-                </div>
-              </details>
-
-              {/* Publications */}
-              <div className="pt-2">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
-                  Books
-                </p>
-                <ul className="flex flex-col gap-2">
-                  {[
-                    { text: "Eficacia, efectividad y entramado normativo", detail: "Marcial Pons, 2026" },
-                    { text: "Derecho y Desarrollo. Una visión desde América Latina y el Caribe", detail: "" },
-                    { text: "La Seguridad Jurídica para el Desarrollo Humano: desafíos en Iberoamérica", detail: "co-author · Marcial Pons, 2025" },
-                    { text: "Errores en la creación y aplicación del derecho", detail: "co-editor with F. Carbonell · Marcial Pons, 2026" },
-                    { text: "Derecho y Pobreza", detail: "co-editor with E. Pereira Fredes · 2021" },
-                    { text: "Seguridad jurídica, pobreza y corrupción", detail: "co-editor with J. Ferrer · 2018" },
-                    { text: "Seguridad jurídica y democracia en Iberoamérica", detail: "co-editor with J. Ferrer and C. Cruz · 2015" },
-                  ].map((pub) => (
-                    <li key={pub.text} className="flex items-start gap-2">
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" aria-hidden />
-                      <span className="text-sm" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
-                        <em>{pub.text}</em>
-                        {pub.detail && <span className="not-italic text-xs text-muted"> · {pub.detail}</span>}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Journal badges */}
-              <div className="pt-1">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
-                  Journals
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "European Law Journal",
-                    "International Journal for the Semiotics of Law",
-                    "Doxa",
-                    "Isonomía",
-                    "Analisi e Diritto",
-                    "Diritto & Questioni Pubbliche",
-                    "Revista Catalana de Derecho Público",
-                  ].map((journal) => (
-                    <span
-                      key={journal}
-                      className="px-3 py-1 rounded border border-line text-xs text-muted"
-                      style={{ fontFamily: "var(--font-jakarta)" }}
-                    >
-                      {journal}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          </div>
-        </section>
-
-        <div className="h-px bg-line" />
-
-        {/* Hernán */}
-        <section className="py-24 px-6 bg-cream relative overflow-hidden">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
-            <Reveal direction="left">
-              <div className="flex flex-col gap-4">
-                <div className="w-24 h-24 rounded-full bg-navy flex items-center justify-center flex-shrink-0">
-                  <span className="text-3xl font-extrabold text-white" style={{ fontFamily: "var(--font-jakarta)" }}>HC</span>
-                </div>
+                <Image
+                  src="/team/hernan-charosky.jpg"
+                  alt="Hernán Charosky"
+                  width={160}
+                  height={160}
+                  className="w-32 h-32 rounded-full object-cover flex-shrink-0"
+                />
                 <div>
                   <h3 className="text-xl">Hernán Charosky</h3>
                   <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Lawyer and sociologist</p>
@@ -181,6 +95,98 @@ export default function QuienesSomosEnPage() {
           </div>
         </section>
 
+        <div className="h-px bg-line" />
+
+        {/* Carolina */}
+        <section className="py-24 px-6 bg-cream relative overflow-hidden">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+            <Reveal direction="left">
+              <div className="flex flex-col gap-4">
+                <Image
+                  src="/team/carolina-fernandez-blanco.jpg"
+                  alt="Carolina Fernández Blanco"
+                  width={160}
+                  height={160}
+                  className="w-32 h-32 rounded-full object-cover flex-shrink-0"
+                />
+                <div>
+                  <h3 className="text-xl">Carolina Fernández Blanco</h3>
+                  <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Doctor in Law · Lawyer</p>
+                  <p className="text-sm text-muted mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>Spain</p>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal direction="right" className="md:col-span-2 flex flex-col gap-4">
+              <p style={{ color: "var(--pd-body)" }}>
+                Carolina holds a PhD from the Universitat de Girona, a law degree from the University of Buenos Aires, and an LL.M. from Columbia University (New York). Her work focuses on legislative quality, deliberation and the rule of law. She has taught courses and conducted training on rational legislation, parliamentary deliberation and evidence-based public policy for legislators and officials from various Latin American countries. She is currently a researcher at the Chair of Legal Culture at the Universitat de Girona and a member of the research projects <em>Biases in the production and application of law</em> and <em>Social Epistemology and Law</em>.
+              </p>
+              <details className="group">
+                <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden text-sm font-semibold text-rust hover:underline font-ui w-fit">
+                  <span className="group-open:hidden">Read full biography ↓</span>
+                  <span className="hidden group-open:inline">Hide ↑</span>
+                </summary>
+                <div className="mt-4 flex flex-col gap-4">
+              <p style={{ color: "var(--pd-body)" }}>
+                She was a postdoctoral researcher at the same institution and coordinated the official Master’s program in Tort Law between 2021 and 2026. She has extensive teaching experience at the University of Buenos Aires and the Universitat de Girona, and currently teaches in the Master’s in Tort Law, the Master’s in Foundations of Civil Liability, and the Master in Global Rule of Law &amp; Constitutional Democracy (Genova and Girona).
+              </p>
+              <p style={{ color: "var(--pd-body)" }}>
+                She practiced law in Buenos Aires and worked at human rights organizations. She also acts as a legal consultant and litigator before the Inter-American System and the European Court of Human Rights.
+              </p>
+                </div>
+              </details>
+
+              {/* Publications */}
+              <div className="pt-2">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  Books
+                </p>
+                <ul className="flex flex-col gap-2">
+                  {[
+                    { text: "Eficacia, efectividad y entramado normativo", detail: "Marcial Pons, 2026" },
+                    { text: "Derecho y Desarrollo. Una visión desde América Latina y el Caribe", detail: "Editores del Puerto, 2013" },
+                    { text: "La Seguridad Jurídica para el Desarrollo Humano: desafíos en Iberoamérica", detail: "co-author · Marcial Pons, 2025" },
+                    { text: "Errores en la creación y aplicación del derecho", detail: "co-editor with F. Carbonell · Marcial Pons, 2026" },
+                    { text: "Derecho y Pobreza", detail: "co-editor with E. Pereira Fredes · 2021" },
+                    { text: "Seguridad jurídica, pobreza y corrupción", detail: "co-editor with J. Ferrer · 2018" },
+                    { text: "Seguridad jurídica y democracia en Iberoamérica", detail: "co-editor with J. Ferrer and C. Cruz · 2015" },
+                  ].map((pub) => (
+                    <li key={pub.text} className="flex items-start gap-2">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" aria-hidden />
+                      <span className="text-sm" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
+                        <em>{pub.text}</em>
+                        {pub.detail && <span className="not-italic text-xs text-muted"> · {pub.detail}</span>}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Journals: each one links to the article */}
+              <div className="pt-1">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted mb-3" style={{ fontFamily: "var(--font-jakarta)" }}>
+                  Journals (selected works)
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {journals.map((j) => (
+                    <li key={j.url}>
+                      <a
+                        href={j.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-3 py-1 rounded border border-line text-xs text-navy hover:border-terracotta hover:text-rust transition-colors"
+                        style={{ fontFamily: "var(--font-jakarta)" }}
+                      >
+                        {j.en} <span aria-hidden>↗</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         {/* Network */}
         <section className="bg-navy py-20 px-6 relative overflow-hidden">
           <Reveal className="max-w-4xl mx-auto flex flex-col gap-6">
@@ -195,12 +201,25 @@ export default function QuienesSomosEnPage() {
           </Reveal>
         </section>
 
+        {/* Redes plurales */}
+        <section className="py-20 px-6 bg-cream">
+          <Reveal className="max-w-4xl mx-auto flex flex-col gap-6">
+            <h2 className="heading-sentence max-w-2xl">Plural networks</h2>
+            <p className="text-lg leading-relaxed max-w-2xl" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
+              Experiences that manage to improve a difficult conversation tend to stay locked in the place where they happened. We want to build a network that puts them into circulation: identifying good practices of dialogue and deliberation in different contexts, turning them into tools that others can adapt, and widening their reach through those who use them and those who study them.
+            </p>
+            <p className="text-lg leading-relaxed max-w-2xl" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
+              That is why the network brings together people who work on the ground, such as facilitators, public officials, legislators and civil society organizations, with universities and think tanks that research polarization, deliberation and the quality of public decisions.
+            </p>
+          </Reveal>
+        </section>
+
         {/* CTA */}
         <section className="py-20 px-6 bg-sand border-t border-line">
           <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 items-center justify-between">
             <Reveal direction="left">
               <span className="label text-muted">Dialogue</span>
-              <h2 className="mt-3 max-w-sm">Want to work with us?</h2>
+              <h2 className="mt-3 max-w-sm">Do you want to join the network?</h2>
               <p className="mt-3 max-w-sm" style={{ color: "var(--pd-body)" }}>
                 We are interested in learning about your concerns and proposals.
               </p>

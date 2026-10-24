@@ -9,11 +9,10 @@ import { localHref } from "@/lib/nav";
 const copy = {
   es: {
     heroLabel: "Deliberación · Evidencia · Pluralismo",
-    title: "Nuestro trabajo",
+    title: "¿Cómo podemos ayudarte?",
     intro:
-      "Una propuesta para poner en práctica dispositivos que mejoren la conversación pública a través del respeto, la lógica argumentativa, la incorporación de evidencia, la diversidad y el pluralismo.",
-    servicesLabel: "Líneas de trabajo",
-    servicesTitle: "¿En qué podemos colaborar?",
+      "Una propuesta para poner en práctica dispositivos que mejoren el debate público, la legislación y las políticas públicas frente a desafíos como la polarización, a través del respeto, la argumentación, la evidencia y el pluralismo.",
+    servicesTitle: "Líneas de trabajo",
     services: [
       { id: "diagnostico", title: "Diagnóstico y soluciones", desc: "Evaluación y propuestas de solución de situaciones en donde el diálogo y la toma de decisiones colectivas se encuentra bloqueada." },
       { id: "formacion", title: "Formación", desc: "Formación en distintos niveles relativas a prácticas deliberativas y diálogo racional." },
@@ -39,11 +38,10 @@ const copy = {
   },
   en: {
     heroLabel: "Deliberation · Evidence · Pluralism",
-    title: "Our work",
+    title: "How can we help you?",
     intro:
-      "A proposal to put into practice mechanisms that improve public conversation through respect, argumentative logic, the incorporation of evidence, diversity and pluralism.",
-    servicesLabel: "Lines of work",
-    servicesTitle: "How can we work together?",
+      "A proposal to put into practice mechanisms that improve public debate, legislation and public policy in the face of challenges such as polarization, through respect, argumentation, evidence and pluralism.",
+    servicesTitle: "Lines of work",
     services: [
       { id: "diagnostico", title: "Diagnosis and solutions", desc: "Evaluation and proposed solutions for situations where dialogue and collective decision-making is blocked." },
       { id: "formacion", title: "Training", desc: "Training at various levels related to deliberative practices and rational dialogue." },
@@ -89,8 +87,7 @@ export default function ServicesPage({ lang }: { lang: "es" | "en" }) {
         <section className="py-20 md:py-24 px-6 bg-cream">
           <div className="max-w-5xl mx-auto">
             <Reveal className="mb-12">
-              <span className="label text-rust">{t.servicesLabel}</span>
-              <h2 className="mt-3 max-w-xl">{t.servicesTitle}</h2>
+              <h2 className="max-w-xl">{t.servicesTitle}</h2>
             </Reveal>
             <ul className="flex flex-col gap-px bg-line border border-line">
               {t.services.map((s) => (

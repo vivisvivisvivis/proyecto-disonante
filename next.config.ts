@@ -1,4 +1,8 @@
 import type { NextConfig } from "next";
+import { articles, activities } from "./src/lib/articles";
+
+// Where an article lives now (/actividades/... or /blog/...).
+const pathOf = (slug: string) => `/${articles.find((a) => a.slug === slug)?.section ?? "blog"}/${slug}`;
 
 // Old WordPress URLs (proyectodisonante.org and english.proyectodisonante.org),
 // taken from the WP sitemaps on 2026-10-09, so shared links and search results keep working.
@@ -23,7 +27,7 @@ const oldPages: Record<string, string> = {
   "politica-privacidad": "/privacy",
   "category/politica": "/blog",
   "category/polarizacion": "/blog",
-  "category/sin-categoria/actividades-realizadas": "/blog?cat=actividades",
+  "category/sin-categoria/actividades-realizadas": "/actividades",
   "author/admin": "/blog",
 };
 
@@ -55,15 +59,20 @@ const nextConfig: NextConfig = {
       ...Object.entries(oldPosts).map(([from, slug]) => ({
         source: `/${from}`,
         has: englishHost,
-        destination: `https://proyectodisonante.org/en/blog/${slug}`,
+        destination: `https://proyectodisonante.org/en${pathOf(slug)}`,
         permanent: true,
       })),
       // proyectodisonante.org old paths
       ...Object.entries(oldPosts).map(([from, slug]) => ({
         source: `/${from}`,
-        destination: `/blog/${slug}`,
+        destination: pathOf(slug),
         permanent: true,
       })),
+      // Activities used to live under /blog (moved Oct 2026).
+      ...activities.flatMap((a) => [
+        { source: `/blog/${a.slug}`, destination: `/actividades/${a.slug}`, permanent: true },
+        { source: `/en/blog/${a.slug}`, destination: `/en/actividades/${a.slug}`, permanent: true },
+      ]),
       ...Object.entries(oldPages).map(([from, to]) => ({
         source: `/${from}`,
         destination: to,

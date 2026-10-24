@@ -3,13 +3,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import HeroText from "@/components/HeroText";
-import NewsletterForm from "@/components/NewsletterForm";
-import { articles } from "@/lib/articles";
+import { activities, articlePath } from "@/lib/articles";
+import { partners } from "@/lib/cases";
 import { localHref } from "@/lib/nav";
 
 const copy = {
   es: {
-    ctaPrimary: "Hablemos de tu proyecto",
+    ctaPrimary: "Nuestro trabajo",
     ctaSecondary: "Actividades realizadas",
     problemLabel: "El problema",
     problemTitle: "La polarización es un desafío para la gobernanza democrática",
@@ -20,52 +20,34 @@ const copy = {
     quote:
       "Esta polarización es, en algún sentido, tentadora: toca alguna fibra íntima de nuestras convicciones pero vuelve estéril cualquier debate.",
     proposalLabel: "Nuestra propuesta",
-    proposalTitle: "Una propuesta para mejorar la conversación pública",
+    // PROPOSED wording (point 10), pending Carolina's approval.
+    proposalTitle: "Una propuesta para mejorar el debate público, la legislación y las políticas públicas",
     proposalP1:
       "Proyecto Disonante es una propuesta para poner en práctica dispositivos que mejoren la conversación pública a través del respeto, la lógica argumentativa, la incorporación de evidencia, la diversidad y el pluralismo.",
     proposalP2:
       "Las propuestas de política pública, los proyectos legislativos y las agendas de reformas pueden incrementar su legitimidad y su eficacia en la medida en que incorporen la pluralidad, la deliberación y la evidencia en los procesos de discusión.",
     proposalLink: "Nuestro trabajo",
-    audiencesLabel: "¿A quiénes se dirige nuestro trabajo?",
-    audiences: [
-      "Gobiernos y poderes legislativos",
-      "Educadores y centros educativos",
-      "ONGs y organizaciones de la sociedad civil (OSC)",
-      "Empresas",
-      "Asociaciones y organizaciones profesionales",
-    ],
     manifesto:
       "Una conversación pública sujeta a reglas de respeto y argumentación puede ser más productiva para una mejor gobernanza.",
-    servicesLabel: "Nuestro trabajo",
-    servicesTitle: "¿En qué podemos colaborar?",
-    servicesIntro: "Para gobiernos, legislaturas, educadores, ONGs, empresas y asociaciones profesionales.",
-    services: [
-      { id: "diagnostico", title: "Diagnóstico y soluciones", desc: "Evaluación y propuestas de solución de situaciones en donde el diálogo y la toma de decisiones colectivas se encuentra bloqueada." },
-      { id: "formacion", title: "Formación", desc: "Formación en distintos niveles relativas a prácticas deliberativas y diálogo racional." },
-      { id: "implementacion", title: "Implementación", desc: "Ayuda en la implementación de decisiones que generan conflictividad, son resistidas por un sector o son difíciles de transmitir para ser comprendidas." },
-      { id: "argumentacion", title: "Argumentación basada en evidencia", desc: "Colaboración en la elaboración de argumentos basados en la evidencia y construidos siguiendo las buenas prácticas del diálogo racional." },
-    ],
-    convictionLabel: "Nuestra convicción",
-    convictionTitle:
-      "Tanto la legitimidad como la eficacia de las propuestas se fortalecerán si se las discute con dispositivos adecuados",
-    convictionP: "Dispositivos que las preserven del secuestro por identidades que las exceden.",
-    convictionCta: "Escribe al equipo",
-    newsLabel: "Blog",
-    newsTitle: "Análisis y novedades",
-    newsAll: "Ver el blog",
+    helpTitle: "¿Cómo podemos ayudarte?",
+    // Short summary of the services page (point 11).
+    helpP:
+      "Trabajamos con gobiernos y poderes legislativos, centros educativos, organizaciones de la sociedad civil, empresas y asociaciones profesionales en cuatro líneas: diagnóstico y soluciones, formación, implementación y argumentación basada en evidencia.",
+    newsLabel: "Actividades realizadas",
+    newsTitle: "Últimas actividades",
+    newsAll: "Actividades realizadas",
+    partnersLabel: "Con quién trabajamos",
     teamLabel: "Nosotros",
     teamTitle: "Quiénes somos",
-    teamP: "Proyecto Disonante está liderado por Carolina Fernández Blanco y Hernán Charosky.",
+    teamP: "Proyecto Disonante está liderado por Hernán Charosky y Carolina Fernández Blanco.",
     teamLink: "Conocer al equipo",
     contactLabel: "Diálogo",
     contactTitle: "Contáctanos",
     contactP: "Nos interesa conocer tus inquietudes y propuestas.",
     contactLink: "Escríbenos",
-    newsletterTitle: "Suscríbete",
-    newsletterP: "Recibe nuestras novedades y publicaciones por correo.",
   },
   en: {
-    ctaPrimary: "Let's talk about your project",
+    ctaPrimary: "Our work",
     ctaSecondary: "Past activities",
     problemLabel: "The problem",
     problemTitle: "Polarization is a challenge for democratic governance",
@@ -76,49 +58,29 @@ const copy = {
     quote:
       "This polarization is, in some sense, tempting: it touches something intimate in our convictions, but renders any debate sterile.",
     proposalLabel: "Our proposal",
-    proposalTitle: "A proposal to improve public conversation",
+    proposalTitle: "A proposal to improve public debate, legislation and public policy",
     proposalP1:
       "Proyecto Disonante is a proposal to put into practice mechanisms that improve public conversation through respect, argumentative logic, the incorporation of evidence, diversity and pluralism.",
     proposalP2:
       "Public policy proposals, legislative projects, and reform agendas can increase their legitimacy and effectiveness to the extent that they incorporate plurality, deliberation and evidence in the discussion process.",
     proposalLink: "Our work",
-    audiencesLabel: "Who is our work for?",
-    audiences: [
-      "Governments and legislative bodies",
-      "Educators and educational institutions",
-      "NGOs and civil society organizations (CSOs)",
-      "Businesses",
-      "Professional associations and organizations",
-    ],
     manifesto:
       "A public conversation subject to rules of respect and argumentation can be more productive for better governance.",
-    servicesLabel: "Our work",
-    servicesTitle: "How can we work together?",
-    servicesIntro: "For governments, legislatures, educators, NGOs, businesses and professional associations.",
-    services: [
-      { id: "diagnostico", title: "Diagnosis and solutions", desc: "Evaluation and proposed solutions for situations where dialogue and collective decision-making is blocked." },
-      { id: "formacion", title: "Training", desc: "Training at various levels related to deliberative practices and rational dialogue." },
-      { id: "implementacion", title: "Implementation", desc: "Support in the implementation of decisions that generate conflict, are resisted by a sector, or are difficult to communicate for understanding." },
-      { id: "argumentacion", title: "Evidence-based argumentation", desc: "Collaboration in the elaboration of arguments based on evidence and built following good practices of rational dialogue." },
-    ],
-    convictionLabel: "Our conviction",
-    convictionTitle:
-      "Both the legitimacy and effectiveness of proposals will be strengthened if they are discussed with adequate mechanisms",
-    convictionP: "Mechanisms that preserve them from being hijacked by identities that exceed them.",
-    convictionCta: "Write to the team",
-    newsLabel: "Blog",
-    newsTitle: "Analysis and news",
-    newsAll: "Go to the blog",
+    helpTitle: "How can we help you?",
+    helpP:
+      "We work with governments and legislative bodies, educational institutions, civil society organizations, businesses and professional associations along four lines: diagnosis and solutions, training, implementation, and evidence-based argumentation.",
+    newsLabel: "Past activities",
+    newsTitle: "Latest activities",
+    newsAll: "Past activities",
+    partnersLabel: "Who we work with",
     teamLabel: "About us",
     teamTitle: "Who we are",
-    teamP: "Proyecto Disonante is led by Carolina Fernández Blanco and Hernán Charosky.",
+    teamP: "Proyecto Disonante is led by Hernán Charosky and Carolina Fernández Blanco.",
     teamLink: "Meet the team",
     contactLabel: "Dialogue",
     contactTitle: "Contact us",
     contactP: "We are interested in hearing your concerns and proposals.",
-    contactLink: "Write to the team",
-    newsletterTitle: "Subscribe",
-    newsletterP: "Get our news and publications by email.",
+    contactLink: "Write to us",
   },
 };
 
@@ -127,21 +89,19 @@ const ui = { fontFamily: "var(--font-jakarta)" };
 export default function HomePage({ lang }: { lang: "es" | "en" }) {
   const t = copy[lang];
   const href = (p: string) => localHref(lang, p);
-  const blogBase = lang === "en" ? "/en/blog" : "/blog";
-  // Latest analysis and news. Activities already appear as cases; newsletters are not news.
-  const latest = articles.filter((a) => a.category === "analisis").slice(0, 3);
+  const latest = activities.slice(0, 3);
 
   return (
     <>
       <Navbar lang={lang} />
       <main id="main">
         {/* ── Hero ─────────────────────────────────────── */}
-        <section className="bg-cream pt-12 pb-16 md:pt-24 md:pb-20 px-6">
+        <section className="bg-cream pt-12 pb-16 md:pt-24 md:pb-20 px-6 overflow-hidden">
           <div className="max-w-5xl mx-auto flex flex-col items-center gap-10">
             <HeroText lang={lang} />
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Link
-                href={href("/contacto")}
+                href={href("/que-ofrecemos")}
                 className="text-center bg-terracotta text-white px-9 py-3.5 rounded font-ui font-semibold hover:bg-terracotta-dark transition-colors duration-200 text-sm tracking-wide"
               >
                 {t.ctaPrimary}
@@ -188,18 +148,6 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
                 </div>
               </Reveal>
             </div>
-
-            <div className="flex flex-col gap-4">
-              <span className="label text-muted">{t.audiencesLabel}</span>
-              <ul className="flex flex-wrap gap-x-8 gap-y-3">
-                {t.audiences.map((a) => (
-                  <li key={a} className="flex items-center gap-3">
-                    <span aria-hidden className="w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" />
-                    <span className="text-[0.9375rem] text-ink" style={ui}>{a}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </section>
 
@@ -210,51 +158,21 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
           </Reveal>
         </section>
 
-        {/* ── Services ─────────────────────────────────── */}
-        <section className="py-20 md:py-28 px-6 bg-cream border-t border-line">
-          <div className="max-w-5xl mx-auto">
-            <Reveal className="mb-12">
-              <span className="label text-rust">{t.servicesLabel}</span>
-              <h2 className="mt-3 max-w-xl">{t.servicesTitle}</h2>
-              <p className="mt-4 max-w-xl">{t.servicesIntro}</p>
-            </Reveal>
-            <ul className="flex flex-col gap-px bg-line border border-line">
-              {t.services.map((s) => (
-                <li key={s.id}>
-                  <Link
-                    href={`${href("/que-ofrecemos")}#${s.id}`}
-                    className="bg-cream group flex flex-col md:flex-row gap-3 md:gap-12 md:items-center p-7 md:p-9 hover:bg-sand transition-colors duration-200"
-                  >
-                    <div className="flex flex-col gap-2 flex-1">
-                      <h3 className="group-hover:text-rust transition-colors duration-200">{s.title}</h3>
-                      <p className="text-[0.9375rem] leading-relaxed">{s.desc}</p>
-                    </div>
-                    <span aria-hidden className="hidden md:block text-muted group-hover:text-rust group-hover:translate-x-1.5 transition-[color,transform] duration-200 text-xl">
-                      →
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* ── Conviction ───────────────────────────────── */}
-        <section className="bg-navy py-20 md:py-24 px-6">
-          <Reveal className="max-w-3xl mx-auto text-center flex flex-col gap-7">
-            <span className="label text-blue-200">{t.convictionLabel}</span>
-            <h2 className="heading-sentence text-white">{t.convictionTitle}</h2>
-            <p className="text-blue-100 text-lg leading-relaxed">{t.convictionP}</p>
+        {/* ── How we can help: summary of the services page ── */}
+        <section className="py-20 md:py-24 px-6 bg-sand border-y border-line">
+          <Reveal className="max-w-3xl mx-auto flex flex-col gap-6 items-start">
+            <h2>{t.helpTitle}</h2>
+            <p className="text-lg leading-relaxed">{t.helpP}</p>
             <Link
-              href={href("/contacto")}
-              className="self-center bg-cream text-navy px-9 py-3.5 rounded font-ui font-semibold hover:bg-sand transition-colors text-sm tracking-wide"
+              href={href("/que-ofrecemos")}
+              className="bg-terracotta text-white px-9 py-3.5 rounded font-ui font-semibold hover:bg-terracotta-dark transition-colors duration-200 text-sm tracking-wide"
             >
-              {t.convictionCta}
+              {t.proposalLink}
             </Link>
           </Reveal>
         </section>
 
-        {/* ── Publications ─────────────────────────────── */}
+        {/* ── Latest activities ──────────────────────────── */}
         <section className="py-20 md:py-28 px-6 bg-cream">
           <div className="max-w-5xl mx-auto">
             <Reveal className="flex items-end justify-between gap-6 flex-wrap mb-12">
@@ -262,7 +180,7 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
                 <span className="label text-rust">{t.newsLabel}</span>
                 <h2 className="mt-3">{t.newsTitle}</h2>
               </div>
-              <Link href={href("/blog")} className="text-rust text-sm font-semibold hover:underline" style={ui}>
+              <Link href={href("/actividades")} className="text-rust text-sm font-semibold hover:underline" style={ui}>
                 {t.newsAll} <span aria-hidden>→</span>
               </Link>
             </Reveal>
@@ -270,7 +188,7 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
               {latest.map((a) => (
                 <li key={a.slug}>
                   <Link
-                    href={`${blogBase}/${a.slug}`}
+                    href={articlePath(a, lang)}
                     className="group h-full bg-cream border border-line rounded-lg p-7 flex flex-col gap-3 hover:border-navy transition-colors duration-200"
                   >
                     <div className="flex items-center gap-2 flex-wrap text-xs" style={ui}>
@@ -285,6 +203,16 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* ── Partners: a quiet line of text ───────────── */}
+        <section aria-labelledby="partners-label" className="px-6 pb-16 bg-cream">
+          <div className="max-w-5xl mx-auto border-t border-line pt-8 flex flex-col gap-2">
+            <h2 id="partners-label" className="text-xs font-semibold uppercase tracking-widest text-muted" style={ui}>
+              {t.partnersLabel}
+            </h2>
+            <p className="text-sm text-muted">{partners.join(" · ")}</p>
           </div>
         </section>
 
@@ -314,16 +242,6 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
               </span>
             </Link>
           </div>
-        </section>
-
-        {/* ── Newsletter ───────────────────────────────── */}
-        <section className="py-20 px-6 bg-cream border-t border-line">
-          <Reveal className="max-w-xl mx-auto text-center flex flex-col gap-5">
-            <span className="label text-rust">Newsletter</span>
-            <h2>{t.newsletterTitle}</h2>
-            <p>{t.newsletterP}</p>
-            <NewsletterForm lang={lang} source={`home-${lang}`} />
-          </Reveal>
         </section>
       </main>
       <Footer lang={lang} />

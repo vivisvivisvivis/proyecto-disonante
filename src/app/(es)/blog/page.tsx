@@ -3,12 +3,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import BlogList from "@/components/BlogList";
-import { articles } from "@/lib/articles";
+import { blogPosts } from "@/lib/articles";
 import { esAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog",
-  description: "Análisis, actividades y novedades de Proyecto Disonante.",
+  description: "Textos de reflexión de Proyecto Disonante.",
   alternates: esAlternates("/blog"),
 };
 
@@ -18,12 +18,12 @@ export default function BlogPage() {
       <Navbar lang="es" />
       <main id="main">
         <PageHero
-          label="Análisis y novedades"
+          label="Análisis"
           title="Blog"
-          description="Análisis, actividades y novedades de Proyecto Disonante."
+          description="Textos de reflexión de Proyecto Disonante."
         />
         <section className="py-24 px-6 bg-cream">
-          <BlogList articles={articles} lang="es" />
+          <BlogList articles={blogPosts} lang="es" />
         </section>
       </main>
       <Footer lang="es" />

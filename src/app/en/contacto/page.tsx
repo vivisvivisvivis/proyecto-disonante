@@ -2,16 +2,14 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import ContactForm from "@/components/ContactForm";
-import NewsletterForm from "@/components/NewsletterForm";
+import ContactDetails from "@/components/ContactDetails";
 import PageHero from "@/components/PageHero";
-import { site } from "@/lib/site";
 
 import { enAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact us",
-  description: "We are interested in exchanging ideas with you. Contact us by filling out the form.",
+  description: "We are interested in exchanging ideas with you.",
   alternates: enAlternates("/contacto"),
 };
 
@@ -23,7 +21,7 @@ export default function ContactoEnPage() {
         <PageHero
           label="Dialogue"
           title="Contact us"
-          description="We are interested in exchanging ideas with you. Contact us by filling out the form."
+          description="We are interested in exchanging ideas with you."
         />
 
         <section className="py-24 px-6 bg-sand relative overflow-hidden">
@@ -54,32 +52,14 @@ export default function ContactoEnPage() {
                     </div>
                   ))}
                 </div>
-                {site.email && (
-                  <p className="text-sm">
-                    You can also write to us at{" "}
-                    <a href={`mailto:${site.email}`} className="font-semibold text-navy underline underline-offset-2 break-all">
-                      {site.email}
-                    </a>
-                  </p>
-                )}
               </div>
             </Reveal>
 
-            {/* Right: form */}
+            {/* Right: how to reach us */}
             <Reveal direction="right">
-              <ContactForm lang="en" />
+              <ContactDetails lang="en" />
             </Reveal>
           </div>
-        </section>
-
-        {/* Newsletter */}
-        <section className="py-20 px-6 bg-cream border-t border-line relative overflow-hidden">
-          <Reveal className="max-w-xl mx-auto text-center flex flex-col gap-6">
-            <span className="label text-rust">Newsletter</span>
-            <h2>Subscribe</h2>
-            <p style={{ color: "var(--pd-body)" }}>Enter your email to receive updates.</p>
-            <NewsletterForm lang="en" source="contact-en" />
-          </Reveal>
         </section>
       </main>
       <Footer lang="en" />

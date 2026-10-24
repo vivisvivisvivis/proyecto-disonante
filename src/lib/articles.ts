@@ -1,14 +1,11 @@
-export type Category = "actividades" | "analisis" | "newsletter";
-
-export const categoryLabels: Record<Category, { es: string; en: string }> = {
-  actividades: { es: "Actividades", en: "Activities" },
-  analisis: { es: "Análisis", en: "Analysis" },
-  newsletter: { es: "Newsletter", en: "Newsletter" },
-};
+// Two sections share this list:
+// - "actividades": the chronological record of what the project did (/actividades/[slug])
+// - "blog": reflection pieces (/blog/[slug])
+export type Section = "actividades" | "blog";
 
 export interface Article {
   slug: string;
-  category: Category;
+  section: Section;
   isoDate: string; // ISO 8601, empty string if unknown
   es: {
     title: string;
@@ -29,7 +26,7 @@ export interface Article {
 const allArticles: Article[] = [
   {
     slug: "cepal-derechos-sexuales-reproductivos",
-    category: "actividades",
+    section: "actividades",
     isoDate: "2026-09-29",
     es: {
       title:
@@ -52,7 +49,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "taller-minerva-university",
-    category: "actividades",
+    section: "actividades",
     isoDate: "2025-11-12",
     es: {
       title:
@@ -75,7 +72,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "newsletter-actividades-2024",
-    category: "newsletter",
+    section: "actividades",
     isoDate: "2025-02-27",
     es: {
       title: "Newsletter con las actividades de 2024",
@@ -95,8 +92,29 @@ const allArticles: Article[] = [
     },
   },
   {
+    slug: "evidencia-creacion-derecho-girona",
+    section: "actividades",
+    isoDate: "2025-06-05",
+    es: {
+      title: "Evidencia en la creación del derecho: una introducción y un modelo plausible",
+      author: "Carolina Fernández Blanco",
+      date: "5 de junio de 2025",
+      excerpt:
+        "Ponencia presentada en la II Michele Taruffo Girona Evidence Week, en el workshop «La prueba en la legislación».",
+      tag: "Ponencia",
+    },
+    en: {
+      title: "Evidence in lawmaking: an introduction and a plausible model",
+      author: "Carolina Fernández Blanco",
+      date: "June 5, 2025",
+      excerpt:
+        "Paper presented at the 2nd Michele Taruffo Girona Evidence Week, in the workshop “Evidence in legislation”.",
+      tag: "Paper",
+    },
+  },
+  {
     slug: "encrucijadas-libertad-expresion",
-    category: "actividades",
+    section: "actividades",
     isoDate: "2024-12-15",
     es: {
       title: "Encrucijadas de la Libertad de Expresión en redes sociales",
@@ -117,7 +135,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "financiamiento-politica",
-    category: "actividades",
+    section: "blog",
     isoDate: "2024-12-15",
     es: {
       title: "Financiamiento de la política",
@@ -138,11 +156,11 @@ const allArticles: Article[] = [
   },
   {
     slug: "capacitacion-ndi",
-    category: "actividades",
+    section: "actividades",
     isoDate: "2024-07-29",
     es: {
       title:
-        "Capacitación “Legislación y Diálogo” para el National Democratic Institute",
+        "Capacitación “Legislación y diálogo” para el National Democratic Institute",
       author: "Carolina Fernández Blanco",
       date: "29 de julio de 2024",
       excerpt:
@@ -151,17 +169,17 @@ const allArticles: Article[] = [
     },
     en: {
       title:
-        "Training on “Legislation and Dialogue” for the National Democratic Institute",
+        "Training on “Legislation and dialogue” for the National Democratic Institute",
       author: "Carolina Fernández Blanco",
       date: "July 29, 2024",
       excerpt:
-        "During June, Proyecto Disonante conducted a training course on “Legislation and Dialogue” for the National Democratic Institute's Innovation Network.",
+        "During June, Proyecto Disonante conducted a training course on “Legislation and dialogue” for the National Democratic Institute's Innovation Network.",
       tag: "Training",
     },
   },
   {
     slug: "apertura-polarizacion",
-    category: "analisis",
+    section: "blog",
     isoDate: "2024-07-09",
     es: {
       title: "Apertura en tiempos de polarización",
@@ -182,7 +200,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "polarizacion-toma-decisiones",
-    category: "analisis",
+    section: "blog",
     isoDate: "2024-10-10",
     es: {
       title: "Polarización y toma de decisiones racionales",
@@ -203,7 +221,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "dialogo-politico-mejores-politicas",
-    category: "analisis",
+    section: "blog",
     isoDate: "2024-03-01",
     es: {
       title: "Diálogo político y mejores políticas: algunos hitos biográficos",
@@ -225,7 +243,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "antagonismo-desacuerdo-conflicto",
-    category: "analisis",
+    section: "blog",
     isoDate: "2023-03-19",
     es: {
       title: "Antagonismo, desacuerdo y conflicto institucionalizado",
@@ -246,7 +264,7 @@ const allArticles: Article[] = [
   },
   {
     slug: "legislacion-simbolica",
-    category: "analisis",
+    section: "blog",
     isoDate: "2023-03-09",
     es: {
       title:
@@ -270,3 +288,20 @@ const allArticles: Article[] = [
 
 // Newest first.
 export const articles: Article[] = [...allArticles].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+
+export const activities = articles.filter((a) => a.section === "actividades");
+export const blogPosts = articles.filter((a) => a.section === "blog");
+
+export const sectionLabels: Record<Section, { es: string; en: string }> = {
+  actividades: { es: "Actividades realizadas", en: "Past activities" },
+  blog: { es: "Blog", en: "Blog" },
+};
+
+export function sectionPath(section: Section, lang: "es" | "en") {
+  const base = section === "actividades" ? "/actividades" : "/blog";
+  return lang === "en" ? `/en${base}` : base;
+}
+
+export function articlePath(article: Article, lang: "es" | "en") {
+  return `${sectionPath(article.section, lang)}/${article.slug}`;
+}

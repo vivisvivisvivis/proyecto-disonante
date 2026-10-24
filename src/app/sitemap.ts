@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { articles } from "@/lib/articles";
+import { articles, articlePath } from "@/lib/articles";
 
 const SITE = "https://proyectodisonante.org";
 
@@ -27,12 +27,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const blogPosts = articles.map((a) => ({
-    url: `${SITE}/blog/${a.slug}`,
+    url: `${SITE}${articlePath(a, "es")}`,
     lastModified: a.isoDate ? new Date(a.isoDate) : new Date(),
     alternates: {
       languages: {
-        en: `${SITE}/en/blog/${a.slug}`,
-        "x-default": `${SITE}/blog/${a.slug}`,
+        en: `${SITE}${articlePath(a, "en")}`,
+        "x-default": `${SITE}${articlePath(a, "es")}`,
       },
     },
   }));

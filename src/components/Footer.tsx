@@ -46,7 +46,7 @@ export default function Footer({ lang = "es" }: { lang?: "es" | "en" }) {
             </a>
           )}
           <Link href={localHref(lang, "/contacto")} className="text-sm text-blue-100 hover:text-white hover:underline">
-            {en ? "Contact form →" : "Formulario de contacto →"}
+            {en ? "Contact us →" : "Contáctanos →"}
           </Link>
           {socials.length > 0 && (
             <ul className="flex flex-wrap gap-x-5 gap-y-2 mt-2">

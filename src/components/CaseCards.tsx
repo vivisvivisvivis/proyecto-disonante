@@ -1,8 +1,15 @@
 import Link from "next/link";
 import { cases } from "@/lib/cases";
+import { articles, articlePath } from "@/lib/articles";
+
+// Each case points at its article, in whichever section it lives.
+function casePath(slug: string, lang: "es" | "en") {
+  const article = articles.find((a) => a.slug === slug);
+  return article ? articlePath(article, lang) : lang === "en" ? "/en/actividades" : "/actividades";
+}
 
 export default function CaseCards({ lang = "es", limit }: { lang?: "es" | "en"; limit?: number }) {
-  const base = lang === "en" ? "/en/blog" : "/blog";
+  
   const list = limit ? cases.slice(0, limit) : cases;
 
   return (
@@ -12,7 +19,7 @@ export default function CaseCards({ lang = "es", limit }: { lang?: "es" | "en"; 
         return (
           <li key={c.slug} className="bg-cream md:[&:last-child:nth-child(odd)]:col-span-2">
             <Link
-              href={`${base}/${c.slug}`}
+              href={casePath(c.slug, lang)}
               className="group h-full flex flex-col gap-3 p-7 md:p-8 hover:bg-sand transition-colors duration-200"
             >
               <div className="flex items-center justify-between gap-4 flex-wrap">
