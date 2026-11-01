@@ -9,7 +9,7 @@ import { localHref } from "@/lib/nav";
 
 const copy = {
   es: {
-    ctaPrimary: "Nuestro trabajo",
+    ctaPrimary: "¿Qué hacemos?",
     ctaSecondary: "Actividades realizadas",
     problemLabel: "El problema",
     problemTitle: "La polarización es un desafío para la gobernanza democrática",
@@ -26,7 +26,7 @@ const copy = {
       "Proyecto Disonante es una propuesta para poner en práctica dispositivos que mejoren la conversación pública a través del respeto, la lógica argumentativa, la incorporación de evidencia, la diversidad y el pluralismo.",
     proposalP2:
       "Las propuestas de política pública, los proyectos legislativos y las agendas de reformas pueden incrementar su legitimidad y su eficacia en la medida en que incorporen la pluralidad, la deliberación y la evidencia en los procesos de discusión.",
-    proposalLink: "Nuestro trabajo",
+    proposalLink: "¿Qué hacemos?",
     manifesto:
       "Una conversación pública sujeta a reglas de respeto y argumentación puede ser más productiva para una mejor gobernanza.",
     helpTitle: "¿Cómo podemos ayudarte?",
@@ -47,7 +47,7 @@ const copy = {
     contactLink: "Escríbenos",
   },
   en: {
-    ctaPrimary: "Our work",
+    ctaPrimary: "What we do",
     ctaSecondary: "Past activities",
     problemLabel: "The problem",
     problemTitle: "Polarization is a challenge for democratic governance",
@@ -63,7 +63,7 @@ const copy = {
       "Proyecto Disonante is a proposal to put into practice mechanisms that improve public conversation through respect, argumentative logic, the incorporation of evidence, diversity and pluralism.",
     proposalP2:
       "Public policy proposals, legislative projects, and reform agendas can increase their legitimacy and effectiveness to the extent that they incorporate plurality, deliberation and evidence in the discussion process.",
-    proposalLink: "Our work",
+    proposalLink: "What we do",
     manifesto:
       "A public conversation subject to rules of respect and argumentation can be more productive for better governance.",
     helpTitle: "How can we help you?",

@@ -59,7 +59,7 @@ export default function UruguayPage() {
                 Escribir al equipo
               </Link>
               <Link href="/que-ofrecemos" className="text-white font-semibold underline underline-offset-4 hover:no-underline text-sm" style={ui}>
-                Nuestro trabajo
+                ¿Qué hacemos?
               </Link>
             </div>
             {site.email && (
