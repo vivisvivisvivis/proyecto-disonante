@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
+import LegalContact from "@/components/LegalContact";
 import { esAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -18,7 +19,7 @@ export default function TermsPage() {
         <PageHero
           label="Legal"
           title="Términos de uso"
-          description="Última actualización: octubre de 2026"
+          description="Última actualización: noviembre de 2026"
         />
 
         <section className="py-24 px-6 bg-sand">
@@ -62,10 +63,7 @@ export default function TermsPage() {
             <div className="flex flex-col gap-4">
               <h2 className="text-xl">6. Contacto</h2>
               <p style={{ color: "var(--pd-body)" }}>
-                Para cualquier consulta sobre estos términos, escríbenos a{" "}
-                <a href="mailto:contacto@proyectodisonante.org" className="text-rust hover:underline">
-                  contacto@proyectodisonante.org
-                </a>.
+                Para cualquier consulta sobre estos términos, escríbenos a través de <LegalContact lang="es" />.
               </p>
             </div>
 
