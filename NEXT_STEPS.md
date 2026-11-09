@@ -3,6 +3,8 @@ Updated: 2026-11-09. Production = `main` @ 6c440b5 on proyecto-disonante.vercel.
 Working branch for the next round: `carolina-final` (branched from main).
 
 ## Done
+- 2026-11-09: **DOMAIN LIVE.** proyectodisonante.org, www and english. point to Vercel (GoDaddy DNS edited by Vivis: A @ 216.198.79.1 + 64.29.17.1, CNAME www/english → cfcf135841d919f8.vercel-dns-017.com). Let's Encrypt cert issued (~55 min after the change). Old WP links (ES + english.) redirect correctly. Email records (MX/TXT, Microsoft 365 via GoDaddy) untouched and working.
+- 2026-11-09: round 3 merged to `main` (85b2ee8) and deployed to production.
 - 2026-11-09: Carolina's round 3 (`instrucciones-claude-web-disonante-ronda-3.md`, via WhatsApp) done on `carolina-final`, preview deployed, NOT merged/production:
   public email on, privacy names Hernán Charosky as data controller, Hernán label + 3 org links, books linked + reordered, journals reordered,
   MYSU in partners, report paragraph in «Financiamiento de la política» (EN: paragraph under the Spanish-only notice, links to the English report),
@@ -12,9 +14,12 @@ Working branch for the next round: `carolina-final` (branched from main).
   - Services page named «¿Qué hacemos?» / "What we do" everywhere.
   - Carolina approved the proposal title (point 10) and the Girona description (point 26).
 
-## Next up (in this order)
-1. **Carolina reviews the round-3 preview.** Open questions for her: book 5 full title «…en Iberoamérica» (Marcial Pons confirms it, and lists the year as 2019, not 2018); bio sentences of Carolina and Hernán still PENDING. Then merge + `vercel --prod` only with Vivis's OK.
-2. **Then the domain switch**: proyectodisonante.org still serves the OLD WordPress site. Add the domain in Vercel, give Dante the GoDaddy DNS records step by step (don't log into GoDaddy ourselves). Afterwards check the WordPress redirects (ES + english. subdomain).
+## Next up
+1. Optional: make www redirect to proyectodisonante.org (today both serve the site; canonical tags already point to the main domain). Vercel → Settings → Domains → www → Redirect.
+2. Optional: `www.english` CNAME in GoDaddy now points to english. → Vercel without a certificate. Delete it or add it to the Vercel project.
+3. Old `_acme-challenge` CNAMEs (Cloudflare, from the WordPress hosting) are unused now; safe to delete later, not urgent.
+4. Carolina: change GoDaddy, webmail and Gmail passwords (they're in plain text in her Word doc, and the GoDaddy one appeared in a Claude session). Cancel the old WordPress hosting only after a few days of checks.
+5. Carolina still to confirm: book 5 full title «…en Iberoamérica» + year (Marcial Pons says 2019); PENDING bio sentences.
 
 ## Blocked / needs Carolina
 - Aviso legal (point 5): needs name / NIF / address. Skipped for launch on Dante's call.
