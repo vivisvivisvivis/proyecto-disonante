@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LegalContact from "@/components/LegalContact";
+import { site } from "@/lib/site";
 import { esAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -28,7 +29,14 @@ export default function PrivacyPage() {
           <div className="max-w-3xl mx-auto flex flex-col gap-10">
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">1. Datos que recopilamos</h2>
+              <h2 className="text-xl">1. Responsable del tratamiento</h2>
+              <p style={body}>
+                El responsable del tratamiento de los datos es Hernán Charosky. Contacto: <a href={`mailto:${site.email}`} className="text-rust hover:underline">{site.email}</a>.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <h2 className="text-xl">2. Datos que recopilamos</h2>
               <p style={body}>
                 Este sitio no tiene formularios ni registros: no recopilamos datos personales a través de él.
               </p>
@@ -38,30 +46,30 @@ export default function PrivacyPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">2. Cookies</h2>
+              <h2 className="text-xl">3. Cookies</h2>
               <p style={body}>
                 Este sitio no utiliza cookies propias ni de terceros: ni de análisis, ni de seguimiento, ni de publicidad. Por eso no te pedimos consentimiento de cookies al entrar.
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">3. Alojamiento del sitio</h2>
+              <h2 className="text-xl">4. Alojamiento del sitio</h2>
               <p style={body}>
                 El sitio está alojado en <strong>Vercel</strong> (Vercel Inc., EE. UU.). Como cualquier servidor web, Vercel registra datos técnicos de las visitas, como la dirección IP, para entregar las páginas y proteger el sitio frente a abusos. No usamos esos datos para identificarte ni para analizar tu navegación.
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">4. Uso de los datos</h2>
+              <h2 className="text-xl">5. Uso de los datos</h2>
               <p style={body}>
                 Los datos que nos envías por correo se usan únicamente para responder a tu consulta y se conservan solo el tiempo necesario para ello. No los vendemos, cedemos ni compartimos con terceros.
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">5. Tus derechos</h2>
+              <h2 className="text-xl">6. Tus derechos</h2>
               <p style={body}>
-                Tienes derecho a acceder, rectificar, suprimir, limitar el tratamiento y solicitar la portabilidad de tus datos personales, así como a oponerte a su tratamiento. Para ejercerlos, escríbenos a través de <LegalContact lang="es" />.
+                Tienes derecho a acceder, rectificar, suprimir, limitar el tratamiento y solicitar la portabilidad de tus datos personales, así como a oponerte a su tratamiento. Para ejercerlos, escríbenos a <LegalContact lang="es" />.
               </p>
               <p style={body}>
                 Si consideras que no hemos tratado tus datos correctamente, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (aepd.es).
@@ -69,9 +77,9 @@ export default function PrivacyPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">6. Contacto</h2>
+              <h2 className="text-xl">7. Contacto</h2>
               <p style={body}>
-                Para cualquier consulta relacionada con esta política, escríbenos a través de <LegalContact lang="es" />.
+                Para cualquier consulta relacionada con esta política, escríbenos a <LegalContact lang="es" />.
               </p>
             </div>
 

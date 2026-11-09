@@ -13,7 +13,7 @@ Site for Proyecto Disonante, Carolina's civic-deliberation organisation (worksho
 ## Design (Carolina approved, don't drift)
 - Sober. Accent = logo red #C54130. Headings Bebas Neue (uppercase, matches the logo), body Source Sans 3. No fade-in reveals (she rejected them).
 - Menu: ¿Qué hacemos? / Quiénes somos / Actividades realizadas / Blog / Contáctanos. Services page = «¿Qué hacemos?» / "What we do".
-- No contact forms or newsletter (removed on her request). No public email for now.
+- No contact forms or newsletter (removed on her request). Public email: proyectodisonante@gmail.com (`lib/site.ts`). Data controller in the privacy policy: Hernán Charosky.
 
 ## Git and deploy
 - `main` = production (proyecto-disonante.vercel.app). Work on a branch, send Carolina the **preview** link, merge + `vercel --prod` only with Dante's OK.

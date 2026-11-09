@@ -14,10 +14,24 @@ const copy = {
       "Una propuesta para poner en práctica dispositivos que mejoren el debate público, la legislación y las políticas públicas frente a desafíos como la polarización, a través del respeto, la argumentación, la evidencia y el pluralismo.",
     servicesTitle: "Líneas de trabajo",
     services: [
-      { id: "diagnostico", title: "Diagnóstico y soluciones", desc: "Evaluación y propuestas de solución de situaciones en donde el diálogo y la toma de decisiones colectivas se encuentra bloqueada." },
-      { id: "formacion", title: "Formación", desc: "Formación en distintos niveles relativas a prácticas deliberativas y diálogo racional." },
-      { id: "implementacion", title: "Implementación", desc: "Ayuda en la implementación de decisiones que generan conflictividad, son resistidas por un sector o son difíciles de transmitir para ser comprendidas." },
-      { id: "argumentacion", title: "Argumentación basada en evidencia", desc: "Colaboración en la elaboración de argumentos basados en la evidencia y construidos siguiendo las buenas prácticas del diálogo racional." },
+      {
+        id: "diagnostico",
+        title: "Diagnóstico y soluciones",
+        desc: "Evaluación y propuestas de solución de situaciones en donde el diálogo y la toma de decisiones colectivas se encuentra bloqueada.",
+        more: "Apoyamos a gobiernos, legislaturas, OSC y empresas para que lideren sus propuestas en un entorno de contradicciones múltiples.",
+      },
+      {
+        id: "formacion",
+        title: "Formación",
+        desc: "Formación en distintos niveles relativas a prácticas deliberativas y diálogo racional.",
+        more: "Una mejor conversación pública no es un fenómeno espontáneo: requiere conocimiento de los fundamentos morales, las emociones, los sesgos y las falacias que nos afectan a todos. Múltiples disciplinas científicas han generado evidencia acerca de las razones y de los modos de encauzar aquello que nos dificulta entendernos.",
+      },
+      {
+        id: "argumentacion",
+        title: "Argumentación basada en evidencia",
+        desc: "Colaboración en la elaboración de argumentos basados en la evidencia y construidos siguiendo las buenas prácticas del diálogo racional.",
+        more: "La evidencia no habla por sí sola: entra en una discusión ya cargada de identidades y suele leerse según lo que cada parte quiere defender. Por eso, en procesos de decisión de políticas públicas o como aporte experto en litigios de interés público, por ejemplo mediante amicus curiae, trabajamos para que los argumentos se apoyen en evidencia pertinente, hagan explícitos sus supuestos y anticipen las objeciones razonables, de modo que puedan sostenerse ante quienes no comparten el punto de partida.",
+      },
     ],
     audiencesLabel: "Destinatarios",
     audiencesTitle: "¿A quiénes se dirige nuestro trabajo?",
@@ -43,10 +57,24 @@ const copy = {
       "A proposal to put into practice mechanisms that improve public debate, legislation and public policy in the face of challenges such as polarization, through respect, argumentation, evidence and pluralism.",
     servicesTitle: "Lines of work",
     services: [
-      { id: "diagnostico", title: "Diagnosis and solutions", desc: "Evaluation and proposed solutions for situations where dialogue and collective decision-making is blocked." },
-      { id: "formacion", title: "Training", desc: "Training at various levels related to deliberative practices and rational dialogue." },
-      { id: "implementacion", title: "Implementation", desc: "Support in the implementation of decisions that generate conflict, are resisted by a sector, or are difficult to communicate for understanding." },
-      { id: "argumentacion", title: "Evidence-based argumentation", desc: "Collaboration in the elaboration of arguments based on evidence and built following good practices of rational dialogue." },
+      {
+        id: "diagnostico",
+        title: "Diagnosis and solutions",
+        desc: "Evaluation and proposed solutions for situations where dialogue and collective decision-making is blocked.",
+        more: "We support governments, legislatures, CSOs and businesses so that they can lead their proposals in an environment of multiple contradictions.",
+      },
+      {
+        id: "formacion",
+        title: "Training",
+        desc: "Training at various levels related to deliberative practices and rational dialogue.",
+        more: "A better public conversation is not a spontaneous phenomenon: it requires knowledge of the moral foundations, emotions, biases and fallacies that affect us all. Multiple scientific disciplines have produced evidence about the reasons behind what makes it hard for us to understand each other, and about ways to channel it.",
+      },
+      {
+        id: "argumentacion",
+        title: "Evidence-based argumentation",
+        desc: "Collaboration in the elaboration of arguments based on evidence and built following good practices of rational dialogue.",
+        more: "Evidence does not speak for itself: it enters a discussion already charged with identities and is usually read according to what each side wants to defend. That is why, in public policy decision-making or as expert input in public interest litigation, for example through amicus curiae briefs, we work to make sure arguments rest on relevant evidence, make their assumptions explicit and anticipate reasonable objections, so that they can hold up before those who do not share the same starting point.",
+      },
     ],
     audiencesLabel: "Audiences",
     audiencesTitle: "Who is our work for?",
@@ -94,6 +122,7 @@ export default function ServicesPage({ lang }: { lang: "es" | "en" }) {
                 <li key={s.id} id={s.id} className="bg-cream scroll-mt-24 flex flex-col gap-2 p-8 md:p-10">
                   <h3>{s.title}</h3>
                   <p className="text-[0.9375rem] leading-relaxed">{s.desc}</p>
+                  <p className="text-[0.9375rem] leading-relaxed">{s.more}</p>
                 </li>
               ))}
             </ul>

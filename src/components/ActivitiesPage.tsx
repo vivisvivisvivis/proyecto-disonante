@@ -60,7 +60,7 @@ export default function ActivitiesPage({ lang }: { lang: "es" | "en" }) {
           <div className="max-w-5xl mx-auto flex flex-col gap-4">
             <h2 id="partners-label" className="label text-rust">{t.partnersLabel}</h2>
             <ul className="flex flex-wrap gap-x-10 gap-y-3">
-              {partners.map((p) => (
+              {partners[lang].map((p) => (
                 <li key={p} className="text-navy font-semibold text-sm" style={{ fontFamily: "var(--font-jakarta)" }}>
                   {p}
                 </li>

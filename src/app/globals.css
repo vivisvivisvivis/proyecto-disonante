@@ -195,6 +195,12 @@ button, .btn { font-family: var(--font-jakarta), sans-serif; font-weight: 600; }
   color: var(--pd-ink);
 }
 .article-body em { font-style: italic; }
+.article-body a {
+  color: var(--pd-rust);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.article-body a:hover { text-decoration: none; }
 .article-body ul {
   list-style: disc;
   padding-left: 1.5rem;

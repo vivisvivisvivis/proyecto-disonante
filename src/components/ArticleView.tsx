@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ArticleCard from "@/components/ArticleCard";
 import { articles, articlePath, sectionLabels, sectionPath, type Article, type Section } from "@/lib/articles";
-import { esBodies, enBodies } from "@/lib/articleContent";
+import { esBodies, enBodies, enAddenda } from "@/lib/articleContent";
 import { esAlternates, enAlternates } from "@/lib/seo";
 
 const SITE = "https://proyectodisonante.org";
@@ -46,6 +46,7 @@ export default function ArticleView({ article, lang }: { article: Article; lang:
   const c = copy[lang];
   const { title, author, date, excerpt, tag } = article[lang];
   const Body = (lang === "es" ? esBodies : enBodies)[article.slug] ?? null;
+  const Addendum = lang === "en" && !Body ? enAddenda[article.slug] ?? null : null;
   const url = `${SITE}${articlePath(article, lang)}`;
   const sectionHref = sectionPath(article.section, lang);
   const sectionName = sectionLabels[article.section][lang];
@@ -131,6 +132,12 @@ export default function ArticleView({ article, lang }: { article: Article; lang:
                 >
                   Read it in Spanish →
                 </Link>
+              </div>
+            )}
+
+            {Addendum && (
+              <div className="article-body">
+                <Addendum />
               </div>
             )}
 

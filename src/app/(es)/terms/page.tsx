@@ -63,7 +63,7 @@ export default function TermsPage() {
             <div className="flex flex-col gap-4">
               <h2 className="text-xl">6. Contacto</h2>
               <p style={{ color: "var(--pd-body)" }}>
-                Para cualquier consulta sobre estos términos, escríbenos a través de <LegalContact lang="es" />.
+                Para cualquier consulta sobre estos términos, escríbenos a <LegalContact lang="es" />.
               </p>
             </div>
 

@@ -40,7 +40,6 @@ export default function ContactoEnPage() {
                   {[
                     { title: "Diagnosis and solutions", desc: "Situations of blocked dialogue" },
                     { title: "Training", desc: "Deliberative practices and rational dialogue" },
-                    { title: "Implementation", desc: "Decisions that generate conflict" },
                     { title: "Evidence-based argumentation", desc: "Development of rational arguments" },
                   ].map((item) => (
                     <div key={item.title} className="flex items-start gap-3 p-4 rounded border border-line">

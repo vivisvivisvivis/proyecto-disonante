@@ -18,6 +18,7 @@ import LegislacionEn from "@/content/en/legislacion-simbolica";
 import DialogoEn from "@/content/en/dialogo-politico-mejores-politicas";
 import CapacitacionEn from "@/content/en/capacitacion-ndi";
 import GironaEn from "@/content/en/evidencia-creacion-derecho-girona";
+import FinanciamientoEnAddendum from "@/content/en/financiamiento-politica-addendum";
 
 export const esBodies: Record<string, ComponentType> = {
   "cepal-derechos-sexuales-reproductivos": CepalEs,
@@ -40,4 +41,9 @@ export const enBodies: Record<string, ComponentType> = {
   "dialogo-politico-mejores-politicas": DialogoEn,
   "capacitacion-ndi": CapacitacionEn,
   "evidencia-creacion-derecho-girona": GironaEn,
+};
+
+// Extra English paragraphs for posts that are otherwise Spanish only.
+export const enAddenda: Record<string, ComponentType> = {
+  "financiamiento-politica": FinanciamientoEnAddendum,
 };

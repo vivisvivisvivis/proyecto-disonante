@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageHero from "@/components/PageHero";
 import LegalContact from "@/components/LegalContact";
+import { site } from "@/lib/site";
 import { enAlternates } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -28,7 +29,14 @@ export default function PrivacyEnPage() {
           <div className="max-w-3xl mx-auto flex flex-col gap-10">
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">1. Data we collect</h2>
+              <h2 className="text-xl">1. Data controller</h2>
+              <p style={body}>
+                The data controller is Hernán Charosky. Contact: <a href={`mailto:${site.email}`} className="text-rust hover:underline">{site.email}</a>.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <h2 className="text-xl">2. Data we collect</h2>
               <p style={body}>
                 This site has no forms or sign-ups: we do not collect personal data through it.
               </p>
@@ -38,30 +46,30 @@ export default function PrivacyEnPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">2. Cookies</h2>
+              <h2 className="text-xl">3. Cookies</h2>
               <p style={body}>
                 This site does not use its own or third-party cookies: no analytics, tracking or advertising cookies. That is why we do not ask for cookie consent when you arrive.
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">3. Hosting</h2>
+              <h2 className="text-xl">4. Hosting</h2>
               <p style={body}>
                 The site is hosted by <strong>Vercel</strong> (Vercel Inc., USA). Like any web server, Vercel logs technical visit data, such as IP addresses, to deliver pages and protect the site from abuse. We do not use this data to identify you or to analyse your browsing.
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">4. How we use data</h2>
+              <h2 className="text-xl">5. How we use data</h2>
               <p style={body}>
                 Information you send us by email is used only to reply to you and is kept only as long as needed for that. We do not sell, transfer or share it with third parties.
               </p>
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">5. Your rights</h2>
+              <h2 className="text-xl">6. Your rights</h2>
               <p style={body}>
-                You have the right to access, rectify, erase, restrict the processing of and request the portability of your personal data, and to object to its processing. To exercise these rights, contact us through <LegalContact lang="en" />.
+                You have the right to access, rectify, erase, restrict the processing of and request the portability of your personal data, and to object to its processing. To exercise these rights, write to us at <LegalContact lang="en" />.
               </p>
               <p style={body}>
                 If you believe we have not handled your data properly, you can file a complaint with the Spanish Data Protection Agency (aepd.es).
@@ -69,9 +77,9 @@ export default function PrivacyEnPage() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl">6. Contact</h2>
+              <h2 className="text-xl">7. Contact</h2>
               <p style={body}>
-                For any questions about this policy, contact us through <LegalContact lang="en" />.
+                For any questions about this policy, write to us at <LegalContact lang="en" />.
               </p>
             </div>
 

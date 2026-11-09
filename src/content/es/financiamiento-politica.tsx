@@ -16,6 +16,9 @@ export default function Body() {
       <p>
         En el trabajo realizado para la redacción del documento y para la discusión en el taller de diálogo, desde Proyecto Disonante nos esforzamos por mostrar la relevancia de tener discusiones caso por caso, pragmáticas, que busquen objetivos comunes de las diversas posiciones (como la trazabilidad de los fondos, la necesidad de excluir al crimen organizado) que sean capaces de combinar y compatibilizar posiciones distantes. Esta línea de trabajo continuará durante 2025 a nivel regional y también en la promoción de actividades en algunos países de América Latina.
       </p>
+      <p>
+        El informe final ya está publicado: «<a href="https://thedialogue.org/analysis/dinero-en-la-politica-el-rol-del-sector-privado-en-el-fortalecimiento-de-la-transparencia-y-la-democracia-en-america-latina-y-el-caribe?lang=es" target="_blank" rel="noopener noreferrer">Dinero en la política: el rol del sector privado en el fortalecimiento de la transparencia y la democracia en América Latina y el Caribe</a>», elaborado por Tamara Taraciuk Broner, Marcela Ríos Tobar y Hernán Charosky para el Programa sobre Estado de derecho del Diálogo Interamericano e IDEA Internacional (enero de 2025).
+      </p>
     </>
   );
 }

@@ -40,7 +40,7 @@ export default function QuienesSomosEnPage() {
                 />
                 <div>
                   <h3 className="text-xl">Hernán Charosky</h3>
-                  <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Lawyer and sociologist</p>
+                  <p className="text-sm font-semibold text-rust mt-1" style={{ fontFamily: "var(--font-jakarta)" }}>Sociologist and lawyer</p>
                   <p className="text-sm text-muted mt-0.5" style={{ fontFamily: "var(--font-jakarta)" }}>Argentina</p>
                 </div>
               </div>
@@ -71,24 +71,37 @@ export default function QuienesSomosEnPage() {
                   Organizations
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "National Democratic Institute",
-                    "Inter-American Development Bank",
-                    "World Bank",
-                    "UNDP",
-                    "National Endowment for Democracy",
-                    "Poder Ciudadano",
-                    "Argentina Debate",
-                    "Dialogando Buenos Aires",
-                  ].map((org) => (
-                    <span
-                      key={org}
-                      className="px-3 py-1 rounded border border-line text-xs text-muted"
-                      style={{ fontFamily: "var(--font-jakarta)" }}
-                    >
-                      {org}
-                    </span>
-                  ))}
+                  {([
+                    { name: "National Democratic Institute" },
+                    { name: "Inter-American Development Bank" },
+                    { name: "World Bank" },
+                    { name: "UNDP" },
+                    { name: "National Endowment for Democracy" },
+                    { name: "Poder Ciudadano", url: "https://poderciudadano.org/nuevo-director-ejecutivo/" },
+                    { name: "Argentina Debate", url: "https://onthinktanks.org/wp-content/uploads/2018/02/OTT_Consulting_Elecciones_CIPPEC.pdf" },
+                    { name: "Dialogando Buenos Aires", url: "https://buenosaires.gob.ar/gcaba_historico/gobierno/dialogando-ba" },
+                  ] as { name: string; url?: string }[]).map((org) =>
+                    org.url ? (
+                      <a
+                        key={org.name}
+                        href={org.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block px-3 py-1 rounded border border-line text-xs text-navy hover:border-terracotta hover:text-rust transition-colors"
+                        style={{ fontFamily: "var(--font-jakarta)" }}
+                      >
+                        {org.name} <span aria-hidden>↗</span>
+                      </a>
+                    ) : (
+                      <span
+                        key={org.name}
+                        className="px-3 py-1 rounded border border-line text-xs text-muted"
+                        style={{ fontFamily: "var(--font-jakarta)" }}
+                      >
+                        {org.name}
+                      </span>
+                    )
+                  )}
                 </div>
               </div>
             </Reveal>
@@ -143,19 +156,21 @@ export default function QuienesSomosEnPage() {
                 </p>
                 <ul className="flex flex-col gap-2">
                   {[
-                    { text: "Eficacia, efectividad y entramado normativo", detail: "Marcial Pons, 2026" },
-                    { text: "Derecho y Desarrollo. Una visión desde América Latina y el Caribe", detail: "Editores del Puerto, 2013" },
-                    { text: "La Seguridad Jurídica para el Desarrollo Humano: desafíos en Iberoamérica", detail: "co-author · Marcial Pons, 2025" },
-                    { text: "Errores en la creación y aplicación del derecho", detail: "co-editor with F. Carbonell · Marcial Pons, 2026" },
-                    { text: "Derecho y Pobreza", detail: "co-editor with E. Pereira Fredes · 2021" },
-                    { text: "Seguridad jurídica, pobreza y corrupción", detail: "co-editor with J. Ferrer · 2018" },
-                    { text: "Seguridad jurídica y democracia en Iberoamérica", detail: "co-editor with J. Ferrer and C. Cruz · 2015" },
+                    { text: "Eficacia, efectividad y entramado normativo", detail: "Marcial Pons, 2026 (open access)", url: "https://marcialpons-openaccess.es/index.php/juridicas/catalog/book/eficacia-efectividad-y-entramado-normativo" },
+                    { text: "Errores en la creación y aplicación del derecho", detail: "co-editor with F. Carbonell · Marcial Pons, 2026 (open access)", url: "https://marcialpons-openaccess.es/index.php/juridicas/catalog/book/errores-creacion-y-aplicacion-derecho" },
+                    { text: "La Seguridad Jurídica para el Desarrollo Humano: desafíos en Iberoamérica", detail: "co-author · Marcial Pons, 2025", url: "https://www.marcialpons.es/libros/la-seguridad-juridica-para-el-desarrollo-humano-desafios-en-iberoamerica/9788413819709/" },
+                    { text: "Derecho y Pobreza", detail: "co-editor with E. Pereira Fredes · 2021", url: "https://www.marcialpons.es/libros/derecho-y-pobreza/9788413812540/" },
+                    { text: "Seguridad jurídica, pobreza y corrupción", detail: "co-editor with J. Ferrer · 2018", url: "https://www.marcialpons.es/libros/seguridad-juridica-pobreza-y-corrupcion-en-iberoamerica/9788491236023/" },
+                    { text: "Seguridad jurídica y democracia en Iberoamérica", detail: "co-editor with J. Ferrer and C. Cruz · 2015", url: "https://www.marcialpons.es/libros/seguridad-juridica-y-democracia-en-iberoamerica/9788416212941/" },
+                    { text: "Derecho y Desarrollo. Una visión desde América Latina y el Caribe", detail: "Editores del Puerto, 2013", url: "https://www.praxisjuridica.com.ar/productos/derecho-y-desarrollo-fernandez-blanco/" },
                   ].map((pub) => (
                     <li key={pub.text} className="flex items-start gap-2">
                       <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-terracotta flex-shrink-0" aria-hidden />
                       <span className="text-sm" style={{ color: "var(--pd-body)", fontFamily: "var(--font-source)" }}>
-                        <em>{pub.text}</em>
-                        {pub.detail && <span className="not-italic text-xs text-muted"> · {pub.detail}</span>}
+                        <a href={pub.url} target="_blank" rel="noopener noreferrer" className="text-navy hover:text-rust transition-colors">
+                          <em>{pub.text}</em> <span aria-hidden>↗</span>
+                        </a>
+                        <span className="not-italic text-xs text-muted"> · {pub.detail}</span>
                       </span>
                     </li>
                   ))}

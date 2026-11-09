@@ -63,7 +63,7 @@ export default function TermsEnPage() {
             <div className="flex flex-col gap-4">
               <h2 className="text-xl">6. Contact</h2>
               <p style={{ color: "var(--pd-body)" }}>
-                For any queries about these terms, contact us through <LegalContact lang="en" />.
+                For any queries about these terms, write to us at <LegalContact lang="en" />.
               </p>
             </div>
 

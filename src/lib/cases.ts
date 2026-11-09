@@ -102,9 +102,19 @@ export const cases: Case[] = [
 ];
 
 // Organizations shown in "Con quién trabajamos" (home and /actividades).
-export const partners = [
-  "National Democratic Institute",
-  "Minerva University",
-  "Alianza Regional por la Libre Expresión e Información",
-  "Ríos Strategic Lawyering for Social Justice",
-];
+export const partners: Record<"es" | "en", string[]> = {
+  es: [
+    "National Democratic Institute",
+    "Minerva University",
+    "Alianza Regional por la Libre Expresión e Información",
+    "Ríos Strategic Lawyering for Social Justice",
+    "MYSU (Mujer y Salud en Uruguay)",
+  ],
+  en: [
+    "National Democratic Institute",
+    "Minerva University",
+    "Alianza Regional por la Libre Expresión e Información",
+    "Ríos Strategic Lawyering for Social Justice",
+    "MYSU (Women and Health in Uruguay)",
+  ],
+};

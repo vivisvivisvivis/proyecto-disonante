@@ -32,7 +32,7 @@ const copy = {
     helpTitle: "¿Cómo podemos ayudarte?",
     // Short summary of the services page (point 11).
     helpP:
-      "Trabajamos con gobiernos y poderes legislativos, centros educativos, organizaciones de la sociedad civil, empresas y asociaciones profesionales en cuatro líneas: diagnóstico y soluciones, formación, implementación y argumentación basada en evidencia.",
+      "Trabajamos con gobiernos y poderes legislativos, centros educativos, organizaciones de la sociedad civil, empresas y asociaciones profesionales en tres líneas: diagnóstico y soluciones, formación y argumentación basada en evidencia.",
     newsLabel: "Actividades realizadas",
     newsTitle: "Últimas actividades",
     newsAll: "Actividades realizadas",
@@ -68,7 +68,7 @@ const copy = {
       "A public conversation subject to rules of respect and argumentation can be more productive for better governance.",
     helpTitle: "How can we help you?",
     helpP:
-      "We work with governments and legislative bodies, educational institutions, civil society organizations, businesses and professional associations along four lines: diagnosis and solutions, training, implementation, and evidence-based argumentation.",
+      "We work with governments and legislative bodies, educational institutions, civil society organizations, businesses and professional associations along three lines: diagnosis and solutions, training, and evidence-based argumentation.",
     newsLabel: "Past activities",
     newsTitle: "Latest activities",
     newsAll: "Past activities",
@@ -212,7 +212,7 @@ export default function HomePage({ lang }: { lang: "es" | "en" }) {
             <h2 id="partners-label" className="text-xs font-semibold uppercase tracking-widest text-muted" style={ui}>
               {t.partnersLabel}
             </h2>
-            <p className="text-sm text-muted">{partners.join(" · ")}</p>
+            <p className="text-sm text-muted">{partners[lang].join(" · ")}</p>
           </div>
         </section>
 

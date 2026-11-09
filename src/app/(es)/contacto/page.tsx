@@ -40,7 +40,6 @@ export default function ContactoPage() {
                   {[
                     { title: "Diagnóstico y soluciones", desc: "Situaciones de diálogo bloqueado" },
                     { title: "Formación", desc: "Prácticas deliberativas y diálogo racional" },
-                    { title: "Implementación", desc: "Decisiones que generan conflictividad" },
                     { title: "Argumentación basada en evidencia", desc: "Elaboración de argumentos racionales" },
                   ].map((item) => (
                     <div key={item.title} className="flex items-start gap-3 p-4 rounded border border-line">
